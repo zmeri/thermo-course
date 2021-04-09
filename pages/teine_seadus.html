@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/termodynaamika.css">
+
+  <script>
+    $(function(){
+      $("#navigation").load(`/src/navigation.html`);
+    });
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Teine seadus</title>
+</head>
+
+<body>
+  <div id='content'>
+    <div id="navigation"></div>
+    <div id='main-text'>
+      <h1>Teine seadus</h1>
+      <p>
+        Kas on olemas energia allikas, mis on tegelikult taastuv? Tavaliselt peame allikad nagu päike, tuul või biomass taastuvenergia allikaks, ja kindlasti need saab palju kauam kasutada kui fossiilkütuseid. Selles suhtes termin taastuvenergia on õige. Aga kui kaua päike kestab? Kaua kaua tulevikus, võibolla paari miljardi aasta pärast, päike kustub. Ja kust siis oleks võimalik saada energiat? Kas oleks võimalik taastada päikest? Tegelikult, on päris huvitav lugu, mis uurib seda teema: &bdquo;<a href="https://templatetraining.princeton.edu/sites/training/files/the_last_question_-_issac_asimov.pdf">The Last Question</a>&ldquo;. Mõned järeldused, mis tulenevad termodünaamika teisest seadusest on sügavad ja viivad isegi huvitavate filosoofiliste küsimusteni.
+      </p>
+
+      <h2>Entroopia</h2>
+      <p>
+        Entroopiat võib mitu moodi selgitada:
+      </p>
+      <ol>
+        <li>
+          Korratus,
+        </li>
+        <li>
+          Mikroolekute arv.
+        </li>
+      </ol>
+      <p>
+        Ehk, kui süsteem on korrastatud (nt aatomid kindlas kohas kristallis), siis entroopia on väiksem. Kui aga süsteemis on rohkem kaos entroopia on suurem.
+      </p>
+      <img class="inline-img" src="/media/kaardid.png" />
+      <p>
+        Entroopial on ka statistilise mehaanilise tähendus. Entroopia näitab võimalike mikroolekute arvu. Kui süsteem saab vabamalt muuta (ehk on rohkem võimalikke mikroolekuid), siis entroopia on suurem.
+      </p>
+      <div>
+        \[ S = k_B ln &Omega; \]
+      </div>
+      <img class="inline-img" src="/media/microstates_2.png" />
+
+      <h2>Teine seadus</h2>
+      <p>
+        Entroopia universumis ei saa väheneda.
+      </p>
+      <div>
+        \[ &Delta; S_{süsteem} + &Delta; S_{ümbrus} \ge 0 \]
+      </div>
+      <p>
+        Teiste sõnadega, kui sa soovid korrastada süsteemi (ehk vähendada entroopiat), siis on vaja kulutada energiat ja selle tõttu entroopia ümbruses peab vähemalt selle võrra kasvama.
+      </p>
+      <p>
+        Suletud süsteemis:
+      </p>
+      <div>
+        \[ &Delta; S_{süsteem} \ge \frac{&Delta; Q}{T} \]
+      </div>
+      <p>
+        Avatud süsteemis:
+      </p>
+      <div>
+        \[ &Delta; S_{süsteem} \ge \frac{&Delta; Q}{T} + S_{sisse} + S_{välja} \]
+      </div>
+      <p>
+        Teine seadus piirab veelgi, mis protsessid on võimalikud. Isegi kui mõnes protsessis energiabilansid on kooskõlas esimese seadusega, kui protsessi tõttu entroopia väheneb (ja vastav entroopia kasv ümbruses ei toimu), siis ei ole võimalik sellist protsessi ehitada.
+      </p>
+
+      <h2>Pöörduv/Pöördumatu</h2>
+      <p>
+        Valemina teist seadust kirjutatakse tavaliselt suurem või võrdne märgiga. Teoreetiliselt on võimalik viia läbi muudatuse piisavalt aeglaselt, et entroopia muutus on täpselt võrdne energia ülekandega. See tähendaks, et oleks võimalik panna protsessi käima vastassuunas ja jõuda tagasi algolekuni ilma, et oleks vaja kulutada lisa energiat. Sellisel juhul protsess on <b>pöörduv</b>. Üldiselt, protsess reaalses maailmas on hoopis <b>pöördumatu</b>, ehk entroopia süsteemis suureneb rohkem ja selleks, et tagasi algolekuni jõuda on vaja kulutada veel energiat. Ehk, pöördumatu protsessis entroopia suurenemise tõttu mingi osa energiast ei ole enam kasutataval kujul ja meie jaoks läheb kaduma.
+      </p>
+
+      <h2>Eksergia</h2>
+      <p>
+        Teisest seadusest tulenevalt on defineeritud eksergia mõistet. <b>Eksergia</b> on maksimaalne töö, mida saaks muutusest. Samuti eksergia võib kirjeldada minimaalset tööd, mida oleks vaja muudetuse tegemiseks. Seega, eksergia võtab arvesse protsessi entroopia muutust.
+      </p>
+
+      <h2>Temperatuur</h2>
+      <p>
+        Temperatuur on tegelikult ka seotud entroopiaga (ehk mikroolekute arvuga). Õigemini, temperatuur näitab kui palju energia süsteemis muutub, kui mikroolekute arv muutub.<sup><a href="#ref3">3</a></sup>
+      </p>
+      <div>
+        \[ T = \frac{1}{k_B} \frac{&delta;E}{&delta;_{rev}&Omega;} \]
+      </div>
+      <p>
+        Kui süsteemis mikroolekute arvu vähenemine annaks rohkem energiat kui ümbruses (ehk süsteemi temperatuur on kõrge), siis energia liigub soojuse kujul süsteemist ümbrusesse kuni temperatuurid on võrdsed.
+      </p>
+      <p>
+        Pane tähele, et energia suureneb ainult pöörduva entroopia muutuste tõttu. Entroopia võib ka suureneda ilma, et kaasneks energia muutus (pöördumatu protsess). Seega, temperatuur on seotud ainult pöörduva entroopia muutusega.
+      </p>
+
+      <h2>Viited</h2>
+      <ol>
+        <li id="ref1">
+          I. Dincer and M. A. Rosen, Exergy: Energy, Environment and Sustainable Development. Newnes, 2012.
+        </li>
+        <li id="ref2">
+          Y. Cheng, Macroscopic and Statistical Thermodynamics. World Scientific, 2006.
+        </li>
+        <li id="ref3">
+          P. G. Nelson, “Statistical mechanical interpretation of temperature,” Found Chem, vol. 21, no. 3, pp. 325–331, Oct. 2019, doi: 10.1007/s10698-019-09337-4.
+        </li>
+      </ol>
+
+    </div>
+  </div>
+</body>
+</html>

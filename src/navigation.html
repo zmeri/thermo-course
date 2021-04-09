@@ -1,0 +1,97 @@
+<script>
+  function showMenu() {
+    if (document.getElementById('sidebar').style.display == 'none' || document.getElementById('sidebar').style.display == '') {
+      document.getElementById('sidebar').style.display = 'inline';
+    } else {
+      document.getElementById('sidebar').style.display = 'none';
+    }
+  }
+
+  var globalResizeTimer = null;
+
+  $(window).resize(function() {
+    if(globalResizeTimer != null) window.clearTimeout(globalResizeTimer);
+    globalResizeTimer = window.setTimeout(function() {
+      if (window.outerWidth > 1000) {
+        document.getElementById('sidebar').style.display = 'inline';
+      } else {
+        document.getElementById('sidebar').style.display = 'none';
+      }
+    }, 200);
+  });
+</script>
+
+
+<div id='sidebar'>
+  <div id='home'>
+    <a id='home-link' href="/index.html">Termodünaamika</a>
+  </div>
+  <ul id='navi'>
+    <li>
+      <a class='nav-link' href="/pages/termodynaamika.html">Sissejuhatus</a>
+    </li>
+    <li>
+      <a class='nav-link' href="/pages/olekud.html">Olekud</a>
+    </li>
+    <li>
+      <a class='nav-link' href="/pages/statistiline_mehaanika.html">Statistiline mehaanika</a>
+    </li>
+    <li>
+      <a class='nav-link' href="/pages/esimene_seadus.html">Esimene seadus</a>
+    </li>
+    <li>
+      <a class='nav-link' href="/pages/teine_seadus.html">Teine seadus</a>
+    </li>
+    <li>
+      <a class='nav-link'>Olekuvõrrandid</a>
+      <ul id='navi-level2'>
+        <li>
+          <a class='nav-link' href="/pages/veeauru_parameetrid.html">Veeauru parameetrid</a>
+        </li>
+        <li>
+          <a class='nav-link' href="/pages/mis_olekuv%C3%B5rrand.html">Mis olekuvõrrandit kasutada</a>
+        </li>
+        <li>
+          <a class='nav-link' href="/pages/andmete_parameetrite_leidmine.html">Andmete ja parameetrite leidmine</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a class='nav-link' href="/pages/protsessid.html">Protsessid</a>
+      <ul id='navi-level2'>
+        <li>
+          <a class='nav-link' href="/pages/carnot.html">Carnot ringprotsess</a>
+        </li>
+        <li>
+          <a class='nav-link' href="/pages/auruj%C3%B5useadmed.html">Aurujõuseadmed</a>
+        </li>
+        <li>
+          <a class='nav-link' href="/pages/soojuspumbad.html">Soojuspumbad</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a class='nav-link' href="/pages/faasitasakaal.html">Faasitasakaal</a>
+      <ul id='navi-level2'>
+        <li>
+          <a class='nav-link' href="/pages/tasakaal.html">Tasakaal</a>
+        </li>
+        <li>
+          <a class='nav-link' href="/pages/keemiline_potentsiaal.html">Keemiline potentsiaal</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a class='nav-link' href="/pages/protsessid.html">Python</a>
+      <ul id='navi-level2'>
+        <li>
+          <a class='nav-link' href="/pages/python_n%C3%A4pun%C3%A4ited.html">Pythoni näpunäited</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<div id='menu-button' onclick="showMenu()">
+  <img id='menu-icon' src='/icons/menu.svg' />
+</div>

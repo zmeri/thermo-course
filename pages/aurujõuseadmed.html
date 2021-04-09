@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet"
+        href="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/styles/default.min.css">
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/highlight.min.js"></script>  <script>hljs.highlightAll();</script>
+
+  <link rel="stylesheet" href="/styles/termodynaamika.css">
+
+  <script>
+    $(function(){
+      $("#navigation").load(`/src/navigation.html`);
+    });
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Aurujõuseadmed</title>
+</head>
+
+<body>
+  <div id='content'>
+    <div id="navigation"></div>
+    <div id='main-text'>
+      <h1>Aurujõuseadmed</h1>
+      <p>
+        Vesi on üks põhilisi aineid meie maailmas ja seda kasutatakse sageli soojusmasinates töövedelikuna. Paljud elektrijaamad kasutavad aurujõuseadmeid, et muundada soojust mehaaniliseks tööks, mida omakorda kasutatakse elektritootmiseks.
+      </p>
+
+      <h2>Kuidas erineb Carnot ringprotsessist</h2>
+      <p>
+        Reaalses elus ei ole võimalik ega praktiline kasutada Carnot ringprotsessi. Järgmised on mõned põhierinevused aurujõuseadmete ringprotsesside ja Carnot ringprotsessi vahel:
+      </p>
+      <ul>
+        <li>
+          <b>Kokkusurumine ja paisumine ei toimu isentroopiliselt</b> - näiteks energia läheb pumbas ja turbiinis kaduma.
+        </li>
+        <li>
+          <b>Surutakse kokku ainult vedelikku</b> - vedelikku kokkusurumine nõuab vähem tööd, kui gaasi-vedeliku segu kokkusurumine.
+        </li>
+        <li>
+          <b>Turbiinis esineb ainult aur</b> - veetilgad võivad kahjustada turbiini.
+        </li>
+      </ul>
+      <img class="inline-img" src="/media/auruj%C3%B5useade%20-%20carnot.png" />
+
+      <h2>Põhiline protsess</h2>
+      <p>
+        Üldiselt aurujõuseadme ringprotsess koosneb järgnevatest sammudest:<sup><a href="#ref1">1</a></sup>
+      </p>
+      <ol>
+        <li>
+          Vett surutakse kokku pumbas;
+        </li>
+        <li>
+          Vett kuumutatakse katlas ja tekib aur;
+        </li>
+        <li>
+          Auru kuumutatakse veel ülekuumendis (nii et turbiinis oleks ainult aur);
+        </li>
+        <li>
+          Aur paisub turbiinis, tehes tööd;
+        </li>
+        <li>
+          Auru jahutatakse kondensaatoris, muutes taas veeks.
+        </li>
+      </ol>
+      <ul class="img-grid">
+        <li class="img-grid-item">
+          <img class="grid-img" src="/media/auru_base.svg" />
+        </li>
+        <li class="img-grid-item">
+          <img class="grid-img" src="/media/auruj%C3%B5useade%20-%20p%C3%B5hiline%20-%20num.png" />
+        </li>
+      </ul>
+      <p>
+        On mitu viisi, kuidas seda põhilist ringprotsessi muudatatakse. Muudatusi tehakse selleks, et tõsta protsessi tõhusust, kuigi selle eest protsess muutub keerulisemaks.
+      </p>
+
+      <h2>Vaheülekuumendamine</h2>
+      <p>
+        Selleks, et tõsta kasutegurit, tihti kuumutatakse auru taas peale esimest turbiini. Selleks on paigaldatud vaheülekuumendit. Siis saab auru viia läbi teise madala rõhu turbiini enne, kui läheb kondensaatorisse. Elektrijaamas mõlemad turbiinid on tihti samal võllil.<sup><a href="#ref1">1</a></sup>
+      </p>
+      <ul class="img-grid">
+        <li class="img-grid-item">
+          <img class="grid-img" src="/media/auru_reheat.svg" />
+        </li>
+        <li class="img-grid-item">
+          <img class="grid-img" src="/media/auruj%C3%B5useade%20-%20vahekuumendamine%20-%20num.png" />
+        </li>
+      </ul>
+      <p>
+        Kasutegurit võib veel tõsta, kui lisada veel vaheülekuumendamise samme, ehk kui taas kuumutatakse teine või kolmas kord. Kuid iga järgneva ülekuumendamise samm muudab protsessi kallimaks ja kasuteguri tõus muutub järjest väiksemaks.
+      </p>
+
+      <h2>Eelsoojendamine</h2>
+      <p>
+        Teine viis tõsta kasutegurit on kasutada osa auru, mis väljub esimesest turbiinist, selleks et soojendada toitevett. Toitevee kuumutamine nõuab päris palju energiat. Kui esiteks osaliselt soojendame toitevett madalama kvaliteedi auruga, siis me ei pea kasutama nii palju energiat katlast vee soojendamiseks.
+      </p>
+      <p>
+        Tavaliselt, seda tehakse nii, et peale esimest turbiini osa aurust suunatakse eelsoojendisse. Ülejäänud auru kuumutatakse taas ja viiakse edasi madala rõhu turbiinisse. Seega, eelsoojendamisega osa aurutööst jääb saamata, aga kuna vähendame selle kaudu soojust, mida on vaja katlast, siis kogu protsessi kasutegur tõuseb.
+      </p>
+      <ul class="img-grid">
+        <li class="img-grid-item">
+          <img class="grid-img" src="/media/auru_regen.svg" />
+        </li>
+        <li class="img-grid-item">
+          <img class="grid-img" src="/media/auruj%C3%B5useade%20-%20eelsoojendamine%20-%20num.png" />
+        </li>
+      </ul>
+
+      <h2>Ülekriitiline protsess</h2>
+      <p>
+        Nagu me Carnot ringprotsessist õppisime, soojusmasina kasutegur sõltub palju temperatuuride vahest. Kui tõstame auru temperatuuri, siis on võimalik suurendada kasutegurit.
+      </p>
+      <p>
+        Reaalses protsessis materjalide temperatuuri ja rõhu taluvus paneb paika protsessi ülemist temperatuuri. Uuemaid materjale ja valmistamise meetodeid on lubanud kaasaegsetel protsessidel jõuda tingimusteni, milles vesi on ülekriitilises olekus.<sup><a href="#ref1">2</a></sup>
+      </p>
+      <p>
+        Ülekriitilises aurujõuseadmes vett pumbatakse kõrgema rõhuni, mis ületab vee kriitilist rõhku (<a href="https://webbook.nist.gov/cgi/cbook.cgi?ID=C7732185&Mask=4#Thermo-Phase">220,6 bar</a>). Kui vett seejärel kuumutatakse kõrgemal rõhul, ei toimu aurustamist. Vesi on hoopis ülekriitilises olekus ja on võimalik saavutada kõrgemat temperatuuri.
+      </p>
+      <ul class="img-grid">
+        <li class="img-grid-item">
+          <img class="grid-img" src="/media/auru_super.svg" />
+        </li>
+        <li class="img-grid-item">
+          <img class="grid-img" src="/media/auruj%C3%B5useade%20-%20%C3%BClekriitiline%20-%20num.png" />
+        </li>
+      </ul>
+      <p>
+        Üritatakse välja töötada aurujõuseadmeid, mis töötavad ülekriitilises olekus järjest kõrgemal temperatuuril ja rõhul. Sihitakse temperatuuri, mis on 700-760 &deg;C ja rõhku, mis on kuni 350 bar. Selle kõrge temperatuuriga on võimalik saavutada kasutegurit, mis on kõrgem kui 50%. Kuid need protsessid on ka keerulised. Näiteks, sellistel tingimustel teras enam ei pea vastu ja on vaja kasutada spetsiaalseid nikli sulameid.<sup><a href="#ref1">2</a></sup>
+      </p>
+
+      <h2>Arvutused Pythonis</h2>
+      <p>
+        Nüüd vaatame, kuidas saame teha termodünaamilisi arvutusi aurujõuseadmete jaoks. Kasutame näitena ülekriitilist ringprotsessi. Oletame, et ringprotsess läbib järgmised punktid:
+      </p>
+      <table style="text-align: center;">
+        <tr>
+          <th>
+            Olek
+          </th>
+          <th>
+            Kirjeldus
+          </th>
+          <th>
+            Temperatuur </br> (&deg;C)
+          </th>
+          <th>
+            Rõhk </br> (bar)
+          </th>
+        </tr>
+        <tr>
+          <td>
+            0
+          </td>
+          <td style="text-align: left;">
+            Vesi alguses
+          </td>
+          <td>
+            38
+          </td>
+          <td>
+            0,07
+          </td>
+        </tr>
+        <tr>
+          <td>
+            1
+          </td>
+          <td style="text-align: left;">
+            Vesi kõrgemal rõhul peale pumpa
+          </td>
+          <td>
+            38
+          </td>
+          <td>
+            250
+          </td>
+        </tr>
+        <tr>
+          <td>
+            2
+          </td>
+          <td style="text-align: left;">
+            Aur kõrgel temperatuuril ja rõhul peale katlat
+          </td>
+          <td>
+            600
+          </td>
+          <td>
+            250
+          </td>
+        </tr>
+        <tr>
+          <td>
+            3
+          </td>
+          <td style="text-align: left;">
+            Aur peale esimest turbiini
+          </td>
+          <td>
+            340
+          </td>
+          <td>
+            49
+          </td>
+        </tr>
+        <tr>
+          <td>
+            4
+          </td>
+          <td style="text-align: left;">
+            Vaheülekuumendatud aur, mis läheb teisesse turbiinisse
+          </td>
+          <td>
+            600
+          </td>
+          <td>
+            48
+          </td>
+        </tr>
+        <tr>
+          <td>
+            5
+          </td>
+          <td style="text-align: left;">
+            Aur peale teist turbiini, mis läheb kondensaatorisse
+          </td>
+          <td>
+            51
+          </td>
+          <td>
+            0,09
+          </td>
+        </tr>
+      </table>
+      <p>
+        Esiteks, paneme need tingimused kirja Pythonis. Kasutan siin <a href="https://numpy.org/">Numpy</a> moodulit ja <a href="https://numpy.org/doc/stable/reference/generated/numpy.asarray.html"><code class='python'>asarray</code></a> funktsioon muudab Pythoni järjendit Numpy massiiviks.
+      </p>
+      <pre>
+        <code class="python">
+          import numpy as np
+          import CoolProp.CoolProp as cp
+
+          p = np.asarray([0.07, 250, 250, 49, 48, 0.09]) * 1e5 # Pa
+          t = np.asarray([38, 38, 600, 340, 600, 51]) + 273.15 # K
+        </code>
+      </pre>
+      <p>
+        On nüüd lihtne arvutada energiat igal punktil. Kui on teada kaks olekuparameetrit, siis saame teisi termodünaamilisi parameetreid arvutada olekuvõrrandiga. Siin kasutame <a href="http://www.coolprop.org/">CoolProp</a> paketti.
+      </p>
+      <pre>
+        <code class="python">
+          h = cp.PropsSI("Hmass", "T", t, "P", p, "WATER") # J/kg
+        </code>
+      </pre>
+      <p>
+        Nüüd saame arvutada tööd, mida antakse mõlemale turbiinile. Kuna juba arvutasime entalpiat, siis peame lihtsalt lahutama entalpiat enne turbiini entalpiast peale turbiini. Saame sarnaselt arvutada, kui palju tööd on vaja teha pumbaga. Kui liidame kõik kolm väärtust kokku, siis saame teada, kui palju tööd antud protsessiga saab teha.
+      </p>
+      <pre>
+        <code class="python">
+          W_turbiin1 = h[3] - h[2] # J/kg
+          W_turbiin2 = h[5] - h[4] # J/kg
+          W_pump = h[1] - h[0] # J/kg
+          W = W_turbiin1 + W_turbiin2 + W_pump # J/kg
+          print('Kasulik töö: {} kJ/kg'.format(W / 1000))
+        </code>
+      </pre>
+      <p>
+        Kui nüüd jooksutame skripti näeme, et väärtus on negatiivne. Töö on siin negatiivne kuna süsteemi seisukohast töö tegemine tähendab, et energia väljub süsteemist.
+      </p>
+      <pre>
+        <code class="python-repl">
+          Kasulik töö: -1500.6282487384003 kJ/kg
+        </code>
+      </pre>
+      <p>
+        Nüüd arvutame, kui palju soojust antakse. Jälle saame kasutada arvutatud entalpiaid ja lahutame.
+      </p>
+      <pre>
+        <code class="python">
+          Q_katla = h[2] - h[1] # J/kg
+          Q_taaskuumutamine = h[4] - h[3] # J/kg
+        </code>
+      </pre>
+      <p>
+        Kuna teame nüüd kui palju kasulikku tööd saame ja kui palju soojust anname, võime arvutada protsessi kasutegurit.
+      </p>
+      <pre>
+        <code class="python">
+          kasutegur = -W / (Q_katla + Q_taaskuumutamine)
+        </code>
+      </pre>
+      <p>
+        Ja jooksutades skripti näeme, et protsessi kasutegur on 38%.
+      </p>
+
+      <h2>Viited</h2>
+      <ol>
+        <li id="ref1">
+          L. Drbal, K. Westra, and P. Boston, Power Plant Engineering. Springer Science & Business Media, 2012.
+        </li>
+        <li id="ref2">
+          A. D. Gianfrancesco, Materials for Ultra-Supercritical and Advanced Ultra-Supercritical Power Plants. Woodhead Publishing, 2016.
+        </li>
+      </ol>
+
+    </div>
+  </div>
+</body>
+</html>

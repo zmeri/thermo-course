@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet"
+        href="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/styles/default.min.css">
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/highlight.min.js"></script>  <script>hljs.highlightAll();</script>
+
+  <link rel="stylesheet" href="/styles/termodynaamika.css">
+
+  <script>
+    $(function(){
+      $("#navigation").load(`/src/navigation.html`);
+    });
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Mis olekuvõrrandit kasutada</title>
+</head>
+
+<body>
+  <div id='content'>
+    <div id="navigation"></div>
+    <div id='main-text'>
+      <h1>Mis olekuvõrrandit kasutada</h1>
+      <p>
+        Termodünaamika mudeleid on mustmiljon, siis võib olla raske teada, millal kasutada millist mudelit. Üldiselt, strateegia on valida meetodit, mis saavutab nõutud täpsust, aga vajab kõige väiksemat ajakulu. Kui tegemist on tundu ainega ja mudeli parameetrid on juba olemas, siis võib saada väga kvaliteetset väärtust kiiresti. Kui aga aine jaoks mudelid pole kergesti kätte saadavad, siis tuleb hakata valima täpsuse ja ajakulu vahel.
+      </p>
+      <p>
+        Siin vaatame täpsemalt, kuidas arvutada aine või segu termofüüsilisi omadusi. Allpool on minu strateegiad erinevate olukordade jaoks. Need on eelistus järjekorras, ehk alustan esimesega ja kui ei ole võimalik seda strateegiat kasutada lähen järgmise juurde. Need on lihtsalt minu mõtted ja võib ka teisiti ülesandele läheneda.
+      </p>
+
+      <h2>Mitmeparameetrilise Helmholtzi võrrand on olemas</h2>
+      <p>
+        Kuna need on üldiselt kõige täpsemad olekuvõrrandid, kui antud ainele on selline võrrand juba olemas <a href="http://www.coolprop.org/index.html">CoolPropis</a>, siis kohe kasutan seda. Saan vastuse tavaliselt kõige parema täpsusega, aga väga kiiresti kuna mul on juba olemas tarkvara (CoolProp), mis lubab mul rakendada neid olekuvõrrandeid.
+      </p>
+      <pre>
+        <code class="python">
+          import CoolProp.CoolProp as cp
+
+          t = 420 # K
+          p = 10000000 # Pa
+          den = cp.PropsSI('Dmolar', 'T', t, 'P', p, 'METHANE')
+        </code>
+      </pre>
+      <p>
+        CoolPropis on ka võimalik kasutada neid olekuvõrrandeid mõnede lihtsate <a href="http://www.coolprop.org/coolprop/HighLevelAPI.html#user-defined-mixtures">segude</a> jaoks. Tuleb lihtsalt kontrollida, et on olemas <a href="http://www.coolprop.org/fluid_properties/Mixtures.html#binary-pairs">interaktsiooni parameetrid</a> antud ainete vahel.
+      </p>
+      <pre>
+        <code class="python">
+          t = 420 # K
+          p = 10000000 # Pa
+          den = cp.PropsSI('Dmolar', 'T', t, 'P', p, 'METHANE[0.4]&PROPANE[0.6]')
+        </code>
+      </pre>
+      <p>
+        Kahjuks selliseid olekuvõrrandeid on ainult välja arendatud umbes sajale ainele. <a href="http://www.coolprop.org/fluid_properties/PurePseudoPure.html#list-of-fluids">CoolPropi lehelt</a> saab näha, mis ainetele on Helmholtzi olekuvõrrandi tehtud.
+      </p>
+
+      <h2>PC-SAFT parameetrid on olemas</h2>
+      <p>
+         Ma eelistan tavaliselt kasutada head olekuvõrrandit, kui on olemas, kuna olekuvõrrand suudab anda palju informatsiooni ühe mudeliga. PC-SAFT parameetrid on olemas rohkem ainete jaoks kuna ei ole nii raske leida vajalikke parameetreid. Seega, kui mitmeparameetrilist Helmholtzi olekuvõrrandit pole, siis on võimalik, et vähemalt PC-SAFT parameetrid on olemas. PC-SAFT üldiselt annab väärtused hea täpsusega nii gaasi- kui ka vedelfaasi jaoks. Kui PC-SAFT tarkvara on juba olemas (nt <a href="https://pypi.org/project/pcsaft/">pcsaft</a> pakett), siis võid kiiresti arvutusi teha. CoolPropis on ka nüüd olemas PC-SAFT olekuvõrrand, kuid pole veel kerge lisada parameetrid uue aine jaoks.
+      </p>
+      <pre>
+        <code class="python">
+          from pcsaft import pcsaft_den
+          import numpy as np
+
+          t = 420 # K
+          p = 10000000 # Pa
+
+          x = np.asarray([1.])
+          m = np.asarray([1.]) # parameetrid metaani jaoks
+          sigma = np.asarray([3.7039])
+          eps_k = np.asarray([150.03])
+          param_pcsaft = {'m':m, 's':sigma, 'e':eps_k}
+          den = pcsaft_den(t, p, x, param_pcsaft, phase='vap')
+        </code>
+      </pre>
+      <p>
+        On võimalik ka kasutada PC-SAFT olekuvõrrandit segude puhul. Nagu tavaliselt, on vaja ette anda interaktsiooni parameetreid segu ainete vahel. Mõnikord PC-SAFT annab head hinnangut isegi kui pannakse lihtsalt 0 interaktsiooni parameetri jaoks.
+      </p>
+      <p>
+        PC-SAFT parameetreid (k.a interaktsiooni parameetreid) saab tihti leida teaduskirjandusest (vt näiteks artikleid, mida lisasin Moodlisse).<sup><a href="#ref2">2</a>-<a href="#ref6">6</a></sup>
+      </p>
+      <pre>
+        <code class="python">
+          t = 460 # K
+          p = 100000 # Pa
+          x = np.asarray([0.3, 0.7]) # moolosad
+
+          den_pcsaft = np.zeros_like(t)
+          m = np.asarray([3.0576, 2.4653]) # parameetrid heksaani ja benseeni jaoks
+          sigma = np.asarray([3.7983, 3.6478])
+          eps_k = np.asarray([236.77, 287.35])
+          kij = np.asarray([[0, 0.0128],
+                            [0.0128, 0]]) # interaktsiooni parameeter
+          param_pcsaft = {'m':m, 's':sigma, 'e':eps_k, 'k_ij': kij}
+          den_pcsaft = pcsaft_den(t, p, x, param_pcsaft, phase='vap')
+        </code>
+      </pre>
+      <p>
+        Üks nõrk koht PC-SAFT olekuvõrrandiga on see, et entroopia ja energia parameetrite jaoks (entalpia, Gibbs energia, soojusmahtuvus, jne) PC-SAFT annab ainult jääkomadust. Ehk, see ainult näitab, kui palju antud omadus erineb ideaalgaasi väärtusest. Kuid nende parameetrite ideaalgaasi väärtused sõltuvad molekuli struktuurist (ehk ei saa lihtsalt ideaalgaasi valemiga arvutada), ja seega on vaja eraldi korrelatsiooni aine ideaalgaasi soojusmahtuvuse jaoks.<sup><a href="#ref1">1</a></sup> Üsna tihti neid korrelatsioone pole kuskilt kättesaadav. Kui on vaja entroopiat või energia parameetreid arvutada, ma tavaliselt kasutan teist meetodit.
+      </p>
+
+      <h2>Kui on tarkvara teiste mudelitega</h2>
+      <p>
+        Kui pole juba olemas mitmeparameetrilist Helmholtzi võrrandit ega PC-SAFT parameetreid aine jaoks, siis võib kasutada mudeleid muus tarkvaras, kui sul on olemas. Näiteks, protsessisimulaatoritel on hunniku mudeleid, mida saab kasutada. Samuti kui on olemas litsents <a href="https://www.aiche.org/dippr">DIPPR 801</a> või mõne sarnase tarkvara lahenduse jaoks, siis nendes on ka korrelatsioonid ja mudelid, mida võib kasutada. Kuid üldiselt need tarkvarad on päris kallid ja tihti tööandja ei osta neid litsentse. Aga kui on juba olemas, miks mitte kasutada.
+      </p>
+
+      <h2>Kui täpsust ei ole nii oluline</h2>
+      <p>
+        Kui on vaja ainult esialgset väärtust või kui parameetri täpsust ei mõjuta arvutuse tulemust väga palju, siis otsin ligikaudset väärtust. Mõnikord võib kasutada rusikareeglit. Näiteks, ma tean, et paljude orgaaniliste vedelikute jaoks soojusmahtuvus on umbes 2 J g<sup>-1</sup> K<sup>-1</sup>. Võib ka leida sarnast ainet, mille omadused on teada, ja kasutada selle aine omadusi. Kui pole juba minu tarkvaras mudel olemas ja täpsus pole kriitiline, siis kasutan lihtsalt hinnangulist väärtust ja liigun edasi oma tööga.
+      </p>
+
+      <h2>Mudeli parameetreid pole, aga täpsus on oluline</h2>
+      <p>
+        Kuid mõnikord täpsus on oluline ja mudelit pole juba olemas antud ainele või segule. Siis on kahjuks vaja investeerida seda aega, et ise mudelit välja arendada. Kui on vähemalt katseandmed olemas, siis tavaliselt pole nii hull. Siis saab optimeerimise teel leida mõne mudeli parameetrid (nt PC-SAFT parameetrid). Seda näitan ka selles õppeaines. Kui pole aga katseandmeid ka, siis oleks vaja esiteks neid mõõtma. Kui töötad kuskil, siis võibolla on ka võimalik lihtsalt osta need mõõtmised teenusena.
+      </p>
+      <p>
+        Ideaalne oleks, kui saaks ennustada uue aine parameetreid. On küll pakutud palju meetodeid selle jaoks, aga tihti neil on oma piirangud ja puudused. Paljude puhul pole ka tarkvara nende jaoks avalikult olemas, siis oleks võibolla vaja ise neid programeerida. Seega, praegu ei ole olemas sellist ideaalset lahendust omaduste ennustamiseks, aga võibolla tulevikus.
+      </p>
+
+      <h2>Viited</h2>
+      <ol>
+        <li id="ref1">
+          R. Span, E. W. Lemmon, R. T. Jacobsen, W. Wagner, and A. Yokozeki, “A Reference Equation of State for the Thermodynamic Properties of Nitrogen for Temperatures from 63.151 to 1000 K and Pressures to 2200 MPa,” Journal of Physical and Chemical Reference Data, vol. 29, no. 6, pp. 1361–1433, Nov. 2000, doi: 10.1063/1.1349047.
+        </li>
+        <li id="ref2">
+          J. Gross and G. Sadowski, “Perturbed-Chain SAFT:  An Equation of State Based on a Perturbation Theory for Chain Molecules,” Ind. Eng. Chem. Res., vol. 40, no. 4, pp. 1244–1260, Feb. 2001, doi: 10.1021/ie0003887.
+        </li>
+        <li id="ref3">
+          J. Gross and G. Sadowski, “Application of the Perturbed-Chain SAFT Equation of State to Associating Systems,” Ind. Eng. Chem. Res., vol. 41, no. 22, pp. 5510–5515, Oct. 2002, doi: 10.1021/ie010954d.
+        </li>
+        <li id="ref4">
+          M. Kleiner and G. Sadowski, “Modeling of Polar Systems Using PCP-SAFT:  An Approach to Account for Induced-Association Interactions,” J. Phys. Chem. C, vol. 111, no. 43, pp. 15544–15553, Nov. 2007, doi: 10.1021/jp072640v.
+        </li>
+        <li id="ref5">
+          C. Held, T. Reschke, S. Mohammad, A. Luza, and G. Sadowski, “ePC-SAFT revised,” Chemical Engineering Research and Design, vol. 92, no. 12, pp. 2884–2897, Dec. 2014, doi: 10.1016/j.cherd.2014.05.017.
+        </li>
+        <li id="ref6">
+          A. Ghosh, W. G. Chapman, and R. N. French, “Gas solubility in hydrocarbons—a SAFT-based approach,” Fluid Phase Equilibria, vol. 209, no. 2, pp. 229–243, Jul. 2003, doi: 10.1016/S0378-3812(03)00147-X.
+        </li>
+      </ol>
+
+    </div>
+  </div>
+</body>
+</html>

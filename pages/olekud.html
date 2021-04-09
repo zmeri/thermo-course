@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/termodynaamika.css">
+
+  <script>
+    $(function(){
+      $("#navigation").load(`/src/navigation.html`);
+    });
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Olekud</title>
+</head>
+
+<body>
+  <div id='content'>
+    <div id="navigation"></div>
+    <div id='main-text'>
+      <h1>Olekud</h1>
+      <p>
+        <b>Olek</b> - süsteemi teatud seisund termodünaamiliste muutujate suhtes.
+      </p>
+      <p>
+        Termodünaamikas olekud ei sõltu teest, ehk pole vahet, mis protsessi süsteem pidi läbima, et selle olekuni jõuda. Olek on alati sama, hoolimata sellest, kuidas olekuni jõutakse.
+      </p>
+
+      <h2>Süsteem ja keskkond</h2>
+      <p>
+        Termodünaamilistes arvutustes peame esiteks paika panema, mida me täpselt tahame uurida. Defineerime <b>süsteemi</b> ja kõik muu on ümbritsev <b>keskkond</b>. Süsteem võib olla kindel anum, näiteks reaktor.
+      </p>
+      <img class="inline-img" src="/media/system%20-%20reaktor.png" />
+      <p>
+        Süsteem võib ka olla lihtsalt teatud kogus ainet. Näiteks võibolla meid huvitab, kuidas 1 kg ainet muutub, kui see läbib ringprotsessi.
+      </p>
+      <img class="inline-img" src="/media/system%20-%20cycle.png" />
+      <p>
+        Üldiselt võetakse eeldus, et süsteemis termodünaamilised parameetrid on igal pool samad (ehk süsteem asub ühes konkreetses termodünaamilises punktis). Kui süsteemis ei ole igal pool sama olek ja on vaja seda arvesse võtta, siis mõnikord süsteemi jaotatakse mitmeks väiksemateks süsteemideks ja tehakse arvutust igale väiksele süsteemile eraldi. Arvutuslik vedelik dünaamika tarkvara kasutab sellist lähenemist.
+      </p>
+      <p>
+        Oluline on ka märkata, mis suund defineeritakse, kui positiivne voog. Üldiselt defineeritakse vood, mis tulevad süsteemisse, kui positiivsed ja need, mis lahkuvad süsteemist, kui negatiivsed. Seega, kui süsteem toodab energiat, seda tavaliselt tähistatakse kui negatiivne voog kuna termodünaamilistest arvutustest lähtutakse süsteemi seisukohast.
+      </p>
+
+      <h2>Suletud - avatud - isoleeritud</h2>
+      <p>
+        Mõnikord on kasulik liigitada süsteeme, kui suletud, avatud või isoleeritud.
+      </p>
+      <ul class="img-grid">
+        <li class="img-grid-item">
+          <b>Isoleeritud</b> - Ei toimu ei energia ega massi ülekannet süsteemi ja keskkonna vahel
+          <img class="grid-img" src="/media/system%20-%20isolated.png" />
+        </li>
+        <li class="img-grid-item">
+          <b>Suletud</b> - Ainult energia liigub süsteemi ja keskkonna vahel
+          <img class="grid-img" src="/media/system%20-%20closed.png" />
+        </li>
+        <li class="img-grid-item">
+          <b>Avatud</b> - Energia ja mass liiguvad süsteemi ja keskkonna vahel
+          <img class="grid-img" src="/media/system%20-%20open.png" />
+        </li>
+      </ul>
+      <p>
+        Kui on isoleeritud või suletud süsteem siis saame lihtsustada valemeid, mida me kasutame.
+      </p>
+
+      <h2>Olekuparameetrid</h2>
+      <p>
+        Võime kasutada erinevaid olekuparameetreid vastavalt sellele, mis meid huvitab ja mis on kõige mugavamad parameetrid. Näiteks on defineeritud mitu erinevat energiat kuna teatud ülesande jaoks ühte on mugavam kasutada kui teisi. Olekuparameetrid on omavahel seotud ja saab neid teisendada.
+      </p>
+      <ul>
+        <li>
+          <b>Siseenergia</b> (U): Energia molekulide korratu liikumisest mikroskoobilises skaalas, ehk molekulide kineetiline ja potentsiaalne energia.<a href="#ref1"><sup>1,</sup></a><a href="#ref2"><sup>2</sup></a>
+        </li>
+        <li>
+          <b>Entalpia</b> (H): Energia, mis võtab arvesse molekulide mikroskoobiline energia (siseenergia) ja töö, mis tuleb mahu muutusest.<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;H = U + PV
+        </li>
+        <li>
+          <b>Helmholtz energia</b> (A): Energia, mis lahutab molekulide energiast (siseenergiast) energiat, mis läheb entroopia suurenemiseks. Kasulik, kui maht on konstantne.<a href="#ref4"><sup>4</sup></a><br />
+          &nbsp;&nbsp;&nbsp;&nbsp;A = U - TS
+        </li>
+        <li>
+          <b>Gibbs energia</b> (G): Energia, mis lahutab molekulide ja mahu muutuse energiast (entalpiast) energiat, mis läheb entroopia suurenemiseks. Kasulik, kui rõhk on konstantne.<a href="#ref4"><sup>4</sup></a><br />
+          &nbsp;&nbsp;&nbsp;&nbsp;G = U + PV - TS
+        </li>
+        <li>
+          <b>Rõhk</b> (P): Jõu mingile pinnale ühe pindala ühiku kohta.
+        </li>
+        <li>
+          <b>Maht</b> (V): Süsteemi maht/ruumala. Tihti väljendatakse ka kui molaarne maht, ehk kui palju ruumi oleks vaja ühe mooli jaoks süsteemi tingimustel.
+        </li>
+        <li>
+          <b>Tihedus</b> (&rho;): Kui palju ainet on süsteemis mahuühiku kohta. Aine kogust väljendatakse nii massi kui ka moolide järgi (ehk molaarne tihedus).
+        </li>
+        <li>
+          <b>Entroopia</b> (S): Võimalike mikroolekute arv, ehk korratus süsteemis.<a href="#ref3"><sup>3</sup></a>
+        </li>
+        <li>
+          <b>Temperatuur</b> (T): Molekulide mikroskoobilise energia (siseenergia) suhteline muutus kui korratus (entroopia) muutub.<a href="#ref5"><sup>5,</sup></a><a href="#ref6"><sup>6</sup></a>
+        </li>
+        <li>
+          jt...
+        </li>
+      </ul>
+      <p>
+        On oluline ka eristada, kas omadus sõltub süsteemi suurusest või mitte. <b>Süsteemi suurust iseloomustav</b> omadus (ekstensiivne omadus) muutub, kui näiteks süsteemi maht või mass muutub. Energia parameetrid (siseenergia, entalpia, jne) ja maht on suurust iseloomustavad omadused. <b>Süsteemi suurusest sõltumatu</b> omadus (intensiivne omadus) ei olene süsteemi suurusest. Rõhk, temperatuur ja tihedus on suurusest sõltumatud omadused. Kuna tihti on lihtsam kasutada omadusi, mis ei sõltu süsteemi suurusest, sageli teisendatakse ka suurusest iseloomustavaid parameetreid, nii et nad enam ei oleks suurusest sõltuvad. Näiteks, jagatakse mahtu moolide arvuga, et saada molaarne maht. Samuti jagatakse energia parameetreid süsteemi moolide arvu või massiga. Kui jagame entalpia süsteemi massiga, siis saame erientalpia, kuid tihti öeldakse selle kohta ka lihtsalt entalpia (ühikust saab teada, kas on erientalpia või mitte).
+      </p>
+      <p>
+        Lisaks võiks mainida, et mitmed definitsioonid ja valemid termodünaamikas põhinevad eeldusel, et süsteem on tasakaalus. Seega, termodünaamika võib näidata, kas protsess võib toimuda ja mis on süsteemi lõppseisund, aga praegusel kujul ei anna informatsiooni protsessi kiiruse kohta. Praegu uuritakse, kuidas laiendada termodünaamika süsteemidele, mis ei ole tasakaalus, kuid see on suhteliselt uus valdkond ja me selles õppeaines ei käsitle seda.
+      </p>
+
+      <h2>Faasid</h2>
+      <p>
+        Olekuid saab ka liigitada faasi järgi. On olulised erinevused faaside vahel. Näiteks, gaasid ja vedelikud voolavad, aga tahked mitte. Samuti gaasid täidavad terve anuma, kuid vedelikud ja tahked ei tee seda. Gaasis kaugus molekulide vahel on palju pikem, kui vedelikus või tahkes. Kuna faasidel on nii erinevad struktuurid, molekulid ei saa niisama liikuda ühest faasist teisesse. On vaja hoopis lisa energiat, et üle minna teisele faasile. Tihti näidatakse joonistel, mis faas esineb, kui süsteem on teatud olekus.
+      </p>
+      <ul class="img-grid">
+        <li class="img-grid-item">
+          PT joonis
+          <img class="grid-img" src="/media/PT_joonis.png" />
+        </li>
+        <li class="img-grid-item">
+          PV joonis
+          <img class="grid-img" src="/media/PV_joonis.png" />
+        </li>
+      </ul>
+      <p>
+        Faasijoonistel tavaliselt näidatakse joontega faaside piirid, ehk tingimused, mil toimub üleminek ühest faasist teisele. Faasijoonisel saab ka näha paar erilist olekut. Kolmik punkt on olek, kus esineb gaas, vedelik ja tahke samaaegselt. Kriitiline punkt näitab kõige kõrgem rõhk ja temperatuur, mil on ikka võimalik eristada gaase ja vedelikke. Kui temperatuur ja rõhk on kõrgemad, kui kriitiline punkt, siis süsteem ei saa olla vedelfaasis. Selle asemel süsteem on ülekriitilises olekus, ehk molekulid liikuvad mingil määral nagu gaas, aga kui rõhk on kõrge süsteemi tihedus võib olla palju kõrgem kui tavaliselt esineb gaasifaasis.
+      </p>
+      <p>
+        Segude puhul faaside käitumine on veel keerulisem. Näiteks, faasi muudatustega kaasneb tavaliselt keemilise koostise muutus. Samuti kui ained segus on molekulaarse struktuuri poolest piisavalt erinevad, võivad tekkida mitu vedeliku või tahke faasi.
+      </p>
+
+      <h2>Viited</h2>
+      <ol>
+        <li id="ref1">
+          R. Nave, “Internal Energy,” HyperPhysics. <a href="http://hyperphysics.phy-astr.gsu.edu/hbase/thermo/inteng.html">http://hyperphysics.phy-astr.gsu.edu/hbase/thermo/inteng.html</a> (accessed Feb. 01, 2021).
+        </li>
+        <li id="ref2">
+          J. S. Dugdale, Entropy And Its Physical Meaning. CRC Press, 1996.
+        </li>
+        <li id="ref3">
+          Y. Cheng, Macroscopic and Statistical Thermodynamics. World Scientific, 2006.
+        </li>
+        <li id="ref4">
+          P. Atkins, J. de Paula, and J. Keeler, Atkins’ Physical Chemistry 11e: Volume 3: Molecular Thermodynamics and Kinetics. Oxford University Press, 2019.
+        </li>
+        <li id="ref5">
+          P. G. Nelson, “Statistical mechanical interpretation of temperature,” Found Chem, vol. 21, no. 3, pp. 325–331, Oct. 2019, doi: 10.1007/s10698-019-09337-4.
+        </li>
+        <li id="ref6">
+          T. J. Quinn, Temperature. Academic Press, 2013.
+        </li>
+        <li id="ref7">
+          Lõkke pilt: <a href="https://commons.wikimedia.org/wiki/File:Campfire_and_sparks_in_Anttoora_12.jpg">kallerna</a>, 2010.
+        </li>
+      </ol>
+
+    </div>
+  </div>
+</body>
+</html>

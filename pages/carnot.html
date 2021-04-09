@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/termodynaamika.css">
+
+  <script>
+    $(function(){
+      $("#navigation").load(`/src/navigation.html`);
+    });
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Carnot ringprotsess</title>
+</head>
+
+<body>
+  <div id='content'>
+    <div id="navigation"></div>
+    <div id='main-text'>
+      <h1>Carnot ringprotsess</h1>
+      <p>
+        Asi, millel on kõrge temperatuur, sisaldab energiat, mida võiksime kasutada. Loomulikult võiksime seda energiat edasi kanda soojusena, aga võibolla me tahame hoopis mehaanilist tööd teha selle energiaga. Näiteks, võibolla me oleme pannud hunniku puitu põlema ja tahame sellega panna generaatorit pöörlema. Kuidas saame kasutada kõrget temperatuuri, et teha mehaanilist tööd?
+      </p>
+      <p>
+       Üks variant on kuumutada vedelikku või gaasi ja siis lasta sellel ainel paisuda. Paisudes maht muutub, ehk tehakse mehaanilist tööd. Carnot ringprotsess on ideaalne näide sellisest protsessist. Carnot ringprotsessist õppimine annab head tagapõhja selleks, et mõista sarnaseid ringprotsesse.
+      </p>
+
+      <h2>Protsessi neli sammu</h2>
+      <p>
+        Carnot ringprotsessis kasutatakse soojust, et teha tööd. Soojus tuleb kuumast allikast (soojendist) ja jääksoojus läheb külmasse kohta (jahutisse).
+      </p>
+      <figure>
+        <img class="inline-img" src="/media/Carnot_heat_engine_2.svg" />
+        <figcaption>
+          Joonise allikas: <a href="https://commons.wikimedia.org/wiki/File:Carnot_heat_engine_2.svg">Eric Gaba</a>, Wikimedia Commons. CC0.
+        </figcaption>
+      </figure>
+      <p>
+        Carnot ringprotsess erineb teistest ringprotsessidest protsessidest kuna kõik muutused tehakse pöörduvalt. Carnot ringprotsess koosneb neljast sammust.<sup><a href="#ref1">1</a></sup>
+      </p>
+      <ol>
+        <li>
+          Isentroopiline kokkusurumine: \( &Delta;W_1 = \int_{V_1}^{V_2} P dV \)
+        </li>
+        <li>
+          Isotermne kuumutamine: \( &Delta;W_2 = \int_{S_1}^{S_2} T dS_{rev} = &Delta;Q_2 \)
+        </li>
+        <li>
+          Isentroopiline paisumine: \( &Delta;W_3 = \int_{V_3}^{V_4} P dV \)
+        </li>
+        <li>
+          Isotermne jahutamine: \( &Delta;W_4 = \int_{S_2}^{S_1} T dS_{rev} = &Delta;Q_4 \)
+        </li>
+      </ol>
+      <figure>
+        <img class="inline-img" src="/media/Carnot-cycle-p-V-diagram_eestikeeles.svg" />
+        <figcaption>
+          Algjoonise allikas: <a href="https://commons.wikimedia.org/wiki/File:Carnot-cycle-p-V-diagram.svg">Derkleinebauer</a>, Wikimedia Commons. CC0.
+        </figcaption>
+      </figure>
+      <p>
+        Carnot ringprotsess võib ka käia tagurpidi. Siis on ideaalne külmutusprotsess.<sup><a href="#ref1">1</a></sup>
+      </p>
+
+      <h2>Olulised järeldused</h2>
+      <p>
+        Kuna Carnot ringprotsessis kõik muutusi tehakse pöörduvalt, siis ainuke energia, mis läheb kaduma on see, mida antakse jahutile. Seega, protsess on teoreetiline kuna päris maailmas protsessid on pöördumatud ja energia läheb mujale kaduma (nt hõõrdumise tõttu kokkusurumisel ja paisumisel). See tähendab, et ükski soojusmasin, mis viib soojust kahe kindla temperatuuriga asja vahel, ei saa olla nii tõhus kui Carnot ringprotsess. Teiste sõnadega, Carnot ringprotsess näitab kõige rohkem tööd, mida on võimalik teha, kui kanda soojust üle kahe asja vahel.
+      </p>
+
+      <h2>Carnot ringprotsessi kasutegur</h2>
+      <p>
+        Võime arvutada Carnot ringprotsessi kasutegurit. Kuna Carnot ringprotsess on teoreetiline piir, siis võime võrrelda sarnaste soojusmasinate kasutegurit Carnot ringprotsessi kasuteguriga.
+      </p>
+      <p>
+        Kasutegur üldiselt näitab, kui palju saame jagatud sellega, mida on vaja sisestada protsessile. Ehk, siin kasutegur on kasulik töö, mida saame soojusmasinast jagatud soojusega, mida me protsessile anname.
+      </p>
+      <div>
+        \[ &eta; = \frac{&Delta;W}{&Delta;Q_{kuumutamine}} \]
+      </div>
+      <p>
+        Esiteks, arvutame kasulikku tööd, mida me protsessist saame. Kuna on ringprotsess me teame, et olek lõpus peab olema sama kui olek alguses. Ehk, esimese seaduse järgi kõikide sammude energia muutused peavad võrduma nulliga.
+      </p>
+      <div>
+        \[ &Delta;E = 0 = &Delta;W_{kokkusurumine} + &Delta;Q_{kuumutamine} - &Delta;W_{paisumine} - &Delta;Q_{jahutamine} \]
+      </div>
+      <p>
+        Me saame energiat paisumisest, aga peame ka tööd tegema, et ainet kokku suruda. Seega, kasulik töö, mida saame paisumisest teha, on \( &Delta;W_{paisumine} - &Delta;W_{kokkusurumine} \). Kutsume seda kasulikku tööd lihtsalt \( &Delta;W \)-ks.
+      </p>
+      <div>
+        \[ &Delta;W = &Delta;Q_{kuumutamine} - &Delta;Q_{jahutamine} \]
+      </div>
+      <p>
+        Nüüd saame asendada Q töö valemiga.
+      </p>
+      <div>
+        \[ &Delta;W = \int_{S_1}^{S_2} T_{kuum} dS_{rev} + \int_{S_2}^{S_1} T_{jahe} dS_{rev} \]
+      </div>
+      <p>
+        Temperatuur ei muutu, siis saame selle integraalist välja tuua. Nüüd on lihtne lahendada integraali.
+      </p>
+      <div>
+        \[ &Delta;W = T_{kuum} (S_2 - S_1) + T_{jahe} (S_1 - S_2) \]
+      </div>
+      <div>
+        \[ &Delta;W = (T_{kuum} - T_{jahe}) (S_2 - S_1) \]
+      </div>
+      <p>
+        Nüüd saame asendada &Delta;W ja &Delta;Q kasuteguri valemisse.
+      </p>
+      <div>
+        \[ &eta; = \frac{(T_{kuum} - T_{jahe}) (S_2 - S_1)}{T_{kuum} (S_2 - S_1)} \]
+      </div>
+      <p>
+        Ja lihtsustades näeme, et Carnot ringprotsessi kasutegur sõltub ainult soojendi ja jahuti temperatuurist.
+      </p>
+      <div>
+        \[ &eta; = \frac{T_{kuum} - T_{jahe}}{T_{kuum}} \]
+      </div>
+      <p>
+        Mõnikord kirjutatakse sama valemit natuke teisiti, siis näitame seda ka.
+      </p>
+      <div>
+        \[ &eta; = 1 - \frac{T_{jahe}}{T_{kuum}} \]
+      </div>
+      <p>
+        Sellest võime järeldada, et on võimalik tõsta soojusmasina kasutegurit, kui suurendame soojendi temperatuuri ja/või vähendame jahuti temperatuuri.
+      </p>
+
+      <img class="inline-img" src="/media/carnot_efficiency.png" />
+
+      <p>
+        Joonisest võime näha, et kasutegur on suhteliselt madal. Enamasti kasutegur on väiksem kui 50%. See viidab sellele, et kõik energiad ei ole samaväärsed. Näiteks, elektriline energia saab teha rohkem tööd, kui sama kogus soojus energia.
+      </p>
+
+      <h2>Viited</h2>
+      <ol>
+        <li id="ref1">
+          A. Ameen, Refrigeration and Air Conditioning. PHI Learning Pvt. Ltd., 2006.
+        </li>
+      </ol>
+
+    </div>
+  </div>
+</body>
+</html>

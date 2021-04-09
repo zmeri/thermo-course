@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet"
+        href="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/styles/default.min.css">
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/highlight.min.js"></script>  <script>hljs.highlightAll();</script>
+
+  <link rel="stylesheet" href="/styles/termodynaamika.css">
+
+  <script>
+    $(function(){
+      $("#navigation").load(`/src/navigation.html`);
+    });
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Keemiline potentsiaal</title>
+</head>
+
+<body>
+  <div id='content'>
+    <div id="navigation"></div>
+    <div id='main-text'>
+      <h1>Keemiline potentsiaal</h1>
+      <p>
+        Inseneridena me viime läbi ka keemilised muudatusi, näiteks seperatsiooni protsesse ja reaktsioone. Termodünaamika kirjeldab ka neid olekumuutusi.
+      </p>
+
+      <h2>Gibbs energia kui koostis muutub</h2>
+      <p>
+        Tavaliselt keemilistes protsessides me kasutame Gibbs energiat kuna on mugav kasutada, kui rõhk ja temperatuur on konstantsed. Alustame Gibbsi valemiga Gibbs energia jaoks ja võtame nüüd moolide muutused ka arvesse.
+      </p>
+      <div>
+        \[ dG = -SdT + VdP + \sum_i {\left(\frac{&part;G}{&part;n_i}\right)}_{T,P,n_j} dn_i \]
+      </div>
+      <p>
+        Defineerime Gibbs energia tuletist moolide suhtes kui keemiline potentsiaal. Ehk keemiline potentsiaal näitab, kuidas energia muutub, kui koostis muutub.
+      </p>
+      <div>
+        \[ &mu;_i = {\left(\frac{&part;G}{&part;n_i}\right)}_{T,P,n_j} \]
+      </div>
+
+      <h2>Fugitiivsus</h2>
+      <p>
+        Kuid keemilisel potentsiaalil on mõned ebasoodsad matemaatilised omadused. Eeskätt, kui aine <em>i</em> kontsentratsioon läheb nullini siis keemiline potentsiaali väärtus läheb lõpmatuseni. Sellepärast, tihti kasutatakse hoopis <b>fugitiivsust</b>, mida defineeritakse järgmiselt:
+      </p>
+      <div>
+        \[ RT \ln \left( \frac{f_i}{1} \right) = &mu;_i - g_i^o \]
+      </div>
+      <p>
+        Siin <em>f<sub>i</sub></em> on aine <em>i</em> fugitiivsus ja <em>g<sup>o</sup><sub>i</sub></em> on ideaalgaasi standardolek. Seda kuju kasutatakse kuna ideaalgaasi jaoks keemiline potentsiaal on seotud aine osarõhu logaritmiga. Ja logaritmis fugitiivsust jagatakse 1 bar-iga, ehk fugitiivsusel on rõhu ühik.
+      </p>
+      <p>
+        Fugitiivsus on lihtsalt teisendatud keemiline potentsiaal. Ehk, see näitab sama asja kui keemiline potentsiaal, aga ilma nende matemaatiliste probleemideta.
+      </p>
+      <p>
+        Võibolla on kasulik teada, et fugitiivsus tuleb ladina keele sõnast <em>fugere</em>, mis tähendab põgenema. Saab siis ette kujutada, et fugitiivsus näitab, kui palju aine tahaks &bdquo;põgeneda&ldquo; süsteemist.
+      </p>
+
+      <h2>Faasitasakaalu tingimused</h2>
+      <p>
+        Tasakaaluolekus faaside keemilised potentsiaalid on võrdsed.
+      </p>
+      <div>
+        \[ &mu;_{i,faas\ 1} = &mu;_{i,faas\ 2} \]
+      </div>
+      <p>
+        Tasakaalus see kehtib kõikide komponentide jaoks. Kui keemilised potentsiaalid ei ole võrdsed, siis süsteem võib jõuda madalamale energia seisundile, kui mõned aatomid/molekulid lähevad üle teisele faasile. Sama faasitasakaalu tingimust saab defineerida ka fugitiivsusega.
+      </p>
+      <div>
+        \[ f_{i,faas\ 1} = f_{i,faas\ 2} \]
+      </div>
+
+      <h2>Viited</h2>
+      <ol>
+        <li id="ref1">
+          E. B. Smith, Basic Chemical Thermodynamics. Imperial College Press, 2004.
+        </li>
+        <li id="ref2">
+          L. Albright, Albright’s Chemical Engineering Handbook. CRC Press, 2008.
+        </li>
+        <li id="ref3">
+          J. P. O’Connell and J. M. Haile, Thermodynamics: Fundamentals for Applications. Cambridge University Press, 2005.
+        </li>
+      </ol>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet"
+        href="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/styles/default.min.css">
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/highlight.min.js"></script>  <script>hljs.highlightAll();</script>
+
+  <link rel="stylesheet" href="/styles/termodynaamika.css">
+
+  <script>
+    $(function(){
+      $("#navigation").load(`/src/navigation.html`);
+    });
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Soojuspumbad</title>
+</head>
+
+<body>
+  <div id='content'>
+    <div id="navigation"></div>
+    <div id='main-text'>
+      <h1>Soojuspumbad</h1>
+      <p>
+        Oleme näinud, et on võimalik soojusmasinas muundada soojust mehaaniliseks tööks. Kui aga panna protsessi käima tagurpidi, siis on võimalik liigutada soojust külmast kohast kuumasse kohta. Ehk, me saame teha soojuspumbad, mis hoiavad meie majad soojaks.
+      </p>
+
+      <h2>Soojuspumba ringprotsess</h2>
+      <p>
+        Soojuspumba ringprotsess on sarnane soojusmasina ringprotsessidele, kuid protsess viiakse läbi tagurpidi. Soojuspumbas toimuvad järgmised põhilised sammud:
+      </p>
+      <ol>
+        <li>
+          <b>Kokkusurumine</b> &mdash; Gaasi surutakse kokku, et saavutada kõrgemat rõhku;
+        </li>
+        <li>
+          <b>Kondenseerumine</b> &mdash; Ülekuumendatud gaasi jahutatakse ja vedeldatakse kondensaatoris, eraldades soojust;
+        </li>
+        <li>
+          <b>Paisumine</b> &mdash; Töövedeliku rõhku vähendadakse paisuventiilis, et saavutada vajalikku rõhku aurustamiseks keskkonna temperatuuril;
+        </li>
+        <li>
+          <b>Aurustamine</b> &mdash; Aurustamise käigus töövedelik võtab soojust keskkonnast.
+        </li>
+      </ol>
+      <ul class="img-grid">
+        <li class="img-grid-item">
+          <img class="grid-img" src="/media/soojuspump.svg" />
+        </li>
+        <li class="img-grid-item">
+          <img class="grid-img" src="/media/soojuspumpa_ringprotsess_num.png" />
+        </li>
+      </ul>
+      <p>
+        Päris soojuspumbas vedelik, mis lahkub kondensaatorist, on natuke külmem, kui küllastunud olek. Samuti gaas, mis väljub aurustist, ei ole päris küllastunud ja on natuke kõrgemal temperatuuril.<sup><a href="#ref1">1</a></sup>
+      </p>
+      <p>
+        Soojuspumba ringprotsess on sisuliselt sama kui külmutusprotsess. Lihtsalt kasutatakse soojust, mis tuleb kondensaatorist, mitte jahutust aurustist.
+      </p>
+
+      <h2>Soojustegur</h2>
+      <p>
+        Soojuspumpade tõhusust kirjeldatakse soojusteguriga (ingl <em>coefficient of performance</em>), mis on sisuliselt soojusmasina kasuteguri pöördväärtus. Ehk soojuspumbas me tahame hoopis soojust toota ja peame selleks tööd tegema. See on sarnane jahutusprotsessidele, mille puhul kasutatakse jahutustegurit.<sup><a href="#ref1">1</a></sup>
+      </p>
+      <div>
+        \[ COP = \frac{toodetud soojus}{vajalik töö} \]
+      </div>
+      <p>
+        Erinevalt kasutegurist, soojustegur on enamasti kõrgem kui 1. Esialgul võib see tunduda ebaloogiline kuna see tähendab, et saame rohkem soojust kui energiat, mida me sisse anname. Näiliselt see rikkub termodünaamika esimest seadust. Kuid siin on oluline märgata, et soojuspumbaga (ja külmutusprotsessidega ka) enamus soojust lihtsalt liigutatakse ühest kohast teisesse. Seega soojuspump ei pea kogu soojust tootma teisest energia allikast.
+      </p>
+
+      <h2>Ideaalne soojuspump</h2>
+      <p>
+        Carnot ringprotsess on ideaalne soojusmasin, milles soojust kasutatakse kõige tõhusamalt töö tegemiseks. Soojuspumba ideaalne ringprotsess on lihtsalt Carnot pöördringprotsess. Teiste sõnadega, kui Carnot ringprotsess viiakse läbi tagurpidi, siis saadakse kõige rohkem soojust ühe töö ühiku kohta (või kõige rohkem külmutamist, kui kasutatakse külmutusprotsessina).
+      </p>
+      <p>
+        Carnot pöördringprotsessiga võime samamoodi arvutada teoreetilist piiri, ehk kõige suuremat soojustegurit, mida oleks võimalik saavutada soojuspumbaga.
+      </p>
+      <div>
+        \[ COP = \frac{T_{kuum}}{T_{kuum} - T_{jahe}} \]
+      </div>
+      <p>
+        Sellest valemist tulevad mõned huvitavad järeldused. Soojusmasinatega leidsime, et saab kasutegurit tõsta, kui suurendame temperatuuri vahet. Kuid soojuspumpadega on vastupidine käitumine. Soojustegur on suurem, kui temperatuuride vahe on väiksem ja \( T_{kuum} \) on kõrgem. Sellepärast, soojuspumbad töötavad üldiselt tõhusamalt, kui soojuseallikas ei ole nii külm ja vajalik temperatuur radiaatoris või põrandas on madalam.
+      </p>
+      <img class="inline-img" src="/media/carnot_efficiency_heatpump.png" />
+
+      <h2>Erinevad variandid</h2>
+      <p>
+        On erinevad soojuspumba variandid sõltuvalt sellest, mida kasutatakse soojuse allikana.<sup><a href="#ref2">2</a></sup>
+      </p>
+      <ul>
+        <li>
+          <b>Õhksoojuspump</b> &mdash; Kasutab õhku soojusallikana;
+        </li>
+        <li>
+          <b>Vesisoojuspump</b> &mdash; Kasutab veekogu soojusallikana;
+        </li>
+        <li>
+          <b>Maasoojuspump</b> &mdash; Võtab soojust maast või põhjaveest;
+        </li>
+      </ul>
+      <p>
+        Lisaks, on ka soojuspumbad, mida võib kasutada nii kuumutamiseks kui ka jahutamiseks. Selleks paigutatakse ventiili, millega on võimalik vahetada töövedeliku voolamise suunda. Siis näiteks kui ilm läheb soojemaks ja tahetakse hoopis maja jahutada, on võimalik soojuspumpa ümber lülitada, nii et töötab nagu külmik ja jahutab maja.
+      </p>
+
+      <h2>Viited</h2>
+      <ol>
+        <li id="ref1">
+          A. Ameen, Refrigeration and Air Conditioning. PHI Learning Pvt. Ltd., 2006.
+        </li>
+        <li id="ref2">
+          “Heat pump,” Wikipedia. Mar. 12, 2021, Accessed: Mar. 12, 2021. [Online]. Available: <a href="https://en.wikipedia.org/w/index.php?title=Heat_pump&oldid=1011710190">https://en.wikipedia.org/w/index.php?title=Heat_pump&oldid=1011710190</a>.
+        </li>
+      </ol>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet"
+        href="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/styles/default.min.css">
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/highlight.min.js"></script>  <script>hljs.highlightAll();</script>
+
+  <link rel="stylesheet" href="/styles/termodynaamika.css">
+
+  <script>
+    $(function(){
+      $("#navigation").load(`/src/navigation.html`);
+    });
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Andmete ja parameetrite leidmine</title>
+</head>
+
+<body>
+  <div id='content'>
+    <div id="navigation"></div>
+    <div id='main-text'>
+      <h1>Andmete ja parameetrite leidmine</h1>
+      <p>
+        Termodünaamiliste mudelite jaoks on vaja teada mudeli parameetrid. Mõnikord parameetrid on juba olemas tarkvaras või saab neid leida teaduskirjandusest, aga kui ei ole, siis on vaja ise arvutada mudeli parameetreid optimeerimise teel. Optimeerimiseks on vaja andmed aine või segu termofüüsilistest omadustest. Vaatame põhilisi kohti, kust neid andmeid leida. Vaatame ka, kuidas ise leida mudeli parameetrid andmetest optimeerimise teel.
+      </p>
+
+      <h2>Peamised allikad</h2>
+      <p>
+        Aja jooksul on mõõdetud miljoneid andmeid, aga ei ole ühtlane jaotus. Mõned ained on tähtsad või laialt levinud ja neid uuritakse põhjalikumalt. Enamus ainete jaoks võib leida ainult üksikuid andmepunkte, kui on üldse andmed mõõdetud.
+      </p>
+      <table>
+        <caption>
+          Peamised termodünaamiliste andmete allikad.
+        </caption>
+        <tr>
+          <th>
+            Allikas
+          </th>
+          <th>
+            Kirjeldus
+          </th>
+          <th>
+            Tasuta/Tasuline
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <a href="https://webbook.nist.gov/chemistry/">NIST veebileht</a>
+          </td>
+          <td>
+            Sisaldab kriitilisi parameetreid, keemispunkte, sulamispunkte, moodustamisentalpiaid ja mõnikord teised parameetreid.
+          </td>
+          <td>
+            Tasuta
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="https://trc.nist.gov/ThermoML.html">NIST Thermodynamics Research Centeri arhiiv</a>
+          </td>
+          <td>
+            Andmed artiklitest, mis on avaldatud viies peamises termofüüsiliste andmete ajakirjas. Andmed ilmuvad paari aasta hilinemisega.
+          </td>
+          <td>
+            Tasuta
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="https://trc.nist.gov/tde.html">NIST ThermoData Engine</a>
+          </td>
+          <td>
+            Sisaldab miljoneid andmepunkte. Põhjalik allikas.
+          </td>
+          <td>
+            Tasuline
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="http://www.ddbst.com/">Dortmund Data Bank</a>
+          </td>
+          <td>
+            Kõige põhjalikum andmebaas. Sisaldab miljoneid andmepunkte.
+          </td>
+          <td>
+            Tasuline (väike osa on <a href="http://www.ddbst.com/free-data.html">vabalt kättesaadav</a>)
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="https://www.aiche.org/dippr">DIPPR 801</a>
+          </td>
+          <td>
+            Andmed ja korrelatsioone tuhandete ainete jaoks. Projekt keskendub pigem korrelatsioonidele, aga algandmed saab ka kätte.
+          </td>
+          <td>
+            Tasuline
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="https://dechema.de/en/detherm.html">DETHERM</a>
+          </td>
+          <td>
+            Põhineb enamasti Dortmund Data Bankil.
+          </td>
+          <td>
+            Tasuline
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Protsessi simulaatorid
+          </td>
+          <td>
+            Protsessi simulaatoritel on ka tavaliselt oma andmebaasid.
+          </td>
+          <td>
+            Tasuline
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Teaduskirjandus
+          </td>
+          <td>
+            Kirjanduses on palju andmeid, kuid ei ole nii mugav otsida kui andmebaasist.
+          </td>
+          <td>
+            Tasuta või tasuline (sõltub kas avaldatakse avatud juurdepääsuga)
+          </td>
+        </tr>
+      </table>
+
+      <h2>Andmed ja parameetrid teadusajakirjadest</h2>
+      <p>
+        Suur osa andmetest olid kunagi avaldatud teaduskirjanduses. Seega, tihti on võimalik leida kirjandusest vajalikud andmed.
+      </p>
+      <p>
+        Hea koht alustada on NISTi <a href="https://trc.nist.gov/thermolit/main/home.html">Thermolit</a>. Thermolit otsib NISTi andmebaasi ja näitab, mis artiklites on avaldatud andmed teatud aine või segu jaoks. On loomulikult ka artikleid ja allikaid, mis ei ole NISTi andmebaasis, aga andmebaas on siiski päris hea. Seega, on hea koht alustada.
+      </p>
+      <p>
+        Tavalise otsingumootoriga saab ka päris hästi leida andmeid. Google Scholar näitab ka, kas artikli PDF on kuskil internetis kättesaadav, mis on kasulik, kui ajakiri ei ole avaldanud avatud juurdepääsuga. Kahjuks, isegi kui viide on käes, on mõnikord raske pääseda artiklile ligi. Kui ei ole kuskil avalikult avaldatud, siis võib ka kirjutada otse autoritele. Teaduskirjastustest erinevalt, autoritel on tavaliselt heameel, et keegi tahab lugeda nende artiklit. Selleks nad ju alguses avaldasid seda ja nad ei saa kasu juurdepääsu piiramisest, nagu teaduskirjastused. On võimalik ka paluda tuttava käest, kellel on juurdepääs antud artiklile, või isegi saab paluda abi Twitteris (<a href="https://twitter.com/hashtag/icanhazpdf">#icanhazpdf</a>).
+      </p>
+
+      <h2>Mudeli parameetrite optimeerimine</h2>
+      <p>
+        Kui on andmed aine termofüüsiliste omaduste kohta, siis saab ise leida mudeli parameetreid optimeerimise teel. Vaatame, kuidas saab seda teha. Näitena, leiame PC-SAFT mudeli interaktisooni parameetrit heksaani ja benseeni segu jaoks. Andmed tulevad kolmest artiklist.<sup><a href="#ref1">1</a>-<a href="#ref6">6</a></sup>
+      </p>
+      <p>
+        Esiteks vaata andmeid üle. Kui on vigased andmed, siis on raskem leida häid mudeli parameetreid. Näiteks saab teha jooniseid selleks, et näha, kas mõni punkt on üldtrendist väljas.
+      </p>
+      <pre>
+        <code class="python">
+          # impordi andmed Pandasega ---------
+          data = pd.read_csv('andmed_1-hekseen.csv', header=2, delimiter=';')
+
+          # tiheduse joonis
+          plt.figure()
+          plt.scatter(data.loc[data['omadus'] == 'tihedus', 'temperatuur'],
+                      data.loc[data['omadus'] == 'tihedus', 'tihedus_molaarne'])
+          plt.title('1-hekseen')
+          plt.xlabel('Temperatuur (K)')
+          plt.ylabel('Tihedus (mol/m$^3$)')
+          plt.show()
+
+          # aururõhu joonis
+          plt.figure()
+          plt.scatter(data.loc[data['omadus'] == 'aururõhk', 'temperatuur'],
+                      data.loc[data['omadus'] == 'aururõhk', 'rõhk'])
+          plt.yscale('log')
+          plt.title('1-hekseen')
+          plt.xlabel('Temperatuur (K)')
+          plt.ylabel('Aururõhk (Pa)')
+          plt.show()
+        </code>
+      </pre>
+      <ul class="img-grid">
+        <li class="img-grid-item">
+          <img class="grid-img" src="/media/1hekseen_andmete_kontroll_den.png" />
+        </li>
+        <li class="img-grid-item">
+          <img class="grid-img" src="/media/1hekseen_andmete_kontroll_vp.png" />
+        </li>
+      </ul>
+      <p>
+        Järgmisena valime lahendajat, ehk optimeerimise algoritmit. Pea meeles, et lahendajad võivad mõnikord jääda kinni kohalikus miinimumis. Sellepärast ma kasutan siin <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.differential_evolution.html">differential evolution</a> lahendajat, mis on Scipy moodulis. See algoritm tavaliselt suudab leida globaalsed miinimumit, ehk see ei jää kohalikus miinimumis kinni.
+      </p>
+      <pre>
+        <code class="python">
+          from scipy.optimize import differential_evolution
+        </code>
+      </pre>
+      <p>
+        Seejärel me peame defineerima optimeerimise funktsiooni, ehk veafunktsiooni. Tavaliselt kasutatakse lihtsalt absoluutvigade või ruutvigade summa. Siin kasutan ruutvigade summa, aga suhtelise veaga. Kasutan suhtelist viga kuna 100 Pa aururõhu viga on väike atmosfääri rõhu juures, kuid suur kui aururõhk ise on umbes 100 Pa.
+      </p>
+      <pre>
+        <code class="python">
+          def cost_pcsaft(params, omadus, t, p, den):
+              cost = 0
+              x = np.asarray([1]) # puhas aine, siis moolosa on alati 1
+              # optimeerimise funktsioon annab parameetrid Numpy massiivina. Siin
+              # muudame sõnastikuks, nagu pcsaft funktsioonid soovivad.
+              params_pcsaft = {'m':params[0], 's':params[1], 'e':params[2]}
+
+              # pcsaft paketiga peame tegema arvutust ühele punktile korraga. Sellepärast kasutame for-tsüklit
+              for i in range(t.shape[0]):
+                  if omadus[i] == 'aururõhk':
+                      try:
+                          p_fit = flashTQ(t[i], 0, x, params_pcsaft)[0]
+                          cost = cost + ((p_fit - p[i]) / p[i] * 100)**2
+                      except:
+                          cost = cost + 1e20 # kui ei leia head lahendust, siis lihtsalt lisame suure numbri
+                  elif omadus[i] == 'tihedus':
+                      den_fit = pcsaft_den(t[i], p[i], x, params_pcsaft, phase='liq')
+                      cost = cost + ((den_fit - den[i]) / den[i] * 100)**2
+
+              # kontrollime, et viga ei ole NAN (not a number). Kui on NAN, siis lahendaja ei
+              # käitu hästi. Mõnikord juhtub näiteks siis, kui proovitud parameetrid on väga valed.
+              if not np.isfinite(cost):
+                  cost = 1e60
+              return cost
+        </code>
+      </pre>
+      <p>
+        Siis me anname optimeerijale meie funktsiooni ja andmed. Antud algoritmi jaoks on ka vaja ette anda piirid. Näiteks, siin teame, et <code class='python'>m</code> on tõenäoliselt 2 ja 7 vahel ja panimegi need väärtused piiridena. Ja tee kindlaks, et parameetrite järjekord, mida sa annad lahendajale, on sama, kui järjekord veafunktsioonis (ehk et indeks 0 vastab m-ile, 1 sigma-le, jne). <code class='python'>args</code> parameetriga saame anda lahendajale lisa parameetrid, mida lahendaja edasi annab meie veafunktsioonile.
+      </p>
+      <pre>
+        <code class='python'>
+          bnds = ((2,7), (2,6), (150,550)) # Siin paneme piirid paika. Mis piirides parameetrid tõenäoliselt on?
+          result = differential_evolution(cost_pcsaft, bounds=bnds,
+                      args=(data['omadus'], data['temperatuur'], data['rõhk'], data['tihedus_molaarne']))
+        </code>
+      </pre>
+      <p>
+        Nüüd me saame jooksutada skripti ja optimeerimine hakkab toimuma. See protsess võtab tõenäoliselt mitu minutit. Optimeerimise lõpul antakse tulemus <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.OptimizeResult.html#scipy.optimize.OptimizeResult"><code class='python'>OptimizeResult</code></a> objektina, mis on sisuliselt nagu sõnastik.
+      </p>
+      <pre>
+        <code class='python-repl'>
+          fun: 177.79129549217427
+          message: 'Optimization terminated successfully.'
+          nfev: 2757
+          nit: 60
+          success: True
+            x: array([  3.05121012,   3.73067305, 234.04430925])
+        </code>
+      </pre>
+      <p>
+        <code class='python'>fun</code> näitab veafunktsiooni lõppväärtus. Kui <code class='python'>fun</code> on liiga kõrge, siis võibolla oli optimeerimisega mõni probleem või mudelit lihtsalt ei saa sobitada andmetele (nt kui mõned andmed on vigased). <code class='python'>message</code> ja <code class='python'>success</code> näitavad ka tavaliselt, kas optimeerimine õnnestus. Ja meie tulemus, ehk PC-SAFT parameetrid 1-hekseenile, on <code class='python'>x</code>-i all.
+      </p>
+      <p>
+        On hea ka teha jooniseid kontrollimaks leitud parameetreid. Samuti siin oleks kasulik vaadata üldiselt mudeli joonte kuju. Kui mudel arvutab hästi andmete juures, aga käitub imelikult andmete vahel, siis mudel on ületreenitud ja oleks vaja uuesti optimeerida, võibolla teise mudeliga või rohkem andmetega.
+      </p>
+      <pre>
+        <code class='python'>
+          x = np.asarray([1])
+          m = result.x[0]
+          sigma = result.x[1]
+          eps_k = result.x[2]
+          params_pcsaft = {'m':m, 's':sigma, 'e':eps_k}
+
+          npts = 30
+          t_calc = np.linspace(288, 500, npts) # loome massiivid
+          vp_calc = np.zeros_like(t_calc)
+          den_calc = np.zeros_like(t_calc)
+
+          # aururõhu joonis
+          plt.figure()
+
+          for i in range(npts):
+              vp, x_liq, x_vap = flashTQ(t_calc[i], 0, x, params_pcsaft)
+              vp_calc[i] = vp
+
+          plt.plot(t_calc, vp_calc)
+          plt.scatter(data.loc[data['omadus'] == 'aururõhk', 'temperatuur'],
+                      data.loc[data['omadus'] == 'aururõhk', 'rõhk'])
+          plt.yscale('log')
+          plt.title('1-hekseen')
+          plt.xlabel('Temperatuur (K)')
+          plt.ylabel('Aururõhk (Pa)')
+          plt.show()
+
+          # tiheduse joonis
+          plt.figure()
+
+          for i in range(npts):
+              p_den= vp_calc[i] * 1.05 # valime rõhku, mis on natuke kõrgem, kui aururõhk
+              den = pcsaft_den(t_calc[i], p_den, x, params_pcsaft, phase='liq')
+              den_calc[i] = den
+
+          plt.plot(t_calc, den_calc)
+          plt.scatter(data.loc[data['omadus'] == 'tihedus', 'temperatuur'],
+                      data.loc[data['omadus'] == 'tihedus', 'tihedus_molaarne'])
+          plt.title('1-hekseen')
+          plt.xlabel('Temperatuur (K)')
+          plt.ylabel('Tihedus (mol/m$^3$)')
+          plt.show()
+        </code>
+      </pre>
+      <ul class="img-grid">
+        <li class="img-grid-item">
+          <img class="grid-img" src="/media/1hekseen_den.png" />
+        </li>
+        <li class="img-grid-item">
+          <img class="grid-img" src="/media/1hekseen_vp.png" />
+        </li>
+      </ul>
+
+      <h2>Viited</h2>
+      <ol>
+        <li id="ref1">
+          Kerimov A.M., Apaev T.A.: Experimental values of density of 1-hexene,1-octene,cyclohexene,cyclohexane, and methylcyclohexane in dependence on temperature and pressure. Teplofiz.Svoistva Vesh.Mater. (1972) 26-46
+        </li>
+        <li id="ref2">
+          Heinrich J.: Activity Coefficients in Binary Systems of Perfectly Miscible Components. Collect.Czech.Chem.Commun. 40 (1975) 787-793
+        </li>
+        <li id="ref3">
+          Campbell K.N., O'Connor M.J.: The hydrogenation of substituted acetylenes with Raney nickel. J.Am.Chem.Soc. 61 (1939) 2897-2900
+        </li>
+        <li id="ref4">
+          Campbell K.N., Eby L.T.: III. Further Studies on the Preparation of Olefins from Acetylenes. J.Am.Chem.Soc. 63 (1941) 2683-2685
+        </li>
+        <li id="ref5">
+          Tassios D., van Winkle M.: Members of a Homologous Series and a Common Solvent. J.Chem.Eng.Data 12 (1967) 555-561
+        </li>
+        <li id="ref6">
+          Ma P., Fang Z., Zhang J., Ruan Y.: Determination of Critical Constants, Saturated Vapor or Liquid Densities and Vapor Pressures of Six Organic Compounds. Gaoxiao-huaxue-gongcheng-xuebao 6 (1992) 112-117
+        </li>
+      </ol>
+
+    </div>
+  </div>
+</body>
+</html>

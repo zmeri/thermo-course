@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/termodynaamika.css">
+
+  <script>
+    $(function(){
+      $("#navigation").load(`/src/navigation.html`);
+    });
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Esimene seadus</title>
+</head>
+
+<body>
+  <div id='content'>
+    <div id="navigation"></div>
+    <div id='main-text'>
+      <h1>Esimene seadus</h1>
+      <p>
+        Oletame, et sa tahad mõista, kuidas reaalne süsteem käitub, näiteks kütuse muundumine kineetiliseks energiaks raketis. Termodünaamikas on paar seadust, mis lubavad meil arvutada, kuidas süsteem käituks. Siin selgitame termodünaamika esimest seadust.
+      </p>
+
+      <h2>Definitsioon</h2>
+      <p>
+        Termodünaamika esimene seadus ütleb, et energiat ei saa luua ega hävitada. Energia saab ainult muunduda. Tegelikult on see lihtsalt energia jäävuse seadus teise nimega.
+      </p>
+
+      <h2>Rakendamine termodünaamikas</h2>
+      <p>
+        Esimene seadus võimaldab meil koostada energiabilansse, mida saame kasutada termodünaamilistes arvutustes. Näiteks, teame, et energia muutus suletud süsteemis peab võrduma energia hulgaga, mis süsteemile üle kantakse (nt soojuse või tööga).
+      </p>
+      <div>
+        \[ dU = &delta;Q + &delta;W \]
+      </div>
+      <p>
+        Avatud süsteemis võime bilansisse lisada ka energiat, mis tuleb või läheb koos massivoogudega. Ja kui toimub veel mõni energia ülekanne lisaks soojusele ja tööle, on võimalik seda ka valemisse lisada.
+      </p>
+
+      <h2>Neutriinod</h2>
+      <p>
+        Radioaktiivsust avastati 1897. aastal ja 20. sajandi alguses mitmed teadlased uurisid seda. Nad märkasid ühte vastuolu beeta radioaktiivsusega. Alpha ja gamma radioaktiivsusest tekivad osakesed kindla energiaga, aga beeta radioaktiivsusest tulevad elektronid erinevate energiatega. Seega, tundus, et rikkutakse energia jäävuse seadust. Füüsik Wolfgang Pauli proovis lahendada seda vastuolu 1930. aastal pakkudes, et tekib veel üks nähtamatu osake, mis viib osa energiast minema. Kui see vastaks tõele, siis energia jäävuse seadus ikka kehtiks. Kaks aastat hiljem Enrico Fermi avaldas oma teooria beeta lagunemise kohta ja oluline osa sellest oli sellise lisa osakese tekkimine. Fermi nimetas seda osakest neutriinoks. Aastaid hiljem 1954. aastal teised uurijad lõpuks kinnitasid katseliselt neutriinode olemasolu.<a href="#ref1"><sup>1</sup></a><sup>,</sup><a href="#ref2"><sup>2</sup></a> Tänu energia jäävuse seadusele füüsikud said alguses aimu sellest, et võib veel olla mõni nähtamatu osake.
+      </p>
+      <p>
+        Tänapäeval on veel nähtusi, mis näiliselt ei lange kokku energia jäävuse seadusega. Näiteks, on leitud, et universumi laienemine hoopis kiireneb, kuigi praeguste teooriate järgi raskusjõu tõttu peaks laienemine aeglustuma. Need vastuolud on viinud palju füüsikud arvamusele, et on olemas universumis mingi lisa aine ja energia, mida me praeguste tööriistadega ei suuda tajuda. Need kutsutakse tihti tumeaineks ja tumeenergiaks.<a href="#ref3"><sup>3</sup></a><sup>,</sup><a href="#ref4"><sup>4</sup></a>
+      </p>
+
+      <h2>Viited</h2>
+      <ol>
+        <li id="ref1">
+          G. Rajasekaran, “The Story of the Neutrino,” arXiv:1606.08715 [hep-ph, physics:physics], Oct. 2016, Accessed: Feb. 16, 2021. [Online]. Available: <a href="http://arxiv.org/abs/1606.08715">http://arxiv.org/abs/1606.08715</a>.
+        </li>
+        <li id="ref2">
+          E. Ergma, Kosmos : küsimused ja vastused maailmaruumist huvilisele lapsele. Tallinn, Estonia: Tammerraamat, 2020.
+        </li>
+        <li id="ref3">
+          “Dark Matter and Dark Energy’s Role in the Universe,” National Geographic, Jan. 10, 2017. <a href="https://www.nationalgeographic.com/science/space/dark-matter/">https://www.nationalgeographic.com/science/space/dark-matter/</a> (accessed Feb. 16, 2021).
+        </li>
+        <li id="ref4">
+          “Dark energy emerges when energy conservation is violated,” Physics World, Jan. 18, 2017. <a href="https://physicsworld.com/a/dark-energy-emerges-when-energy-conservation-is-violated/">https://physicsworld.com/a/dark-energy-emerges-when-energy-conservation-is-violated/</a> (accessed Feb. 16, 2021).
+        </li>
+      </ol>
+
+    </div>
+  </div>
+</body>
+</html>

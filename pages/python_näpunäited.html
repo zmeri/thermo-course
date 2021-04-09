@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet"
+        href="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/styles/default.min.css">
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/highlight.min.js"></script>  <script>hljs.highlightAll();</script>
+
+  <link rel="stylesheet" href="/styles/termodynaamika.css">
+
+  <script>
+    $(function(){
+      $("#navigation").load(`/src/navigation.html`);
+    });
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Pythoni näpunäited</title>
+</head>
+
+<body>
+  <div id='content'>
+    <div id="navigation"></div>
+    <div id='main-text'>
+      <h1>Pythoni näpunäited</h1>
+      <p>
+        Panen siia jooksvalt kirja mõned Pythoni näpunäited.
+      </p>
+
+      <h2>CSV faili importimine</h2>
+      <p>
+        Tihti on vaja kasutada Pythoni skriptis terve andmetabelit. Tüütu oleks andmed koodisse käsitsi kirjutada. Parem viis on võtta andmed eraldi failist, näiteks CSV failist.
+      </p>
+      <p>
+        CSV faili saab importida <a href="https://pandas.pydata.org/">Pandas</a> mooduliga. Selleks kasutame <a href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html"><code class="python">read_csv</code></a> funktsiooni. Vajadusel saab anda funktsioonile lisa parameetrid, et täpsustada sinu CSV faili formaati. <code class="python">header</code> parameetriga saad panna paika, mis rida sisaldab veerunimed, mida sa tahaksid kasutada. Funktsioon tavaliselt ei loe sisse neid ridu, mis on enne "header"-i rida. <code class="python">delimiter</code> parameetriga on võimalik täpsustada, mis eraldaja kasutad CSV failis.
+      </p>
+      <pre>
+        <code class="python">
+          pd.read_csv('andmed.csv', header=2, delimiter=';')
+        </code>
+      </pre>
+      <p>
+        Eesti keeles, kui ka muudes keeltes, komakoha eraldaja ei ole punkt vaid koma. Kui sinu CSV failis kasutad koma, mitte punkti, siis võid ikkagi importida Pandasega. Tuleb lihtsalt <code class="python">read_csv</code> funktsioonile anda lisa parameetri, mis näitab, et komakoha eraldaja on koma.
+      </p>
+      <pre>
+        <code class="python">
+          pd.read_csv('andmed.csv', header=2, delimiter=';', decimal=',')
+        </code>
+      </pre>
+      <p>
+        Nüüd andmed CSV failist on pandud Pandas dataframe-isse. Siis saab sealt andmeid kasutada. Vaata lisaks Pandase <a href="https://pandas.pydata.org/docs/user_guide/10min.html">dokumentatsioonist</a>.
+      </p>
+
+    </div>
+  </div>
+</body>
+</html>

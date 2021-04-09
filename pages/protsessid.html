@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/termodynaamika.css">
+
+  <script>
+    $(function(){
+      $("#navigation").load(`/src/navigation.html`);
+    });
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Protsessid</title>
+</head>
+
+<body>
+  <div id='content'>
+    <div id="navigation"></div>
+    <div id='main-text'>
+      <h1>Termodünaamilised protsessid</h1>
+      <p>
+        Termodünaamiline <b>protsess</b> toimub, kui süsteemi viiakse ühest olekust teiseni. Sellega tihti kaasneb energia ülekanne süsteemi ja ümbruse vahel.
+      </p>
+
+      <h2>Kui üks muutuja on konstantne</h2>
+      <p>
+        Mõnes protsessis üks termodünaamiline parameeter ei muutu. Nendele protsessidele antakse oma nime vastavalt sellele, mis muutuja on konstantne:
+      </p>
+      <ul>
+        <li>
+          <b>Adiabaatne</b> - Pöörduv entroopia ei muutu, ehk soojus ei liigu süsteemi ja ümbruse vahel;
+        </li>
+        <li>
+          <b>Isobaarne</b> - Rõhk ei muutu;
+        </li>
+        <li>
+          <b>Isotermne</b> - Temperatuur ei muutu;
+        </li>
+        <li>
+          <b>Isohoorne</b> - Maht ei muutu;
+        </li>
+        <li>
+          jt ...
+        </li>
+      </ul>
+
+      <h2>Keerulisemad protsessid</h2>
+      <p>
+        Mõnikord süsteemi muutus koosneb mitmest sammust. Näiteks, külmikus külmutusaine aurustub, et võtta soojust süsteemist välja. Siis ainet surutakse kokku, mille järel seda jahutatakse, nii et muutub taas vedelikuks. Viimase sammuna aine läbib paisuventiili, milles rõhk vähendatakse, ja ringprotsess algab uuesti.<sup><a href="#ref10">10</a></sup> Sageli saame kirjeldada selliseid keerulisemaid protsesse, kui mitu lihtsamat protsessi, mis toimuvad üksteise järel.
+      </p>
+      <p>
+        Võibolla aitab paremini mõista keerulisemaid protsesse, kui kirja panna või panna joonisele oleku muutused, mis toimuvad protsessi käigus. Iga sammu jaoks võib leida, mis olekuparameetrid muutuvad ja nende alg- ja lõppväärtused.
+      </p>
+
+      <h2>Energia ülekandmine</h2>
+      <p>
+        Tihti protsessi käigus toimub energia ülekanne süsteemi ja ümbruse vahel. Kui toimub energia ülekanne, siis ütleme, et tehakse tööd. Füüsikas ja termodünaamikas <b>töö</b> on energia, mis kantakse üle, kui rakendatakse jõudu, et liigutada asja potentsiaali väljas.<sup><a href="#ref3">3</a>,<a href="#ref4">4</a></sup> Üldine valem on selline:
+      </p>
+      <div>
+        \[ &Delta;W = \int F \, dx \]
+      </div>
+      <p>
+        Kui lükkame süsteemi, siis jõud on kiirendus korrutatud süsteemi massiga. Sarnast valemit kasutatakse ka, kui süsteem liigub raskusjõu tõttu.
+      </p>
+      <div>
+        \[ &Delta;W = \int m a \, dx \]
+      </div>
+      <p>
+        Kui jõud on rõhk ja rõhk põhjustab süsteemi mahu muutust, siis see on ka töö.
+      </p>
+      <div>
+        \[ &Delta;W = \int P \, dV \]
+      </div>
+      <p>
+        Jõud võib ka olla elektromagneetiline. Kui näiteks laetud osake liigutatakse elektriväljas, siis tehakse tööd.<sup><a href="#ref3">3</a></sup> Kasutades Coulombi seadust töö valem muutub selliseks:
+      </p>
+      <div>
+        \[ &Delta;W = \frac{-q_1 q_2}{4 &pi; &epsilon;_0} \int \frac{1}{r^2} dr \]
+      </div>
+      <p>
+        Kui aine moolide arv süsteemis muutub, siis sellega kaasneb ka tavaliselt energia ülekanne. Sellist jõudu kutsutakse keemiliseks potentsiaaliks ja sellest räägime lähemalt hiljem.<sup><a href="#ref5">5</a></sup>
+      </p>
+      <div>
+        \[ &Delta;W = \int &mu;_i \, dn_i \]
+      </div>
+      <p>
+        Temperatuuri võib ka tõlgendada, kui jõud. Nagu kirjeldati osas teisest seadusest, temperatuur on energia muutus, mis tuleb mikroolekute arvu (ehk entroopia) muutusest. Ehk, kui süsteem puutub kokku teise asjaga, millel on väiksem temperatuur, siis mikroolekute arv süsteemis väheneb ja sellega kaasneb energia ülekanne süsteemist välja teisele asjale.
+      </p>
+      <div>
+        \[ &Delta;W = \int T \, dS_{rev} \]
+      </div>
+      <p>
+        Märka, kuidas siin valemis võtame arvesse ainult entroopia muutust, mis on pöörduv. Entroopia tekib ka viisil, mis ei suurenda süsteemi energiat, ja sellepärast protsessid reaalses maailmas on pöördumatud. Energia ülekanne, ehk töö, on ainult seotud selle entroopia muutuse osaga, mis on pöörduv.
+      </p>
+      <p>
+        Paljud termodünaamilised parameetrid on olekuparameetrid (ehk oleku funktsioonid), mis tähendab, et nende väärtus ei sõltu teest. Seevastu, töö on protsessi funktsioon, ehk see sõltub sellest, kuidas minnakse ühest olekust teisesse.<sup><a href="#ref1">1</a>,<a href="#ref2">2</a></sup>
+      </p>
+      <p>
+        Energiat võib ka üle kanda koos massiga. Ehk, kui mass siseneb või lahkub süsteemist, siis sellega läheb kaasa oma energia hulka. Näiteks, kui sa lisad kuuma vett tassi, siis selle veega tuleb kaasa energia ja tass muutub soojemaks.
+      </p>
+
+      <h2>Soojus</h2>
+      <p>
+        On aja jooksul välja kujunenud komme kutsuda tööd, mis tuleneb temperatuuri erinevusest, soojuseks. <b>Soojus</b> on energia ülekanne, mis tuleb entroopia muutusest. Seost soojuse ja entroopia vahel võib näha termodünaamika teisest seadusest.
+      </p>
+      <div>
+        \[ &Delta; S_{rev} = \frac{&Delta; Q}{T} \]
+      </div>
+      <div>
+        \[ &Delta;Q = T &Delta; S_{rev} \]
+      </div>
+      <p>
+        Seda võib ka kirjutada integraali vormis ja võime näha, et tegelikult soojus on lihtsalt töö teise nimega.
+      </p>
+      <div>
+        \[ &Delta;Q = &Delta;W = \int T \, dS_{rev} \]
+      </div>
+
+      <h2>Näited</h2>
+      <ul class="img-grid">
+        <li class="img-grid-item">
+          <img class="grid-img" src="/media/Internal_combustion_engine_pistons_of_partial_cross-sectional_view_cropped_square.jpg" />
+          <b>Sisepõlemismootor</b> - Kütuse põletamise tõttu rõhk kolvis kasvab, mis paneb kolbi liikuma ja tööd tegema.
+        </li>
+        <li class="img-grid-item">
+          <img class="grid-img" src="/media/shaun-dakin-nY_RHD44e_o-unsplash_cropped_square.jpg" />
+          <b>Tuulik</b> - Tuul annab edasi oma kineetilist energiat tuuliku tiibadele. Tuuliku pöördumist muundatakse elektriks.
+        </li>
+        <li class="img-grid-item">
+          <img class="grid-img" src="/media/1280px-Diamond_%28side_view%29_cropped_square.png" />
+          <b>Teemant</b> - Kui pannakse süsiniku kõrge rõhu alla, siis süsiniku struktuur muutub moodustades teemanti.
+        </li>
+        <li class="img-grid-item">
+          <img class="grid-img" src="/media/zbynek-burival-V4ZYJZJ3W4M-unsplash_cropped_square.jpg" />
+          <b>Päikesepatarei</b> - Footonid tekitavad pooljuhtivas materjalis elektroni auke. Nende keemiline potentsiaal paneb elektronid liikuma tootes elektrit.
+        </li>
+      </ul>
+
+      <h2>Viited</h2>
+      <ol>
+        <li id="ref1">
+          V. V. Sychev, The Differential Equations Of Thermodynamics. CRC Press, 1991.
+        </li>
+        <li id="ref2">
+          “Process function,” Wikipedia. Jan. 25, 2021, Accessed: Mar. 02, 2021. [Online]. Available: <a href="https://en.wikipedia.org/wiki/Process_function">https://en.wikipedia.org/wiki/Process_function</a>.
+        </li>
+        <li id="ref3">
+          J. Newman, Physics of the Life Sciences. Springer Science & Business Media, 2010.
+        </li>
+        <li id="ref4">
+          “Work (physics),” Wikipedia. Mar. 01, 2021, Accessed: Mar. 03, 2021. [Online]. Available: <a href"https://en.wikipedia.org/wiki/Work_(physics)">https://en.wikipedia.org/wiki/Work_(physics)</a>.
+        </li>
+        <li id="ref5">
+          P. Eastman, “Introduction to Statistical Mechanics,” Introduction to Statistical Mechanics. <a href="https://web.stanford.edu/~peastman/statmech/index.html">https://web.stanford.edu/~peastman/statmech/index.html</a> (accessed Feb. 05, 2021).
+        </li>
+        <li id="ref6">
+          <a href="https://unsplash.com/photos/nY_RHD44e_o">Tuulikute foto</a>: Shaun Dakin. Unsplash.
+        </li>
+        <li id="ref7">
+          <a href="https://commons.wikimedia.org/wiki/File:Internal_combustion_engine_pistons_of_partial_cross-sectional_view.jpg">Sisepõlemismootori pilt</a>: Mj-bird. Wikimedia Commons, 2010.
+        </li>
+        <li id="ref8">
+          <a href="https://commons.wikimedia.org/wiki/File:Diamond_(side_view).png">Teemandi pilt</a>: Pavel.Somov. Wikimedia Commons, 2019.
+        </li>
+        <li id="ref9">
+          <a href="https://unsplash.com/photos/V4ZYJZJ3W4M">Päikesepaneelide pilt</a>: Zbynek Burival. Unsplash.
+        </li>
+        <li idi="ref10">
+          A. Ameen, Refrigeration and Air Conditioning. PHI Learning Pvt. Ltd., 2006.
+        </li>
+      </ol>
+
+    </div>
+  </div>
+</body>
+</html>

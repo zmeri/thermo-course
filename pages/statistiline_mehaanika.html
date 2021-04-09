@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="/styles/termodynaamika.css">
+
+  <script>
+    $(function(){
+      $("#navigation").load(`/src/navigation.html`);
+    });
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Statistiline mehaanika</title>
+</head>
+
+<body>
+  <div id='content'>
+    <div id="navigation"></div>
+    <div id='main-text'>
+      <h1>Statistiline mehaanika</h1>
+      <p>
+        Kuidas asi, mida me näeme oma silmaga, on seotud aatomite käitumisega, millest asi koosneb? Statistilise mehaanikaga saame luua seost makro- ja mikroskaalade vahel. Statistiline mehaanika rakendab statistilisi meetodeid koos mõne baasteooriaga selleks, et selgitada nähtusi suuremas skaalas.<a href="#ref1"><sup>1</sup></a> Näiteks, võime võtta teooria, mis selgitab aatomite käitumist (nt kvantmehaanika) ja kasutada statistikat selleks, et tuletada termodünaamika põhimõtteid. Ehk statistiline mehaanika aitab meil luua seost termodünaamika ja molekulide käitumise vahel.
+      </p>
+
+      <h2>Mis toimub mikroskaalas?</h2>
+      <div class="quote-emphasis">
+        &bdquo;Ma arvan, et ma võin julgelt öelda, et mitte keegi ei mõista kvantmehaanikat.&ldquo;<br />
+        <span class="quote-source">
+          &mdash; Richard Feynman, The Messenger Lectures, 1964, MIT
+        </span>
+      </div>
+      <p>
+        On raske ette kujutada, kuidas aatomid ja osakesed käituvad kuna me neid oma silmaga ei näe. Vaikimisi ette kujutus on vist see, et osakesed käituksid nii nagu asju makroskaalas. See on klassikaline mõtteviis, mis eeldab, et osakesed käituksid Newtoni seaduste järgi. Kujutakse ette, et osakesed on väikesed pallid, mis lendavad ringi ja põrkuvad kokku. Kuid mikroskaalas osakesed tegelikult ei käitu päris nii.
+      </p>
+      <p>
+        Kvantmehaanika selgitab paremini, kuidas väikesed osakesed käituvad. Kvantmehaanika järgi ei ole võimalik täpselt teada kõik ühe osakese omadused (nt asukoht ja kiirus). Osakeste käitumine pigem kirjeldatakse lainefunktsiooniga ja sellest funktsioonist on võimalik arvutada mõne omaduse võimalikud väärtused. Ehk, kvantmehaanikas omadusel võib olla ainult piiratud diskreetseid väärtusi. Statistilist mehaanikat võib kasutada nii klassikalise mehaanika kui ka kvantmehaanika teooriatega (kui ka teiste teooriatega).
+      </p>
+      <p>
+        Statistiline mehaanika põhineb mikroolekutele. <b>Mikroolek</b> on ühk konkreetne mikroskoobiline seisund, ehk mikroolekus kõik mikroskoobilised muutujad on määratud. Klassikalise teooria järgi mikroolek tähendaks näiteks, et kõikidel osakestel on konkreetne asukoht ja kiirus. Kvantmehaanika järgi mikroolek on konkreetse lainefunktsiooni väärtus.<a href="#ref1"><sup>1</sup></a>
+      </p>
+      <img class="inline-img" src="/media/mikroolek1.jpg" />
+
+      <h2>Ansamblid</h2>
+      <p>
+        On tavaliselt mitu erinevat mikroolekut, mis vastavad ühele makroolekule. Näiteks, kui meil on gaasiballoon molekulid liikuvad ja mikroolek muutub, isegi kui rõhk ja temperatuur balloonis ei muutu.
+      </p>
+      <img class="inline-img" src="/media/ansambel.png" />
+      <p>
+        Süsteemi kõikide võimalike mikroolekute kogumit kutsutakse <b>ansambliks</b>. Makrooleku tingimused, mida me valime, määravad ansamblit. Mõnedele ansamblitele on antud nime. <em>Mikrokanoonilises ansamblis</em> moolide arv ja energia kogus jääb samaks, ehk süsteem on isoleeritud. <em>Kanoonilise ansamblis</em> moolide arv ja temperatuur püsivad samaks, aga võib toimuda soojuse ülekanne süsteemi ja keskkonna vahel. Eeldatakse, et keskkond on piisavalt suur, et soojusülekanne ei mõjuta keskkonna temperatuuri. Kanooniline ansambel vastab suletud süsteemile. <em>Suurkanooniline ansamblis</em> nii energia kui ka moolide arv võib muutuda, ehk süsteemi temperatuur, keemiline potentsiaal ja maht jäävad konstantseks. On ka teised ansamblid. Sobivat ansamblit valitakse vastavalt antud süsteemile.
+      </p>
+
+      <h2>Olekute arv</h2>
+      <p>
+        Kui ansamblit on paika pandud, siis saab hinnata võimalike mikroolekute arvu süsteemis (&Omega;). Väikeses süsteemis saaksime lihtsalt kokku lugeda need võimalikud mikroolekud. Kuid tavalises süsteemis on väga palju võimalikke mikroolekuid ja saame ligikaudselt kirjeldada mikroolekute arvu pideva funktsiooniga.
+      </p>
+      <p>
+        Me võime hinnata võimalike mikroolekute arvu energia kaudu kuna need on omavahel seotud. &Omega; peaaegu alati kasvab koos süsteemi energiaga. Ehk, kui on rohkem energiat, siis on rohkem viise, kuidas osakesed võivad süsteemis asuda, et saavutada seda energiataset. Samuti mikroolekute arv kasvab, kui süsteemi energia saab varieeruda. Näiteks, kui süsteem on isoleeritud, siis ei ole võimalik jõuda nende mikroolekuteni, millel on vähem või rohkem energiat kui praegune olek. Aga, kui süsteem saab vahetada energiat keskkonnaga, siis rohkem mikroolekud võivad esineda. Matemaatiliselt võime kirjeldada suhet energia ja &Omega; vahel järgmise proportsionaalse valemiga.
+      </p>
+      <div>
+        \[&Omega; \propto e^{E/k_B T}\]
+      </div>
+      <p>
+        Ehk, me üldiselt näeme, et mikroolekute arv kasvab eksponentsiaalselt koos energiaga. Siin valemis <em>k<sub>B</sub></em> on Boltzmanni konstant ja <em>T</em> on temperatuur. Ja selles valemis saame kasutada erinevat energia valemit vastavalt sellele, mis on antud süsteemi jaoks kõige mugavam. Näiteks, kui tahame võtta arvesse mahumuutusi, siis saame E muutujas juurde liita PV väärtust (ehk energia parameetrina kasutaksime entalpiat). Samuti võiksime arvesse võtta osakeste lahkumist või sisenemist: \(E - &mu;N\).
+      </p>
+
+      <h2>Oleku tõenäosus</h2>
+      <p>
+        Kui tahame teada ühe mikrooleku tõenäosus, on lihtsalt võimalike mikroolekute arv pöördväärtus.
+      </p>
+      <div>
+        \[p(&mu;) = \frac{1}{&Omega;}\]
+      </div>
+      <p>
+        Märka, kuidas see definitsioon põhineb eeldusel, et kõik mikroolekud on sama tõenäosed. Mõnikord see eeldus ei kehti, aga kui süsteem on tasakaalus, siis kehtib.<a href="#ref1"><sup>1</sup></a>
+      </p>
+      <p>
+        Nagu eelmises osas märkasime, &Omega; on seotud süsteemi energiaga. Saame kasutada seda seost selleks, et arvutada ühe mikrooleku tõenäosust. Kuna kõikide mikroolekute tõenäosus kokku liidetud peaks võrduma ühega, peame jagama ka proportsionaalsuse konstandiga (Z).
+      </p>
+      <div>
+        \[Z = \sum e^{-E/k_B T}\]
+      </div>
+      <p>
+        Z on oluline osa statistilise mehaanika arvutustest (inglise keeles antakse sellele nimi <em>partition function</em>). Z liidab kokku sama avaldise, mis on lugejas, aga kõikide mikroolekute jaoks. Kui panna need osad kokku, siis saame arvutada ühe mikrooleku tõenäosuse.
+      </p>
+      <div>
+        \[p(&mu;) = \frac{e^{-E/k_B T}}{Z}\]
+      </div>
+      <p>
+        Seda valemit kutsutakse Maxwell-Boltzmanni jaotus ja on üks põhivalemeid statistilises mehaanikas. Ja nagu mainitud, selles valemis sa võid E muuta vastavalt sellele, mis energia parameetrit sa soovid kasutada (siseenergia, entalpia, gibbs energia, jt). Teiste sõnadega, E sõltub ansamblist, mida oled valinud.
+      </p>
+      <p>
+        Võime ka arvutada muid tõenäosusi, näiteks tõenäosus, et süsteemil oleks teatud olekuparameetri väärtused (ehk teatud makroolek). Seda saab arvutada liites kokku kõikide mikroolekute tõenäosused, millel on samad makroskoobilised parameetrid kui valitud makroolek.
+      </p>
+
+      <h2>Näide - gaasi molekulide kiirus</h2>
+      <p>
+        Statistiline mehaanika selgitab, kuidas termodünaamilisi nähtusi on seotud osakeste liikumisega mikroskoobilisel tasandil. Kuid saame ka statistilise mehaanika abiga arvutada, kuidas molekulid teatud süsteemis käituvad. Näiteks, võime arvutada, kui kiiresti molekulid liikuvad gaasis.<a href="#ref2"><sup>2</sup></a>
+      </p>
+      <p>
+        Alustame Maxwell-Boltzmanni jaotusega ja võtame eelduse, et on ideaalne gaas. Ehk, ei esine molekulide vahelisi tõmbejõudusid. Molekulid ainult põrkuvad. See tähendab, et saame kirjeldada molekulide energiat ainult kineetilise energiaga. Ja kuna molekulid liikuvad kolmedimensionaalses ruumalas, lahutame kiirust x, y ja z komponentideks (ehk kiirus siin on vektor).
+      </p>
+      <div>
+        \[ E = \frac{1}{2} m v_x^2 + \frac{1}{2} m v_y^2 + \frac{1}{2} m v_z^2 \]
+      </div>
+      <div>
+        \[ p(v) = \frac{\sum_&mu; e^{-(\frac{1}{2} m v_x^2 + \frac{1}{2} m v_y^2 + \frac{1}{2} m v_z^2)/k_B T}}{\sum_v e^{-(\frac{1}{2} m v_x^2 + \frac{1}{2} m v_y^2 + \frac{1}{2} m v_z^2)/k_B T}}
+        = \frac{\sum_&mu; e^{-\frac{1}{2} m (v_x^2 + v_y^2 + v_z^2)/k_B T}}{\sum_v e^{-\frac{1}{2} m v_x^2/k_B T} e^{-\frac{1}{2} m v_y^2/k_B T} e^{-\frac{1}{2} m v_z^2/k_B T}} \]
+      </div>
+      <p>
+        Pane tähele, et lugejas peame siin kokku liitma need mikroolekud (<em>&mu;</em>), millel on kiirus <em>v</em> kuna on tavaliselt mitu mikroolekut sama kiirusega. Nimetajas liidame kokku kõik võimalikud mikroolekud, mitte ainult need millel on kiirus <em>v</em>. Kuna siin saame eeldata, et kiiruse jaotus on pidev funktsioon, saame muuta summasid integraalideks.
+      </p>
+      <div>
+        \[ p(v) = \frac{\int_&mu; e^{-\frac{1}{2} m (v_x^2 + v_y^2 + v_z^2)/k_B T} dv_x dv_y dv_z}{\int_v e^{-\frac{1}{2} m v_x^2/k_B T} e^{-\frac{1}{2} m v_y^2/k_B T} e^{-\frac{1}{2} m v_z^2/k_B T} dv_x dv_y dv_z} \]
+      </div>
+      <p>
+        Vaatame esiteks integraali nimetajas ja ainult osa, mis on x suunas. Integraali lahendus on juba teada ja saame seda <a href="https://en.wikipedia.org/wiki/List_of_integrals_of_exponential_functions">internetist</a> leida.
+      </p>
+      <div>
+        \[ \int_{-\infty}^{\infty} e^{-\frac{1}{2} m v_x^2/k_B T} dv_x = \bigg( \frac{2 &pi; k_B T}{m} \bigg)^{1/2} \]
+      </div>
+      <p>
+        Lahendus on sama y ja z suundade jaoks. Kui korrutame kõik suunad, siis meil on nimetaja avaldis käes. Nüüd vaatame integraali lugejas. Kuna \( v_x^2 + v_y^2 + v_z^2 = v^2 \) saame lihtsustada avaldist.
+      </p>
+      <div>
+        \[ \int e^{-\frac{1}{2} m (v_x^2 + v_y^2 + v_z^2)/k_B T} dv_x dv_y dv_z = \int e^{-\frac{1}{2} m v^2/k_B T} dv_x dv_y dv_z = 4 &pi; v^2 e^{-\frac{1}{2} m v^2/k_B T} \]
+      </div>
+      <p>
+        See integraal on erinev integraalist, mis on nimetajas, kuna lugejas v on alati sama hoolimata suunast, kuhu molekul liikub. Seega, sa võid ette kujutada integraali kui sfääri kihi pindala kiiruse ruumis kuna igas suunas kiirus on sama. Sfääri pindala on 4&pi;r<sup>2</sup>. Kui lisada seda ka valemisse, saame lõpuks arvutada molekulide kiiruse jaotus gaasis teades ainult temperatuuri ja gaasi molaarmassi (<em>m</em>).
+      </p>
+      <div>
+        \[ p(v) = 4 &pi; \bigg(\frac{m}{2 &pi; k_B T}\bigg)^{3/2} v^2 e^{-\frac{1}{2} m v^2/k_B T} \]
+      </div>
+
+      <img class="inline-img" src="/media/gas_speeds.png" />
+
+      <h2>Viited</h2>
+      <ol>
+        <li id="ref1">
+          P. Eastman, “Introduction to Statistical Mechanics,” Introduction to Statistical Mechanics. <a href="https://web.stanford.edu/~peastman/statmech/index.html">https://web.stanford.edu/~peastman/statmech/index.html</a> (accessed Feb. 05, 2021).
+        </li>
+        <li id="ref2">
+          P. Atkins, J. de Paula, and J. Keeler, Atkins’ Physical Chemistry 11e: Volume 3: Molecular Thermodynamics and Kinetics. Oxford University Press, 2019.
+        </li>
+        <li id="ref3">
+          M. Kardar, “Lecture Notes | Statistical Mechanics I: Statistical Mechanics of Particles,” MIT OpenCourseWare. <a href="https://ocw.mit.edu/courses/physics/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/lecture-notes/">https://ocw.mit.edu/courses/physics/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/lecture-notes/</a> (accessed Feb. 09, 2021).
+        </li>
+      </ol>
+
+    </div>
+  </div>
+</body>
+</html>

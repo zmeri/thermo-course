@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet"
+        href="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/styles/default.min.css">
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/highlight.min.js"></script>  <script>hljs.highlightAll();</script>
+
+  <link rel="stylesheet" href="/styles/termodynaamika.css">
+
+  <script>
+    $(function(){
+      $("#navigation").load(`/src/navigation.html`);
+    });
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Tasakaal</title>
+</head>
+
+<body>
+  <div id='content'>
+    <div id="navigation"></div>
+    <div id='main-text'>
+      <h1>Tasakaal</h1>
+      <p>
+        Kujuta ette, et sa töötad tehases. Protsess näiliselt töötab hästi, kuid järsku rõhk protsessis hakkab ootamatult kasvama ja on vaja protsessi seisata. Tuleb välja, et protsessis on tekkinud mingisugune tahke aine, mis on ummistanud protsessi.
+      </p>
+      <p>
+        Termodünaamiline tasakaal näitab meile süsteemi eelistatud olekut antud tingimustel. Me saame kasutada neid teadmisi, et disainida protsesse. Saame ka vältida problemaatilisi tingimusi, näiteks tingimused, mil vahad sadenevad.
+      </p>
+
+      <h2>Millal süsteem on tasakaalus?</h2>
+      <p>
+        Me ütleme, et süsteem on tasakaalus, kui (neto)muutus ei toimu. Eks süsteemis molekulid ikka liiguvad, aga kui vaadata süsteemi tervikuna makroolek ei muutu. Süsteem jõuab tasakaalu olekuni, kui energia potentsiaal on kõige väiksem (miinimum). Teiste sõnadega, tasakaal esineb, kui pole ajendit, mis viiks süsteemi mõne teise olekuni.
+      </p>
+      <img class="inline-img" src="/media/ball.png" />
+
+      <h2>Tasakaalu tingimused</h2>
+      <p>
+        Nagu oleme varem näinud, võime kasutada erinevaid energia parameetreid vastavalt sellele, mis on kõige mugavam antud ülesande jaoks. Gibbsi valemitest võime näha, et igal energial on oma loomulikud muutujad.
+      </p>
+      <div>
+        \[ dH = TdS + VdP \]
+      </div>
+      <div>
+        \[ dA = -SdT - PdV \]
+      </div>
+      <div>
+        \[ dG = -SdT + VdP \]
+      </div>
+      <div>
+        \[ dU = TdS - PdV \]
+      </div>
+      <p>
+        Kui need loomulikud muutujad on konstantsed, siis tasakaal esineb, kui antud energia parameeter jõuab oma miinimumväärtuseni. Teiste sõnadega, defineerime tasakaalu tingimust energia parameetriga, mis on kõige mugavam antud ülesande jaoks.
+      </p>
+      <div>
+        \[ dS = 0, dP = 0 \ |\ \min H \]
+      </div>
+      <div>
+        \[ dT = 0, dV = 0 \ |\ \min A \]
+      </div>
+      <div>
+        \[ dT = 0, dP = 0 \ |\ \min G \]
+      </div>
+      <div>
+        \[ dS = 0, dV = 0 \ |\ \min U \]
+      </div>
+      <p>
+        Tavaliselt keemiliste protsesside jaoks on kõige loogilisem vaadata protsessi konstantsel temperatuuril ja rõhul. Sellepärast, kasutame Gibbs energiat ja defineerime tasakaal kui olek, millel on kõige väiksem Gibbs energia.
+      </p>
+
+      <h2>Reaalsed protsessid</h2>
+      <p>
+        Tasakaal on oluline paljudes reaalsetes protsessides.
+      </p>
+      <ul class="img-grid">
+        <li class="img-grid-item">
+          <img class="grid-img" src="/media/Distillation_Columns_at_Saltend_-_geograph.org.uk_-_1384125_cropped.jpg" />
+          Kemikaali puhastamine destillatsiooniga
+        </li>
+        <li class="img-grid-item">
+          <img class="grid-img" src="/media/1280px-Assorted_Pills_3_cropped_square.JPG" />
+          Ravimi lahustuvus kehas
+        </li>
+        <li class="img-grid-item">
+          <img class="grid-img" src="/media/Pollution_plage_Hammamet%2C_Tunisie_30_juin_2013_cropped.jpg" />
+          Saasteainete liikumine keskkonnas
+        </li>
+        <li class="img-grid-item">
+          <img class="grid-img" src="/media/Apollo_synthetic_diamond_cropped.jpg" />
+          Teemanti sünteesimine
+        </li>
+        <li class="img-grid-item">
+          <img class="grid-img" src="/media/nasa-Yj1M5riCKk4-unsplash.jpg" />
+          Orbiidil olemine
+        </li>
+        <li class="img-grid-item">
+          <img class="grid-img" src="/media/hydrate_cropped.png" />
+          Gaashüdraadi või vaha tekkimine
+        </li>
+      </ul>
+
+      <h2>Tasakaal ja kineetika</h2>
+      <p>
+        Tasakaalu järgi teame, et protsess võib toimuda, aga me ei tea kui kiiresti. Näiteks, teemant ei ole tavatingimustel tasakaaluolek, kuid me ei näe, et teemandid lagunevad. Teemantide lagunemisprotsess tavatingimustel on nii aeglane, et see võib aastakümneid püsida selles mitte tasakaalulises olekus. Tasakaal näitab suunda, aga kineetika näitab kiirust.
+      </p>
+      <img class="inline-img" src="/media/Carbon_basic_phase_diagram.png" />
+
+      <h2>Tasakaaluoleku arvutamine</h2>
+      <p>
+        Kuna teame, et tasakaaluolekus süsteemi energia on miinimumis, siis energia tuletis tasakaalus on null. Seega, kui saame mõne mudeliga arvutada energia tuletist, suudame leida süsteemi tasakaaluolekut. See mudel võib olla näiteks olekuvõrrand või aktiivsuse koefitsiendi mudel.
+      </p>
+      <p>
+        Teatud tingimustel saame lihtsustada meie arvutusi ja leida tasakaalu lihtsamate parameetritega, ehk lihtsalt rõhu järgi.
+      </p>
+
+      <h2>Viited</h2>
+      <ol>
+        <li id="ref1">
+          J. A. Curry and P. J. Webster, Thermodynamics of Atmospheres and Oceans. Academic Press, 1999.
+        </li>
+        <li id="ref2">
+          Gaashüdraadi pilt: <a href="http://nfatmala.blogspot.com/2016/02/hydratewaxasphalt-in-subsea-pipeline.html">http://nfatmala.blogspot.com/2016/02/hydratewaxasphalt-in-subsea-pipeline.html</a>
+        </li>
+        <li id="ref3">
+          Süsiniku faasidiagramm: Femto. CC0 litsents. <a href="https://commons.wikimedia.org/wiki/File:Carbon_basic_phase_diagram.png">https://commons.wikimedia.org/wiki/File:Carbon_basic_phase_diagram.png</a>
+        </li>
+        <li id="ref4">
+          Tabletide pilt: ParentingPatch. CC BY SA 3.0 litsents. <a href="https://commons.wikimedia.org/wiki/File:Assorted_Pills_3.JPG">https://commons.wikimedia.org/wiki/File:Assorted_Pills_3.JPG</a>
+        </li>
+        <li id="ref5">
+          Destillatsiooni kolonnid: Andy Beecroft. CC BY SA 2.0 litsents. <a href="https://commons.wikimedia.org/wiki/File:Distillation_Columns_at_Saltend_-_geograph.org.uk_-_1384125.jpg">https://commons.wikimedia.org/wiki/File:Distillation_Columns_at_Saltend_-_geograph.org.uk_-_1384125.jpg</a>
+        </li>
+        <li id="ref6">
+          Pilt kosmonaudist orbiidil: NASA. <a href="https://unsplash.com/photos/Yj1M5riCKk4">https://unsplash.com/photos/Yj1M5riCKk4</a>
+        </li>
+        <li id="ref7">
+          Pilt teemandist: Steve Jurvetson. CC BY 2.0 litsents <a href="https://commons.wikimedia.org/wiki/File:Apollo_synthetic_diamond.jpg">https://commons.wikimedia.org/wiki/File:Apollo_synthetic_diamond.jpg</a>
+        </li>
+        <li id="ref8">
+          Pilt saastamisest: Habib M’henni. CC BY SA 3.0 litsents <a href="https://commons.wikimedia.org/wiki/File:Pollution_plage_Hammamet,_Tunisie_30_juin_2013.jpg">https://commons.wikimedia.org/wiki/File:Pollution_plage_Hammamet,_Tunisie_30_juin_2013.jpg</a>
+        </li>
+      </ol>
+    </div>
+  </div>
+</body>
+</html>
