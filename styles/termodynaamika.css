@@ -21,11 +21,14 @@ a {
   text-decoration: none;
 }
 
+.table-div {
+  display: block;
+  overflow-x: auto;
+}
+
 table {
   border-collapse: collapse;
   margin: 1em auto 1em auto;
-  display: block;
-  overflow-x: auto;
 }
 
 th, td {
