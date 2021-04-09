@@ -4,17 +4,16 @@
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet"
         href="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/styles/default.min.css">
   <script src="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/highlight.min.js"></script>  <script>hljs.highlightAll();</script>
 
-  <link rel="stylesheet" href="/thermo_course/styles/termodynaamika.css">
+  <link rel="stylesheet" href="/thermo-course/styles/termodynaamika.css">
 
   <script>
     $(function(){
-      $("#navigation").load(`/thermo_course/src/navigation.html`);
+      $("#navigation").load(`/thermo-course/src/navigation.html`);
     });
   </script>
 
@@ -53,15 +52,13 @@
         Näitena oletame, et tahame arvutada vee entalpia teatud temperatuuri ja rõhu juures. PropsSI funktsioonis siis esimese parameetrina anname sõne <code class="python">Hmolar</code>. See ütleb funktsioonile, mis parameetrit me tahame arvutada.
       </p>
       <pre>
-        <code class="python">
-          import CoolProp.CoolProp as cp
+<code class="python">import CoolProp.CoolProp as cp
 
-          t = 540 + 273.15 # K
-          p = 170 * 100000 # Pa
+t = 540 + 273.15 # K
+p = 170 * 100000 # Pa
 
-          h = cp.PropsSI('Hmolar', 'T', t, 'P', p, 'WATER') # J mol^1
-          print('Vee entalpia tingimustel {} K ja {} bar: {} J/mol'.format(t, p, h))
-        </code>
+h = cp.PropsSI('Hmolar', 'T', t, 'P', p, 'WATER') # J mol^1
+print('Vee entalpia tingimustel {} K ja {} bar: {} J/mol'.format(t, p, h))</code>
       </pre>
       <p>
         Nagu kõikide olekuvõrranditega, on vaja ette anda kaks tingimust, mille juures seda parameetrit arvutada. Siin anname siis ette temperatuuri ja rõhku. CoolPropis temperatuuri sümbol on <code class="python">T</code> ja rõhu jaoks kasutatakse <code class="python">P</code>. Siin oleme ka eraldi defineerinud muutujad temperatuuri ja rõhu väärtuste jaoks.

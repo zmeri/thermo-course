@@ -4,17 +4,16 @@
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet"
         href="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/styles/default.min.css">
   <script src="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/highlight.min.js"></script>  <script>hljs.highlightAll();</script>
 
-  <link rel="stylesheet" href="/thermo_course/styles/termodynaamika.css">
+  <link rel="stylesheet" href="/thermo-course/styles/termodynaamika.css">
 
   <script>
     $(function(){
-      $("#navigation").load(`/thermo_course/src/navigation.html`);
+      $("#navigation").load(`/thermo-course/src/navigation.html`);
     });
   </script>
 
@@ -47,7 +46,7 @@
           <b>Turbiinis esineb ainult aur</b> - veetilgad võivad kahjustada turbiini.
         </li>
       </ul>
-      <img class="inline-img" src="/thermo_course/media/auruj%C3%B5useade%20-%20carnot.png" />
+      <img class="inline-img" src="/thermo-course/media/auruj%C3%B5useade%20-%20carnot.png" />
 
       <h2>Põhiline protsess</h2>
       <p>
@@ -72,10 +71,10 @@
       </ol>
       <ul class="img-grid">
         <li class="img-grid-item">
-          <img class="grid-img" src="/thermo_course/media/auru_base.svg" />
+          <img class="grid-img" src="/thermo-course/media/auru_base.svg" />
         </li>
         <li class="img-grid-item">
-          <img class="grid-img" src="/thermo_course/media/auruj%C3%B5useade%20-%20p%C3%B5hiline%20-%20num.png" />
+          <img class="grid-img" src="/thermo-course/media/auruj%C3%B5useade%20-%20p%C3%B5hiline%20-%20num.png" />
         </li>
       </ul>
       <p>
@@ -88,10 +87,10 @@
       </p>
       <ul class="img-grid">
         <li class="img-grid-item">
-          <img class="grid-img" src="/thermo_course/media/auru_reheat.svg" />
+          <img class="grid-img" src="/thermo-course/media/auru_reheat.svg" />
         </li>
         <li class="img-grid-item">
-          <img class="grid-img" src="/thermo_course/media/auruj%C3%B5useade%20-%20vahekuumendamine%20-%20num.png" />
+          <img class="grid-img" src="/thermo-course/media/auruj%C3%B5useade%20-%20vahekuumendamine%20-%20num.png" />
         </li>
       </ul>
       <p>
@@ -107,10 +106,10 @@
       </p>
       <ul class="img-grid">
         <li class="img-grid-item">
-          <img class="grid-img" src="/thermo_course/media/auru_regen.svg" />
+          <img class="grid-img" src="/thermo-course/media/auru_regen.svg" />
         </li>
         <li class="img-grid-item">
-          <img class="grid-img" src="/thermo_course/media/auruj%C3%B5useade%20-%20eelsoojendamine%20-%20num.png" />
+          <img class="grid-img" src="/thermo-course/media/auruj%C3%B5useade%20-%20eelsoojendamine%20-%20num.png" />
         </li>
       </ul>
 
@@ -126,10 +125,10 @@
       </p>
       <ul class="img-grid">
         <li class="img-grid-item">
-          <img class="grid-img" src="/thermo_course/media/auru_super.svg" />
+          <img class="grid-img" src="/thermo-course/media/auru_super.svg" />
         </li>
         <li class="img-grid-item">
-          <img class="grid-img" src="/thermo_course/media/auruj%C3%B5useade%20-%20%C3%BClekriitiline%20-%20num.png" />
+          <img class="grid-img" src="/thermo-course/media/auruj%C3%B5useade%20-%20%C3%BClekriitiline%20-%20num.png" />
         </li>
       </ul>
       <p>
@@ -244,58 +243,46 @@
         Esiteks, paneme need tingimused kirja Pythonis. Kasutan siin <a href="https://numpy.org/">Numpy</a> moodulit ja <a href="https://numpy.org/doc/stable/reference/generated/numpy.asarray.html"><code class='python'>asarray</code></a> funktsioon muudab Pythoni järjendit Numpy massiiviks.
       </p>
       <pre>
-        <code class="python">
-          import numpy as np
-          import CoolProp.CoolProp as cp
+<code class="python">import numpy as np
+import CoolProp.CoolProp as cp
 
-          p = np.asarray([0.07, 250, 250, 49, 48, 0.09]) * 1e5 # Pa
-          t = np.asarray([38, 38, 600, 340, 600, 51]) + 273.15 # K
-        </code>
+p = np.asarray([0.07, 250, 250, 49, 48, 0.09]) * 1e5 # Pa
+t = np.asarray([38, 38, 600, 340, 600, 51]) + 273.15 # K</code>
       </pre>
       <p>
         On nüüd lihtne arvutada energiat igal punktil. Kui on teada kaks olekuparameetrit, siis saame teisi termodünaamilisi parameetreid arvutada olekuvõrrandiga. Siin kasutame <a href="http://www.coolprop.org/">CoolProp</a> paketti.
       </p>
       <pre>
-        <code class="python">
-          h = cp.PropsSI("Hmass", "T", t, "P", p, "WATER") # J/kg
-        </code>
+        <code class="python">h = cp.PropsSI("Hmass", "T", t, "P", p, "WATER") # J/kg</code>
       </pre>
       <p>
         Nüüd saame arvutada tööd, mida antakse mõlemale turbiinile. Kuna juba arvutasime entalpiat, siis peame lihtsalt lahutama entalpiat enne turbiini entalpiast peale turbiini. Saame sarnaselt arvutada, kui palju tööd on vaja teha pumbaga. Kui liidame kõik kolm väärtust kokku, siis saame teada, kui palju tööd antud protsessiga saab teha.
       </p>
       <pre>
-        <code class="python">
-          W_turbiin1 = h[3] - h[2] # J/kg
-          W_turbiin2 = h[5] - h[4] # J/kg
-          W_pump = h[1] - h[0] # J/kg
-          W = W_turbiin1 + W_turbiin2 + W_pump # J/kg
-          print('Kasulik töö: {} kJ/kg'.format(W / 1000))
-        </code>
+<code class="python">W_turbiin1 = h[3] - h[2] # J/kg
+W_turbiin2 = h[5] - h[4] # J/kg
+W_pump = h[1] - h[0] # J/kg
+W = W_turbiin1 + W_turbiin2 + W_pump # J/kg
+print('Kasulik töö: {} kJ/kg'.format(W / 1000))</code>
       </pre>
       <p>
         Kui nüüd jooksutame skripti näeme, et väärtus on negatiivne. Töö on siin negatiivne kuna süsteemi seisukohast töö tegemine tähendab, et energia väljub süsteemist.
       </p>
       <pre>
-        <code class="python-repl">
-          Kasulik töö: -1500.6282487384003 kJ/kg
-        </code>
+        <code class="python-repl">Kasulik töö: -1500.6282487384003 kJ/kg</code>
       </pre>
       <p>
         Nüüd arvutame, kui palju soojust antakse. Jälle saame kasutada arvutatud entalpiaid ja lahutame.
       </p>
       <pre>
-        <code class="python">
-          Q_katla = h[2] - h[1] # J/kg
-          Q_taaskuumutamine = h[4] - h[3] # J/kg
-        </code>
+<code class="python">Q_katla = h[2] - h[1] # J/kg
+Q_taaskuumutamine = h[4] - h[3] # J/kg</code>
       </pre>
       <p>
         Kuna teame nüüd kui palju kasulikku tööd saame ja kui palju soojust anname, võime arvutada protsessi kasutegurit.
       </p>
       <pre>
-        <code class="python">
-          kasutegur = -W / (Q_katla + Q_taaskuumutamine)
-        </code>
+        <code class="python">kasutegur = -W / (Q_katla + Q_taaskuumutamine)</code>
       </pre>
       <p>
         Ja jooksutades skripti näeme, et protsessi kasutegur on 38%.

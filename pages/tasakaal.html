@@ -3,18 +3,20 @@
 <head>
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      CommonHTML: { linebreaks: { automatic: true } }
+    });
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS_CHTML"></script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <link rel="stylesheet"
-        href="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/styles/default.min.css">
-  <script src="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/highlight.min.js"></script>  <script>hljs.highlightAll();</script>
 
-  <link rel="stylesheet" href="/thermo_course/styles/termodynaamika.css">
+  <link rel="stylesheet" href="/thermo-course/styles/termodynaamika.css">
 
   <script>
     $(function(){
-      $("#navigation").load(`/thermo_course/src/navigation.html`);
+      $("#navigation").load(`/thermo-course/src/navigation.html`);
     });
   </script>
 
@@ -39,7 +41,7 @@
       <p>
         Me ütleme, et süsteem on tasakaalus, kui (neto)muutus ei toimu. Eks süsteemis molekulid ikka liiguvad, aga kui vaadata süsteemi tervikuna makroolek ei muutu. Süsteem jõuab tasakaalu olekuni, kui energia potentsiaal on kõige väiksem (miinimum). Teiste sõnadega, tasakaal esineb, kui pole ajendit, mis viiks süsteemi mõne teise olekuni.
       </p>
-      <img class="inline-img" src="/thermo_course/media/ball.png" />
+      <img class="inline-img" src="/thermo-course/media/ball.png" />
 
       <h2>Tasakaalu tingimused</h2>
       <p>
@@ -82,27 +84,27 @@
       </p>
       <ul class="img-grid">
         <li class="img-grid-item">
-          <img class="grid-img" src="/thermo_course/media/Distillation_Columns_at_Saltend_-_geograph.org.uk_-_1384125_cropped.jpg" />
+          <img class="grid-img" src="/thermo-course/media/Distillation_Columns_at_Saltend_-_geograph.org.uk_-_1384125_cropped.jpg" />
           Kemikaali puhastamine destillatsiooniga
         </li>
         <li class="img-grid-item">
-          <img class="grid-img" src="/thermo_course/media/1280px-Assorted_Pills_3_cropped_square.JPG" />
+          <img class="grid-img" src="/thermo-course/media/1280px-Assorted_Pills_3_cropped_square.JPG" />
           Ravimi lahustuvus kehas
         </li>
         <li class="img-grid-item">
-          <img class="grid-img" src="/thermo_course/media/Pollution_plage_Hammamet%2C_Tunisie_30_juin_2013_cropped.jpg" />
+          <img class="grid-img" src="/thermo-course/media/Pollution_plage_Hammamet%2C_Tunisie_30_juin_2013_cropped.jpg" />
           Saasteainete liikumine keskkonnas
         </li>
         <li class="img-grid-item">
-          <img class="grid-img" src="/thermo_course/media/Apollo_synthetic_diamond_cropped.jpg" />
+          <img class="grid-img" src="/thermo-course/media/Apollo_synthetic_diamond_cropped.jpg" />
           Teemanti sünteesimine
         </li>
         <li class="img-grid-item">
-          <img class="grid-img" src="/thermo_course/media/nasa-Yj1M5riCKk4-unsplash.jpg" />
+          <img class="grid-img" src="/thermo-course/media/nasa-Yj1M5riCKk4-unsplash.jpg" />
           Orbiidil olemine
         </li>
         <li class="img-grid-item">
-          <img class="grid-img" src="/thermo_course/media/hydrate_cropped.png" />
+          <img class="grid-img" src="/thermo-course/media/hydrate_cropped.png" />
           Gaashüdraadi või vaha tekkimine
         </li>
       </ul>
@@ -111,7 +113,7 @@
       <p>
         Tasakaalu järgi teame, et protsess võib toimuda, aga me ei tea kui kiiresti. Näiteks, teemant ei ole tavatingimustel tasakaaluolek, kuid me ei näe, et teemandid lagunevad. Teemantide lagunemisprotsess tavatingimustel on nii aeglane, et see võib aastakümneid püsida selles mitte tasakaalulises olekus. Tasakaal näitab suunda, aga kineetika näitab kiirust.
       </p>
-      <img class="inline-img" src="/thermo_course/media/Carbon_basic_phase_diagram.png" />
+      <img class="inline-img" src="/thermo-course/media/Carbon_basic_phase_diagram.png" />
 
       <h2>Tasakaaluoleku arvutamine</h2>
       <p>
@@ -145,7 +147,7 @@
           Pilt teemandist: Steve Jurvetson. CC BY 2.0 litsents <a href="https://commons.wikimedia.org/wiki/File:Apollo_synthetic_diamond.jpg">https://commons.wikimedia.org/wiki/File:Apollo_synthetic_diamond.jpg</a>
         </li>
         <li id="ref8">
-          Pilt saastamisest: Habib M’henni. CC BY SA 3.0 litsents <a href="https://commons.wikimedia.org/wiki/File:Pollution_plage_Hammamet,_Tunisie_30_juin_2013.jpg">https://commons.wikimedia.org/wiki/File:Pollution_plage_Hammamet,_Tunisie_30_juin_2013.jpg</a>
+          Pilt saastamisest: Habib M’henni. CC BY SA 3.0 litsents <a href="https://commons.wikimedia.org/wiki/File:Pollution_plage_Hammamet,_Tunisie_30_juin_2013.jpg">https://commons.wikimedia.org/wiki/File:Pollution_plage_Hammamet,_Tunisie<br />_30_juin_2013.jpg</a>
         </li>
       </ol>
     </div>

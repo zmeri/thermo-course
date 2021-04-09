@@ -4,17 +4,16 @@
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet"
         href="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/styles/default.min.css">
   <script src="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/highlight.min.js"></script>  <script>hljs.highlightAll();</script>
 
-  <link rel="stylesheet" href="/thermo_course/styles/termodynaamika.css">
+  <link rel="stylesheet" href="/thermo-course/styles/termodynaamika.css">
 
   <script>
     $(function(){
-      $("#navigation").load(`/thermo_course/src/navigation.html`);
+      $("#navigation").load(`/thermo-course/src/navigation.html`);
     });
   </script>
 
@@ -40,23 +39,19 @@
         Kuna need on üldiselt kõige täpsemad olekuvõrrandid, kui antud ainele on selline võrrand juba olemas <a href="http://www.coolprop.org/index.html">CoolPropis</a>, siis kohe kasutan seda. Saan vastuse tavaliselt kõige parema täpsusega, aga väga kiiresti kuna mul on juba olemas tarkvara (CoolProp), mis lubab mul rakendada neid olekuvõrrandeid.
       </p>
       <pre>
-        <code class="python">
-          import CoolProp.CoolProp as cp
+<code class="python">import CoolProp.CoolProp as cp
 
-          t = 420 # K
-          p = 10000000 # Pa
-          den = cp.PropsSI('Dmolar', 'T', t, 'P', p, 'METHANE')
-        </code>
+t = 420 # K
+p = 10000000 # Pa
+den = cp.PropsSI('Dmolar', 'T', t, 'P', p, 'METHANE')</code>
       </pre>
       <p>
         CoolPropis on ka võimalik kasutada neid olekuvõrrandeid mõnede lihtsate <a href="http://www.coolprop.org/coolprop/HighLevelAPI.html#user-defined-mixtures">segude</a> jaoks. Tuleb lihtsalt kontrollida, et on olemas <a href="http://www.coolprop.org/fluid_properties/Mixtures.html#binary-pairs">interaktsiooni parameetrid</a> antud ainete vahel.
       </p>
       <pre>
-        <code class="python">
-          t = 420 # K
-          p = 10000000 # Pa
-          den = cp.PropsSI('Dmolar', 'T', t, 'P', p, 'METHANE[0.4]&PROPANE[0.6]')
-        </code>
+<code class="python">t = 420 # K
+p = 10000000 # Pa
+den = cp.PropsSI('Dmolar', 'T', t, 'P', p, 'METHANE[0.4]&PROPANE[0.6]')</code>
       </pre>
       <p>
         Kahjuks selliseid olekuvõrrandeid on ainult välja arendatud umbes sajale ainele. <a href="http://www.coolprop.org/fluid_properties/PurePseudoPure.html#list-of-fluids">CoolPropi lehelt</a> saab näha, mis ainetele on Helmholtzi olekuvõrrandi tehtud.
@@ -67,20 +62,18 @@
          Ma eelistan tavaliselt kasutada head olekuvõrrandit, kui on olemas, kuna olekuvõrrand suudab anda palju informatsiooni ühe mudeliga. PC-SAFT parameetrid on olemas rohkem ainete jaoks kuna ei ole nii raske leida vajalikke parameetreid. Seega, kui mitmeparameetrilist Helmholtzi olekuvõrrandit pole, siis on võimalik, et vähemalt PC-SAFT parameetrid on olemas. PC-SAFT üldiselt annab väärtused hea täpsusega nii gaasi- kui ka vedelfaasi jaoks. Kui PC-SAFT tarkvara on juba olemas (nt <a href="https://pypi.org/project/pcsaft/">pcsaft</a> pakett), siis võid kiiresti arvutusi teha. CoolPropis on ka nüüd olemas PC-SAFT olekuvõrrand, kuid pole veel kerge lisada parameetrid uue aine jaoks.
       </p>
       <pre>
-        <code class="python">
-          from pcsaft import pcsaft_den
-          import numpy as np
+<code class="python">from pcsaft import pcsaft_den
+import numpy as np
 
-          t = 420 # K
-          p = 10000000 # Pa
+t = 420 # K
+p = 10000000 # Pa
 
-          x = np.asarray([1.])
-          m = np.asarray([1.]) # parameetrid metaani jaoks
-          sigma = np.asarray([3.7039])
-          eps_k = np.asarray([150.03])
-          param_pcsaft = {'m':m, 's':sigma, 'e':eps_k}
-          den = pcsaft_den(t, p, x, param_pcsaft, phase='vap')
-        </code>
+x = np.asarray([1.])
+m = np.asarray([1.]) # parameetrid metaani jaoks
+sigma = np.asarray([3.7039])
+eps_k = np.asarray([150.03])
+param_pcsaft = {'m':m, 's':sigma, 'e':eps_k}
+den = pcsaft_den(t, p, x, param_pcsaft, phase='vap')</code>
       </pre>
       <p>
         On võimalik ka kasutada PC-SAFT olekuvõrrandit segude puhul. Nagu tavaliselt, on vaja ette anda interaktsiooni parameetreid segu ainete vahel. Mõnikord PC-SAFT annab head hinnangut isegi kui pannakse lihtsalt 0 interaktsiooni parameetri jaoks.
@@ -89,20 +82,18 @@
         PC-SAFT parameetreid (k.a interaktsiooni parameetreid) saab tihti leida teaduskirjandusest (vt näiteks artikleid, mida lisasin Moodlisse).<sup><a href="#ref2">2</a>-<a href="#ref6">6</a></sup>
       </p>
       <pre>
-        <code class="python">
-          t = 460 # K
-          p = 100000 # Pa
-          x = np.asarray([0.3, 0.7]) # moolosad
+<code class="python">t = 460 # K
+p = 100000 # Pa
+x = np.asarray([0.3, 0.7]) # moolosad
 
-          den_pcsaft = np.zeros_like(t)
-          m = np.asarray([3.0576, 2.4653]) # parameetrid heksaani ja benseeni jaoks
-          sigma = np.asarray([3.7983, 3.6478])
-          eps_k = np.asarray([236.77, 287.35])
-          kij = np.asarray([[0, 0.0128],
-                            [0.0128, 0]]) # interaktsiooni parameeter
-          param_pcsaft = {'m':m, 's':sigma, 'e':eps_k, 'k_ij': kij}
-          den_pcsaft = pcsaft_den(t, p, x, param_pcsaft, phase='vap')
-        </code>
+den_pcsaft = np.zeros_like(t)
+m = np.asarray([3.0576, 2.4653]) # parameetrid heksaani ja benseeni jaoks
+sigma = np.asarray([3.7983, 3.6478])
+eps_k = np.asarray([236.77, 287.35])
+kij = np.asarray([[0, 0.0128],
+                  [0.0128, 0]]) # interaktsiooni parameeter
+param_pcsaft = {'m':m, 's':sigma, 'e':eps_k, 'k_ij': kij}
+den_pcsaft = pcsaft_den(t, p, x, param_pcsaft, phase='vap')</code>
       </pre>
       <p>
         Üks nõrk koht PC-SAFT olekuvõrrandiga on see, et entroopia ja energia parameetrite jaoks (entalpia, Gibbs energia, soojusmahtuvus, jne) PC-SAFT annab ainult jääkomadust. Ehk, see ainult näitab, kui palju antud omadus erineb ideaalgaasi väärtusest. Kuid nende parameetrite ideaalgaasi väärtused sõltuvad molekuli struktuurist (ehk ei saa lihtsalt ideaalgaasi valemiga arvutada), ja seega on vaja eraldi korrelatsiooni aine ideaalgaasi soojusmahtuvuse jaoks.<sup><a href="#ref1">1</a></sup> Üsna tihti neid korrelatsioone pole kuskilt kättesaadav. Kui on vaja entroopiat või energia parameetreid arvutada, ma tavaliselt kasutan teist meetodit.

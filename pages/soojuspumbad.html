@@ -3,18 +3,20 @@
 <head>
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      CommonHTML: { linebreaks: { automatic: true } }
+    });
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS_CHTML"></script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <link rel="stylesheet"
-        href="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/styles/default.min.css">
-  <script src="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/highlight.min.js"></script>  <script>hljs.highlightAll();</script>
 
-  <link rel="stylesheet" href="/thermo_course/styles/termodynaamika.css">
+  <link rel="stylesheet" href="/thermo-course/styles/termodynaamika.css">
 
   <script>
     $(function(){
-      $("#navigation").load(`/thermo_course/src/navigation.html`);
+      $("#navigation").load(`/thermo-course/src/navigation.html`);
     });
   </script>
 
@@ -52,10 +54,10 @@
       </ol>
       <ul class="img-grid">
         <li class="img-grid-item">
-          <img class="grid-img" src="/thermo_course/media/soojuspump.svg" />
+          <img class="grid-img" src="/thermo-course/media/soojuspump.svg" />
         </li>
         <li class="img-grid-item">
-          <img class="grid-img" src="/thermo_course/media/soojuspumpa_ringprotsess_num.png" />
+          <img class="grid-img" src="/thermo-course/media/soojuspumpa_ringprotsess_num.png" />
         </li>
       </ul>
       <p>
@@ -89,7 +91,7 @@
       <p>
         Sellest valemist tulevad mõned huvitavad järeldused. Soojusmasinatega leidsime, et saab kasutegurit tõsta, kui suurendame temperatuuri vahet. Kuid soojuspumpadega on vastupidine käitumine. Soojustegur on suurem, kui temperatuuride vahe on väiksem ja \( T_{kuum} \) on kõrgem. Sellepärast, soojuspumbad töötavad üldiselt tõhusamalt, kui soojuseallikas ei ole nii külm ja vajalik temperatuur radiaatoris või põrandas on madalam.
       </p>
-      <img class="inline-img" src="/thermo_course/media/carnot_efficiency_heatpump.png" />
+      <img class="inline-img" src="/thermo-course/media/carnot_efficiency_heatpump.png" />
 
       <h2>Erinevad variandid</h2>
       <p>
