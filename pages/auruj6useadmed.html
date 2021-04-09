@@ -139,106 +139,108 @@
       <p>
         Nüüd vaatame, kuidas saame teha termodünaamilisi arvutusi aurujõuseadmete jaoks. Kasutame näitena ülekriitilist ringprotsessi. Oletame, et ringprotsess läbib järgmised punktid:
       </p>
-      <table style="text-align: center;">
-        <tr>
-          <th>
-            Olek
-          </th>
-          <th>
-            Kirjeldus
-          </th>
-          <th>
-            Temperatuur </br> (&deg;C)
-          </th>
-          <th>
-            Rõhk </br> (bar)
-          </th>
-        </tr>
-        <tr>
-          <td>
-            0
-          </td>
-          <td style="text-align: left;">
-            Vesi alguses
-          </td>
-          <td>
-            38
-          </td>
-          <td>
-            0,07
-          </td>
-        </tr>
-        <tr>
-          <td>
-            1
-          </td>
-          <td style="text-align: left;">
-            Vesi kõrgemal rõhul peale pumpa
-          </td>
-          <td>
-            38
-          </td>
-          <td>
-            250
-          </td>
-        </tr>
-        <tr>
-          <td>
-            2
-          </td>
-          <td style="text-align: left;">
-            Aur kõrgel temperatuuril ja rõhul peale katlat
-          </td>
-          <td>
-            600
-          </td>
-          <td>
-            250
-          </td>
-        </tr>
-        <tr>
-          <td>
-            3
-          </td>
-          <td style="text-align: left;">
-            Aur peale esimest turbiini
-          </td>
-          <td>
-            340
-          </td>
-          <td>
-            49
-          </td>
-        </tr>
-        <tr>
-          <td>
-            4
-          </td>
-          <td style="text-align: left;">
-            Vaheülekuumendatud aur, mis läheb teisesse turbiinisse
-          </td>
-          <td>
-            600
-          </td>
-          <td>
-            48
-          </td>
-        </tr>
-        <tr>
-          <td>
-            5
-          </td>
-          <td style="text-align: left;">
-            Aur peale teist turbiini, mis läheb kondensaatorisse
-          </td>
-          <td>
-            51
-          </td>
-          <td>
-            0,09
-          </td>
-        </tr>
-      </table>
+      <div class='table-div'>
+        <table style="text-align: center;">
+          <tr>
+            <th>
+              Olek
+            </th>
+            <th>
+              Kirjeldus
+            </th>
+            <th>
+              Temperatuur </br> (&deg;C)
+            </th>
+            <th>
+              Rõhk </br> (bar)
+            </th>
+          </tr>
+          <tr>
+            <td>
+              0
+            </td>
+            <td style="text-align: left;">
+              Vesi alguses
+            </td>
+            <td>
+              38
+            </td>
+            <td>
+              0,07
+            </td>
+          </tr>
+          <tr>
+            <td>
+              1
+            </td>
+            <td style="text-align: left;">
+              Vesi kõrgemal rõhul peale pumpa
+            </td>
+            <td>
+              38
+            </td>
+            <td>
+              250
+            </td>
+          </tr>
+          <tr>
+            <td>
+              2
+            </td>
+            <td style="text-align: left;">
+              Aur kõrgel temperatuuril ja rõhul peale katlat
+            </td>
+            <td>
+              600
+            </td>
+            <td>
+              250
+            </td>
+          </tr>
+          <tr>
+            <td>
+              3
+            </td>
+            <td style="text-align: left;">
+              Aur peale esimest turbiini
+            </td>
+            <td>
+              340
+            </td>
+            <td>
+              49
+            </td>
+          </tr>
+          <tr>
+            <td>
+              4
+            </td>
+            <td style="text-align: left;">
+              Vaheülekuumendatud aur, mis läheb teisesse turbiinisse
+            </td>
+            <td>
+              600
+            </td>
+            <td>
+              48
+            </td>
+          </tr>
+          <tr>
+            <td>
+              5
+            </td>
+            <td style="text-align: left;">
+              Aur peale teist turbiini, mis läheb kondensaatorisse
+            </td>
+            <td>
+              51
+            </td>
+            <td>
+              0,09
+            </td>
+          </tr>
+        </table>
+      </div>
       <p>
         Esiteks, paneme need tingimused kirja Pythonis. Kasutan siin <a href="https://numpy.org/">Numpy</a> moodulit ja <a href="https://numpy.org/doc/stable/reference/generated/numpy.asarray.html"><code class='python'>asarray</code></a> funktsioon muudab Pythoni järjendit Numpy massiiviks.
       </p>
