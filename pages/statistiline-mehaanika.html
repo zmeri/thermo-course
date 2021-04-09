@@ -3,15 +3,20 @@
 <head>
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      CommonHTML: { linebreaks: { automatic: true } }
+    });
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS_CHTML"></script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-  <link rel="stylesheet" href="/thermo_course/styles/termodynaamika.css">
+  <link rel="stylesheet" href="/thermo-course/styles/termodynaamika.css">
 
   <script>
     $(function(){
-      $("#navigation").load(`/thermo_course/src/navigation.html`);
+      $("#navigation").load(`/thermo-course/src/navigation.html`);
     });
   </script>
 
@@ -45,13 +50,13 @@
       <p>
         Statistiline mehaanika põhineb mikroolekutele. <b>Mikroolek</b> on ühk konkreetne mikroskoobiline seisund, ehk mikroolekus kõik mikroskoobilised muutujad on määratud. Klassikalise teooria järgi mikroolek tähendaks näiteks, et kõikidel osakestel on konkreetne asukoht ja kiirus. Kvantmehaanika järgi mikroolek on konkreetse lainefunktsiooni väärtus.<a href="#ref1"><sup>1</sup></a>
       </p>
-      <img class="inline-img" src="/thermo_course/media/mikroolek1.jpg" />
+      <img class="inline-img" src="/thermo-course/media/mikroolek1.jpg" />
 
       <h2>Ansamblid</h2>
       <p>
         On tavaliselt mitu erinevat mikroolekut, mis vastavad ühele makroolekule. Näiteks, kui meil on gaasiballoon molekulid liikuvad ja mikroolek muutub, isegi kui rõhk ja temperatuur balloonis ei muutu.
       </p>
-      <img class="inline-img" src="/thermo_course/media/ansambel.png" />
+      <img class="inline-img" src="/thermo-course/media/ansambel.png" />
       <p>
         Süsteemi kõikide võimalike mikroolekute kogumit kutsutakse <b>ansambliks</b>. Makrooleku tingimused, mida me valime, määravad ansamblit. Mõnedele ansamblitele on antud nime. <em>Mikrokanoonilises ansamblis</em> moolide arv ja energia kogus jääb samaks, ehk süsteem on isoleeritud. <em>Kanoonilise ansamblis</em> moolide arv ja temperatuur püsivad samaks, aga võib toimuda soojuse ülekanne süsteemi ja keskkonna vahel. Eeldatakse, et keskkond on piisavalt suur, et soojusülekanne ei mõjuta keskkonna temperatuuri. Kanooniline ansambel vastab suletud süsteemile. <em>Suurkanooniline ansamblis</em> nii energia kui ka moolide arv võib muutuda, ehk süsteemi temperatuur, keemiline potentsiaal ja maht jäävad konstantseks. On ka teised ansamblid. Sobivat ansamblit valitakse vastavalt antud süsteemile.
       </p>
@@ -138,7 +143,7 @@
         \[ p(v) = 4 &pi; \bigg(\frac{m}{2 &pi; k_B T}\bigg)^{3/2} v^2 e^{-\frac{1}{2} m v^2/k_B T} \]
       </div>
 
-      <img class="inline-img" src="/thermo_course/media/gas_speeds.png" />
+      <img class="inline-img" src="/thermo-course/media/gas_speeds.png" />
 
       <h2>Viited</h2>
       <ol>

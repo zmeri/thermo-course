@@ -4,17 +4,16 @@
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet"
         href="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/styles/default.min.css">
   <script src="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/highlight.min.js"></script>  <script>hljs.highlightAll();</script>
 
-  <link rel="stylesheet" href="/thermo_course/styles/termodynaamika.css">
+  <link rel="stylesheet" href="/thermo-course/styles/termodynaamika.css">
 
   <script>
     $(function(){
-      $("#navigation").load(`/thermo_course/src/navigation.html`);
+      $("#navigation").load(`/thermo-course/src/navigation.html`);
     });
   </script>
 
@@ -159,100 +158,90 @@
       <p>
         Esiteks vaata andmeid üle. Kui on vigased andmed, siis on raskem leida häid mudeli parameetreid. Näiteks saab teha jooniseid selleks, et näha, kas mõni punkt on üldtrendist väljas.
       </p>
-      <pre>
-        <code class="python">
-          # impordi andmed Pandasega ---------
-          data = pd.read_csv('andmed_1-hekseen.csv', header=2, delimiter=';')
+        <pre>
+<code class="python"># impordi andmed Pandasega ---------
+data = pd.read_csv('andmed_1-hekseen.csv', header=2, delimiter=';')
 
-          # tiheduse joonis
-          plt.figure()
-          plt.scatter(data.loc[data['omadus'] == 'tihedus', 'temperatuur'],
-                      data.loc[data['omadus'] == 'tihedus', 'tihedus_molaarne'])
-          plt.title('1-hekseen')
-          plt.xlabel('Temperatuur (K)')
-          plt.ylabel('Tihedus (mol/m$^3$)')
-          plt.show()
+# tiheduse joonis
+plt.figure()
+plt.scatter(data.loc[data['omadus'] == 'tihedus', 'temperatuur'],
+            data.loc[data['omadus'] == 'tihedus', 'tihedus_molaarne'])
+plt.title('1-hekseen')
+plt.xlabel('Temperatuur (K)')
+plt.ylabel('Tihedus (mol/m$^3$)')
+plt.show()
 
-          # aururõhu joonis
-          plt.figure()
-          plt.scatter(data.loc[data['omadus'] == 'aururõhk', 'temperatuur'],
-                      data.loc[data['omadus'] == 'aururõhk', 'rõhk'])
-          plt.yscale('log')
-          plt.title('1-hekseen')
-          plt.xlabel('Temperatuur (K)')
-          plt.ylabel('Aururõhk (Pa)')
-          plt.show()
-        </code>
-      </pre>
+# aururõhu joonis
+plt.figure()
+plt.scatter(data.loc[data['omadus'] == 'aururõhk', 'temperatuur'],
+            data.loc[data['omadus'] == 'aururõhk', 'rõhk'])
+plt.yscale('log')
+plt.title('1-hekseen')
+plt.xlabel('Temperatuur (K)')
+plt.ylabel('Aururõhk (Pa)')
+plt.show()</code>
+        </pre>
       <ul class="img-grid">
         <li class="img-grid-item">
-          <img class="grid-img" src="/thermo_course/media/1hekseen_andmete_kontroll_den.png" />
+          <img class="grid-img" src="/thermo-course/media/1hekseen_andmete_kontroll_den.png" />
         </li>
         <li class="img-grid-item">
-          <img class="grid-img" src="/thermo_course/media/1hekseen_andmete_kontroll_vp.png" />
+          <img class="grid-img" src="/thermo-course/media/1hekseen_andmete_kontroll_vp.png" />
         </li>
       </ul>
       <p>
         Järgmisena valime lahendajat, ehk optimeerimise algoritmit. Pea meeles, et lahendajad võivad mõnikord jääda kinni kohalikus miinimumis. Sellepärast ma kasutan siin <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.differential_evolution.html">differential evolution</a> lahendajat, mis on Scipy moodulis. See algoritm tavaliselt suudab leida globaalsed miinimumit, ehk see ei jää kohalikus miinimumis kinni.
       </p>
       <pre>
-        <code class="python">
-          from scipy.optimize import differential_evolution
-        </code>
+        <code class="python">from scipy.optimize import differential_evolution</code>
       </pre>
       <p>
         Seejärel me peame defineerima optimeerimise funktsiooni, ehk veafunktsiooni. Tavaliselt kasutatakse lihtsalt absoluutvigade või ruutvigade summa. Siin kasutan ruutvigade summa, aga suhtelise veaga. Kasutan suhtelist viga kuna 100 Pa aururõhu viga on väike atmosfääri rõhu juures, kuid suur kui aururõhk ise on umbes 100 Pa.
       </p>
       <pre>
-        <code class="python">
-          def cost_pcsaft(params, omadus, t, p, den):
-              cost = 0
-              x = np.asarray([1]) # puhas aine, siis moolosa on alati 1
-              # optimeerimise funktsioon annab parameetrid Numpy massiivina. Siin
-              # muudame sõnastikuks, nagu pcsaft funktsioonid soovivad.
-              params_pcsaft = {'m':params[0], 's':params[1], 'e':params[2]}
+<code class="python">def cost_pcsaft(params, omadus, t, p, den):
+    cost = 0
+    x = np.asarray([1]) # puhas aine, siis moolosa on alati 1
+    # optimeerimise funktsioon annab parameetrid Numpy massiivina. Siin
+    # muudame sõnastikuks, nagu pcsaft funktsioonid soovivad.
+    params_pcsaft = {'m':params[0], 's':params[1], 'e':params[2]}
 
-              # pcsaft paketiga peame tegema arvutust ühele punktile korraga. Sellepärast kasutame for-tsüklit
-              for i in range(t.shape[0]):
-                  if omadus[i] == 'aururõhk':
-                      try:
-                          p_fit = flashTQ(t[i], 0, x, params_pcsaft)[0]
-                          cost = cost + ((p_fit - p[i]) / p[i] * 100)**2
-                      except:
-                          cost = cost + 1e20 # kui ei leia head lahendust, siis lihtsalt lisame suure numbri
-                  elif omadus[i] == 'tihedus':
-                      den_fit = pcsaft_den(t[i], p[i], x, params_pcsaft, phase='liq')
-                      cost = cost + ((den_fit - den[i]) / den[i] * 100)**2
+    # pcsaft paketiga peame tegema arvutust ühele punktile korraga. Sellepärast kasutame for-tsüklit
+    for i in range(t.shape[0]):
+        if omadus[i] == 'aururõhk':
+            try:
+                p_fit = flashTQ(t[i], 0, x, params_pcsaft)[0]
+                cost = cost + ((p_fit - p[i]) / p[i] * 100)**2
+            except:
+                cost = cost + 1e20 # kui ei leia head lahendust, siis lihtsalt lisame suure numbri
+        elif omadus[i] == 'tihedus':
+            den_fit = pcsaft_den(t[i], p[i], x, params_pcsaft, phase='liq')
+            cost = cost + ((den_fit - den[i]) / den[i] * 100)**2
 
-              # kontrollime, et viga ei ole NAN (not a number). Kui on NAN, siis lahendaja ei
-              # käitu hästi. Mõnikord juhtub näiteks siis, kui proovitud parameetrid on väga valed.
-              if not np.isfinite(cost):
-                  cost = 1e60
-              return cost
-        </code>
+    # kontrollime, et viga ei ole NAN (not a number). Kui on NAN, siis lahendaja ei
+    # käitu hästi. Mõnikord juhtub näiteks siis, kui proovitud parameetrid on väga valed.
+    if not np.isfinite(cost):
+        cost = 1e60
+    return cost</code>
       </pre>
       <p>
         Siis me anname optimeerijale meie funktsiooni ja andmed. Antud algoritmi jaoks on ka vaja ette anda piirid. Näiteks, siin teame, et <code class='python'>m</code> on tõenäoliselt 2 ja 7 vahel ja panimegi need väärtused piiridena. Ja tee kindlaks, et parameetrite järjekord, mida sa annad lahendajale, on sama, kui järjekord veafunktsioonis (ehk et indeks 0 vastab m-ile, 1 sigma-le, jne). <code class='python'>args</code> parameetriga saame anda lahendajale lisa parameetrid, mida lahendaja edasi annab meie veafunktsioonile.
       </p>
       <pre>
-        <code class='python'>
-          bnds = ((2,7), (2,6), (150,550)) # Siin paneme piirid paika. Mis piirides parameetrid tõenäoliselt on?
-          result = differential_evolution(cost_pcsaft, bounds=bnds,
-                      args=(data['omadus'], data['temperatuur'], data['rõhk'], data['tihedus_molaarne']))
-        </code>
+<code class='python'>bnds = ((2,7), (2,6), (150,550)) # Siin paneme piirid paika. Mis piirides parameetrid tõenäoliselt on?
+result = differential_evolution(cost_pcsaft, bounds=bnds,
+            args=(data['omadus'], data['temperatuur'], data['rõhk'], data['tihedus_molaarne']))</code>
       </pre>
       <p>
         Nüüd me saame jooksutada skripti ja optimeerimine hakkab toimuma. See protsess võtab tõenäoliselt mitu minutit. Optimeerimise lõpul antakse tulemus <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.OptimizeResult.html#scipy.optimize.OptimizeResult"><code class='python'>OptimizeResult</code></a> objektina, mis on sisuliselt nagu sõnastik.
       </p>
       <pre>
-        <code class='python-repl'>
-          fun: 177.79129549217427
-          message: 'Optimization terminated successfully.'
-          nfev: 2757
-          nit: 60
-          success: True
-            x: array([  3.05121012,   3.73067305, 234.04430925])
-        </code>
+<code class='python-repl'>fun: 177.79129549217427
+message: 'Optimization terminated successfully.'
+nfev: 2757
+nit: 60
+success: True
+  x: array([  3.05121012,   3.73067305, 234.04430925])</code>
       </pre>
       <p>
         <code class='python'>fun</code> näitab veafunktsiooni lõppväärtus. Kui <code class='python'>fun</code> on liiga kõrge, siis võibolla oli optimeerimisega mõni probleem või mudelit lihtsalt ei saa sobitada andmetele (nt kui mõned andmed on vigased). <code class='python'>message</code> ja <code class='python'>success</code> näitavad ka tavaliselt, kas optimeerimine õnnestus. Ja meie tulemus, ehk PC-SAFT parameetrid 1-hekseenile, on <code class='python'>x</code>-i all.
@@ -261,57 +250,55 @@
         On hea ka teha jooniseid kontrollimaks leitud parameetreid. Samuti siin oleks kasulik vaadata üldiselt mudeli joonte kuju. Kui mudel arvutab hästi andmete juures, aga käitub imelikult andmete vahel, siis mudel on ületreenitud ja oleks vaja uuesti optimeerida, võibolla teise mudeliga või rohkem andmetega.
       </p>
       <pre>
-        <code class='python'>
-          x = np.asarray([1])
-          m = result.x[0]
-          sigma = result.x[1]
-          eps_k = result.x[2]
-          params_pcsaft = {'m':m, 's':sigma, 'e':eps_k}
+<code class='python'>x = np.asarray([1])
+m = result.x[0]
+sigma = result.x[1]
+eps_k = result.x[2]
+params_pcsaft = {'m':m, 's':sigma, 'e':eps_k}
 
-          npts = 30
-          t_calc = np.linspace(288, 500, npts) # loome massiivid
-          vp_calc = np.zeros_like(t_calc)
-          den_calc = np.zeros_like(t_calc)
+npts = 30
+t_calc = np.linspace(288, 500, npts) # loome massiivid
+vp_calc = np.zeros_like(t_calc)
+den_calc = np.zeros_like(t_calc)
 
-          # aururõhu joonis
-          plt.figure()
+# aururõhu joonis
+plt.figure()
 
-          for i in range(npts):
-              vp, x_liq, x_vap = flashTQ(t_calc[i], 0, x, params_pcsaft)
-              vp_calc[i] = vp
+for i in range(npts):
+    vp, x_liq, x_vap = flashTQ(t_calc[i], 0, x, params_pcsaft)
+    vp_calc[i] = vp
 
-          plt.plot(t_calc, vp_calc)
-          plt.scatter(data.loc[data['omadus'] == 'aururõhk', 'temperatuur'],
-                      data.loc[data['omadus'] == 'aururõhk', 'rõhk'])
-          plt.yscale('log')
-          plt.title('1-hekseen')
-          plt.xlabel('Temperatuur (K)')
-          plt.ylabel('Aururõhk (Pa)')
-          plt.show()
+plt.plot(t_calc, vp_calc)
+plt.scatter(data.loc[data['omadus'] == 'aururõhk', 'temperatuur'],
+            data.loc[data['omadus'] == 'aururõhk', 'rõhk'])
+plt.yscale('log')
+plt.title('1-hekseen')
+plt.xlabel('Temperatuur (K)')
+plt.ylabel('Aururõhk (Pa)')
+plt.show()
 
-          # tiheduse joonis
-          plt.figure()
+# tiheduse joonis
+plt.figure()
 
-          for i in range(npts):
-              p_den= vp_calc[i] * 1.05 # valime rõhku, mis on natuke kõrgem, kui aururõhk
-              den = pcsaft_den(t_calc[i], p_den, x, params_pcsaft, phase='liq')
-              den_calc[i] = den
+for i in range(npts):
+    p_den= vp_calc[i] * 1.05 # valime rõhku, mis on natuke kõrgem, kui aururõhk
+    den = pcsaft_den(t_calc[i], p_den, x, params_pcsaft, phase='liq')
+    den_calc[i] = den
 
-          plt.plot(t_calc, den_calc)
-          plt.scatter(data.loc[data['omadus'] == 'tihedus', 'temperatuur'],
-                      data.loc[data['omadus'] == 'tihedus', 'tihedus_molaarne'])
-          plt.title('1-hekseen')
-          plt.xlabel('Temperatuur (K)')
-          plt.ylabel('Tihedus (mol/m$^3$)')
-          plt.show()
-        </code>
+plt.plot(t_calc, den_calc)
+plt.scatter(data.loc[data['omadus'] == 'tihedus', 'temperatuur'],
+            data.loc[data['omadus'] == 'tihedus', 'tihedus_molaarne'])
+plt.title('1-hekseen')
+plt.xlabel('Temperatuur (K)')
+plt.ylabel('Tihedus (mol/m$^3$)')
+plt.show()</code>
       </pre>
       <ul class="img-grid">
         <li class="img-grid-item">
-          <img class="grid-img" src="/thermo_course/media/1hekseen_den.png" />
+          <img class="grid-img" src="/thermo-course/media/1hekseen_den.png" />
         </li>
         <li class="img-grid-item">
-          <img class="grid-img" src="/thermo_course/media/1hekseen_vp.png" />
+          <img class="grid-img" src="/thermo-course/media/1hekseen_vp.png" />
         </li>
       </ul>
 
