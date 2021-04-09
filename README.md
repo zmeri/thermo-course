@@ -2,7 +2,7 @@
 Käesolevas projektis on õpik ja muid materjalid EIS0110 &bdquo;Tehnilise termodünaamika&ldquo; õppeaine jaoks.
 
 ## Õpik
-Õpikut saab lugeda [siin](https://zmeri.github.io/thermo_course/pages/termodynaamika.html).
+Õpikut saab lugeda [siin](https://zmeri.github.io/thermo-course/pages/termodynaamika.html).
 
 ## Video loengud
 Kursuse jaoks on tehtud ka video loenguid, mida on võimalik leida [YouTube-ist](https://www.youtube.com/channel/UCd56tTqH8ZKNeSW7Elfm4kQ).
