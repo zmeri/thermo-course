@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet"
+        href="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/styles/default.min.css">
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/highlight.min.js"></script>  <script>hljs.highlightAll();</script>
+
+  <link rel="stylesheet" href="/thermo-course/styles/termodynaamika.css">
+
+  <script>
+    $(function(){
+      $("#navigation").load(`/thermo-course/src/navigation.html`);
+    });
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Faasitasakaal</title>
+</head>
+
+<body>
+  <div id='content'>
+    <div id="navigation"></div>
+    <div id='main-text'>
+      <h1>Faasitasakaal</h1>
+      <p>
+        Faasimuutused mõjutavad protsesse. Neid kasutatakse separatsiooni protsessides, et puhastada kemikaale ja muid toote. On oluline siis arvutada tingimusi, kus kaks faasi tekivad.
+      </p>
+
+      <h2>Faasitasakaalu tingimused</h2>
+      <p>
+        Faasitasakaal esineb siis, kui mõlema faasi keemilised potentsiaalid on võrdsed kõikide ainete jaoks. Kuna keemiline potentsiaal ei käitu ilusti matemaatiliselt, saab samuti leida faasitasakaalu fugitiivsustega.
+      </p>
+      <div>
+        \[ &mu;_{i,faas\ 1} = &mu;_{i,faas\ 2} \]
+      </div>
+      <div>
+        \[ f_{i,faas\ 1} = f_{i,faas\ 2} \]
+      </div>
+
+      <h2>Ideaalne tasakaal</h2>
+      <p>
+        Kuidas me saame fugitiivsust arvutada? Alustame kõige lihtsama olukorraga, ehk kui on ideaalgaas tasakaalus ideaalse seguga. Ideaalgaasi jaoks fugitiivsus on lihtsalt aine osarõhk.
+      </p>
+      <div>
+        \[ f_{i,gaas} = P_i = y_i P \]
+      </div>
+      <p>
+        y<sub>i</sub> on aine moolosa gaasifaasis.
+      </p>
+      <p>
+        Peame arvutama ka aine vedelfaasi fugitiivsust. Puhta aine jaoks vedeliku fugitiivsus võrdub süsteemi rõhuga, mis on lihtsalt aine aururõhk (P<sup>sat</sup>).
+      </p>
+      <div>
+        \[ f_{i,vedel} = P = P^{sat} \]
+      </div>
+      <p>
+        Ja ideaalses süsteemis võime eeldata, et aine vedelfaasi fugitiivsus on lihtsalt aururõhk korrutatud vedelfaasi moolosaga. Kuna faasitasakaalus aine fugitiivsused mõlemas faasis peab olema võrdsed, siis saame lõpuks sellise valemi faasitasakaalu jaoks.
+      </p>
+      <div>
+        \[ y_i P = x_i P^{sat} \]
+      </div>
+      <p>
+        Seda valemit kutsutakse <b>Raoulti seaduseks</b>.
+      </p>
+
+      <h2>Reaalsed segud</h2>
+      <p>
+        Loomulikult, reaalses elus molekulide vahelised tõmbejõud on olulised ja Raoulti seadus tihti ei vasta reaalsele olukorrale. Vaata näiteks, kuidas 3-metüülpentaani ja 2-metüül-2-propanooli segu erineb Raoulti seadusest.
+      </p>
+
+      <img class="inline-img" src="/thermo-course/media/figure_3mp_2m2p.png" />
+      <figcaption>3-metüülpentaani + 2-metüül-2-propanooli segu auru rõhk temperatuuril 331,5 K<sup><a href="#ref1">1</a></sup></figcaption>
+      <p>
+        Selleks, et hinnata süsteemi erinevust ideaalolekust, kasutatakse tihti jääkomadusi. <b>Jääkomadus</b> (ingl <em>residual property</em>) arvutatakse lahutades ideaalväärtust aine/segu tegeliku omaduse väärtusest. Jääkomadustega on võimalik paremini näha, kuidas molekulide vahelised jõud mõjutavad segu omadust.
+      </p>
+      <div>
+        \[ &Theta;^{res} = &Theta; - &Theta;^{ig} \]
+      </div>
+      <p>
+        Faasitasakaalu arvutustes kasutatakse tavaliselt fugitiivsuse koefitsienti (&phi;), mis on sisuliselt jääkomadus.
+      </p>
+      <div>
+        \[ &mu;_{i}^{res} = &mu;_i - &mu;_i^{ig} = RT \ln &phi;_i \]
+      </div>
+      <p>
+        Fugitiivsuse koefitsient näitab erinevust referentsolekust. Tavaliselt referentsina kasutatakse ideaalgaasi olekut, ehk olek, milles fugitiivsus võrdub aine osarõhuga.
+      </p>
+      <div>
+        \[ &phi;_i = \frac{f_i}{f_i^{ig}} = \frac{f_i}{x_i P} \]
+      </div>
+      <p>
+        Mõnikord kasutatakse ka lõpmatu lahjenduse olekut. Seda kasutatakse näiteks soolalahuste jaoks kuna puhas sool on hoopis tahke. Aine oma osarõhu asemel kasutatakse hoopis lahusti puhta aine fugitiivsust referentsina.
+      </p>
+
+      <h2>Reaalse segu tasakaal</h2>
+      <p>
+        Kuna fugitiivsuse koefitsient näitab kõrvalekallet ideaalsest olukorrast, saame seda lisada Raoulti seadusele, et modelleerida faasitasakaalu reaalsete ainete jaoks. Seda meetodit kutsutakse mõnikord &phi;-&phi; meetodiks.
+      </p>
+      <div>
+        \[ f_i = x_i &phi;_i P \]
+      </div>
+      <div>
+        \[ y_i &phi;_{i,gaas} P = x_i &phi;_{i,vedel} P \]
+      </div>
+      <div>
+        \[ y_i &phi;_{i,gaas} = x_i &phi;_{i,vedel} \]
+      </div>
+      <p>
+        Fugitiivsuse koefitsienti saab arvutada olekuvõrrandiga.
+      </p>
+
+      <h2>Aktiivsuse koefitsient</h2>
+      <p>
+        Minevikus polnud head olekuvõrrandit vedelfaasi jaoks. Sellepärast, töötati välja meetodit, mis kasutab hoopis aktiivsuse koefitsienti vedelfaasi fugitiivsuse arvutamiseks.
+      </p>
+      <p>
+        <b>Aktiivsuse koefitsient</b> on aine fugitiivsus segus jagatud puhta aine fugitiivsusega samadel tingimustel. Nimetajas puhta aine fugitiivsust korrutatakse ka aine moolosaga, nii et suurused oleksid võrreldavad.
+      </p>
+      <div>
+        \[ &gamma;_i = \frac{f_i}{f_{i,puhas} x_i} \]
+      </div>
+      <p>
+        Aktiivsuse koefitsient näitab erinevust ideaalsest segunemisest. <b>Ideaalne segu</b> tähendab, et segu omadus saab arvutada, kui korrutada iga komponendi puhta aine omadust moolosaga segus ja siis need väärtused kokku liita.
+      </p>
+      <div>
+        \[ &Theta;_{ideaalne\ segu} = \sum_{i} &Theta;_{i,puhas} x_i \]
+      </div>
+      <p>
+        Teiste sõnadega, segu on ideaalne, kui tõmbejoud erinevate molekulide vahel segus on sarnased neile, mis esinevad aine oma molekulide vahel. Reaalses segus ained on tavaliselt piisavalt erinevad, et fugitiivsus muudab koostisega. Aktiivsuse koefitsient eraldab segunemise mõju.
+      </p>
+      <p>
+        Aktiivsus koefitsienti saab arvutada erinevate mudelitega.
+      </p>
+
+      <h2>Tasakaal aktiivsuse koefitsiendiga</h2>
+      <p>
+        Me saame nüüd asendada vedelfaasi fugitiivsuse koefitsiendi aktiivsuse koefitsiendiga. Seda meetodit kutsutakse mõnikord &gamma;-&phi; meetodiks.
+      </p>
+      <div>
+        \[ y_i &phi;_{i,gaas} P = x_i &gamma;_i &phi;^{sat}_{i,vedel} P^{sat}_i \exp \left( \int_{P_i^{sat}}^{P} \frac{V_i}{RT} dp \right) \]
+      </div>
+      <p>
+        Nagu näha, tasakaalu valem on nüüd keerulisem. Aktiivsuse koefitsient ei võta arvesse nii palju mõjusid, kui fugitiivsuse koefitsient. Sellepärast, on vaja lisada need teised osad valemis, mis võtavad need mõjud arvesse.
+      </p>
+      <p>
+        Näiteks, exponentsiaal valemi lõpul on <b>Poyntingi parandustegur</b>, mis võtab arvesse rõhu erinevuse mõju segu fugitiivsusele. On rõhu erinevus kuna aine aururõhk (P<sup>sat</sup>) ei ole päris sama kui segu rõhk (P). Tavaliselt, rõhu mõju on ainult oluline, kui süsteemi rõhk on kõrge. Seega, madalamal rõhul saame tavaliselt valemit lihtsustada jättes Poyntingi parandusteguri välja.
+      </p>
+      <div>
+        \[ y_i &phi;_{i,gaas} P = x_i &gamma;_i &phi;^{sat}_{i,vedel} P^{sat}_i \]
+      </div>
+      <p>
+        Valemis on samuti puhta aine vedelfaasi fugitiivsuse koefitsient aururõhul (\( &phi;^{sat}_{i,vedel} \)). See võtab arvesse aine kõrvalekallet ideaalsest käitumisest. Pea meeles, et aktiivsuse koefitsient võtab arvesse ainult kõrvalekallet, mis tuleb <em>segunemisest</em>. Isegi puhta ainega esinevad kõrvalekalded ideaalsest käitumisest ja \( &phi;^{sat}_{i,vedel} \) võtab need arvesse. Kui eeldame, et puhta aine vedelfaasi fugitiivsuse koefitsient on ühe lähedal, siis saame selle valemist välja jätta. See eeldus tavaliselt sobib, kui rõhk on madal.
+      </p>
+      <div>
+        \[ y_i &phi;_{i,gaas} P = x_i &gamma;_i P^{sat}_i \]
+      </div>
+      <p>
+        Gaasifaasi jaoks ikkagi kasutatakse fugitiivsuse koefitsienti selleks, et arvutada kõrvalekallet ideaalsest käitumisest. Selle arvutamiseks saab kasutada ka lihtsamaid olekuvõrrandeid nagu kuupvõrrandeid. Kui eeldame, et gaasifaas käitub ideaalselt, siis saame valemit veelgi lihtsustada jättes välja gaasifaasi fugitiivsuse koefitsiendi.
+      </p>
+      <div>
+        \[ y_i P = x_i &gamma;_i P^{sat}_i \]
+      </div>
+      <p>
+        Ja kui eeldame, et vedelfaas on ideaalne segu (ehk segunemine ei mõjuta fugitiivsust), siis võime aktiivsuse koefitsiendi kõrvale jätta ja jõuame tagasi Raoulti seaduseni.
+      </p>
+
+      <h2>Muud tasakaalud</h2>
+      <p>
+        Siiamaani oleme keskendanud auru-vedel tasakaalule, aga esinevad tasakaalud ka teiste faaside vahel.
+      </p>
+      <ul>
+        <li>
+          Vedel-vedel tasakaal,
+        </li>
+        <li>
+          Tahke-vedel tasakaal,
+        </li>
+        <li>
+          Gaasi-tahke tasakaal,
+        </li>
+        <li>
+          Vedel-vedel-vedel tasakaal,
+        </li>
+        <li>
+          Tahke-vedel-vedel tasakaal,
+        </li>
+        <li>
+          Tahke-tahke tasakaal.
+        </li>
+      </ul>
+      <p>
+        Selleks, et arvutada tasakaalu tingimusi muude tasakaalude jaoks on vaja lihtsalt valemit mõlema faasi fugitiivsuse jaoks. Näiteks, vedel-vedel tasakaalu jaoks võime kasutada samad valemid vedelfaasi jaoks, mida me oleme kasutanud auru-vedel tasakaalu arvutustes. Kui kasutada olekuvõrrandit (nt PC-SAFT), et otse arvutada fugitiivsuse koefitsienti, siis vedel-vedel tasakaalu valem on selline:
+      </p>
+      <div>
+        \[ x_{i,A} &phi;_{i,A} = x_{i,B} &phi;_{i,B} \]
+      </div>
+      <p>
+        Võime samuti arvutada vedel-vedel tasakaalu aktiivsuse koefitsiendiga:
+      </p>
+      <div>
+        \[ x_{i,A} &gamma;_{i,A} &phi;^{sat}_{i,A} P^{sat}_{i,A} = x_{i,B} &gamma;_{i,B} &phi;^{sat}_{i,B} P^{sat}_{i,B} \]
+      </div>
+      <p>
+        Ja kuna aururõhk ja \( &phi;^{sat}_{i} \) on mõlema faasi jaoks sama (on ju sama aine), need taanduvad välja.
+      </p>
+      <div>
+        \[ x_{i,A} &gamma;_{i,A} = x_{i,B} &gamma;_{i,B} \]
+      </div>
+
+      <h2>Viited</h2>
+      <ol>
+        <li id="ref1">
+          P. Uusi-Kyyny, J.-P. Pokki, J. Aittamaa, and S. Liukkonen, “Vapor−Liquid Equilibrium for the Binary Systems of 3-Methylpentane + 2-Methyl-2-propanol at 331 K and + 2-Butanol at 331 K,” Journal of Chemical & Engineering Data, vol. 46, no. 3, pp. 754–758, May 2001, doi: 10.1021/je000295w.
+        </li>
+        <li id="ref2">
+          L. Albright, Albright’s Chemical Engineering Handbook. CRC Press, 2008.
+        </li>
+        <li id="ref3">
+          J. P. O’Connell and J. M. Haile, Thermodynamics: Fundamentals for Applications. Cambridge University Press, 2005.
+        </li>
+        <li id="ref4">
+          M. Uyan, G. Sieder, T. Ingram, and C. Held, “Predicting CO2 solubility in aqueous N-methyldiethanolamine solutions with ePC-SAFT,” Fluid Phase Equilibria, vol. 393, pp. 91–100, May 2015, doi:10.1016/j.fluid.2015.02.026.
+        </li>
+        <li id="ref5">
+          M. D. Koretsky, Engineering and Chemical Thermodynamics. John Wiley & Sons, 2012.
+        </li>
+        <li id="ref6">
+          Y. Thio, “Vapor Liquid Equilibrium: A Guide”. MIT Chemical Engineering Thermodynamics course. 2002. http://web.mit.edu/10.213/www/handouts/vle.pdf
+        </li>
+        <li id="ref7">
+          R. Smith, Chemical Process Design and Integration. John Wiley & Sons, 2016.
+        </li>
+      </ol>
+    </div>
+  </div>
+</body>
+</html>
