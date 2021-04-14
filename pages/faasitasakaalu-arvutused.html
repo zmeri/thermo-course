@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet"
+        href="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/styles/default.min.css">
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/highlight.min.js"></script>  <script>hljs.highlightAll();</script>
+
+  <link rel="stylesheet" href="/thermo-course/styles/termodynaamika.css">
+
+  <script>
+    $(function(){
+      $("#navigation").load(`/thermo-course/src/navigation.html`);
+    });
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Faasitasakaalu arvutused</title>
+</head>
+
+<body>
+  <div id='content'>
+    <div id="navigation"></div>
+    <div id='main-text'>
+      <h1>Faasitasakaalu arvutused</h1>
+      <p>
+        Tavaliselt teame kas temperatuuri või rõhku, aga mitte mõlemaid. Siis peame teist parameetrit arvutama. Kuid fugitiivsuse avaldised sõltuvad ka temperatuurist ja rõhust, ja üldiselt on raske või võimatu leida neid analüütiliselt. Sellepärast, me peame leidma temperatuuri või rõhku numbriliselt.
+      </p>
+
+      <h2>Lahendamine paketi funktsioonidega</h2>
+      <p>
+        Mõned tööriistad lahendavad ise taustas ja me ei pea ise muretsema sellest. Näiteks, pcsaft paketis on <a href="https://pcsaft.readthedocs.io/en/latest/functions/pcsaft.flashTQ.html"><code class="python">flashTQ</code></a> ja <a href="https://pcsaft.readthedocs.io/en/latest/functions/pcsaft.flashPQ.html"><code class="python">flashPQ</code></a> funktsioonid, mida saame kasutada auru-vedel tasakaalu arvutuste jaoks.
+      </p>
+      <p>
+        Näitena, arvutame 2-propüülamiini aururõhku temperatuuril 25 &deg;C. 2-propüülamiini PC-SAFTi parameetrid saab leida kirjandusest.<sup><a href="#ref1">1</a></sup>
+      </p>
+      <pre>
+<code class="python">import numpy as np
+from pcsaft import flashTQ
+
+t = 25 + 273.15 # K
+q = 0
+x = np.asarray([1])
+pcsaft_params = {'m': np.asarray([2.5908]),
+                 's': np.asarray([3.4777]),
+                 'e': np.asarray([231.80]),
+                 'vol_a': np.asarray([0.021340]),
+                 'e_assoc': np.asarray([932.2])}
+
+pvap, xl, xv = flashTQ(t, q, x, pcsaft_params)</code>
+      </pre>
+      <p>
+        <code class="python">flashTQ</code> funktsioonile anname parameetrina Q. Q näitab moolosa süsteemist, mis on gaasifaasist, ja varsti selgitame seda põhjalikumalt. Funktsioon väljastab kolm parameetrit. <code class="python">pvap</code> on aururõhk. <code class="python">xl</code> ja <code class="python">xv</code> on vastavalt vedel- ja gaasifaasi koostised, aga kuna antud ülesandes on ainult üks aine moolosa mõlemas faasis on lihtsalt 1.
+      </p>
+      <p>
+        Kui jooksutame skripti ja prindime <code class="python">pvap</code>, näeme 2-propüülamiini aururõhku.
+      </p>
+      <pre>
+        <code class="python-repl">2-propüülamiini aururõhk: 77952.10072375127 Pa</code>
+      </pre>
+      <p>
+        CoolProp paketiga on ka võimalik teha faasitasakaalu arvutusi. On vaja lihtsalt anda <code class="python">PropsSI</code> funktsioonile parameeter <a href="http://www.coolprop.org/coolprop/HighLevelAPI.html#table-of-string-inputs-to-propssi-function">Q</a>, nii nagu antakse pcsaft funktsioonidele. Näiteks, võime arvutada vee aururõhku.
+      </p>
+      <pre>
+<code class="python">import CoolProp.CoolProp as cp
+
+pvap = cp.PropsSI("P", "T", 298, "Q", 0, "WATER")</code>
+      </pre>
+
+      <h2>Moolosa gaasifaasis</h2>
+      <p>
+        Mis on see parameeter Q, mida oleme kasutanud siin auru-vedel tasakaalu arvutustes? Kui süsteemis on auru- ja vedelfaasid, siis auru kogus võib varieeruda. Näiteks, võibolla süsteemis on ainult üks väike mull. Süsteemis võib samuti olla pool vedelik ja pool aur või peaaegu kogu süsteem võib olla gaasifaasis ja on ainult üks vedeliku piisk. Q näitab moolosa ainest/segust, mis on gaasifaasi.
+      </p>
+      <img class="inline-img" src="/thermo-course/media/q-parameeter.jpg" />
+      <p>
+        Q on oluline kuna süsteemi omadused muutuvad vastavalt sellele, mis osakaal on gaasifaasis. Kui tahame arvutada puhta aine aururõhku, siis pole vahet, mis Q väärtust me kasutame (0 ja 1 vahel, loomulikult). Aururõhk ja temperatuur ei muutu, kui on ainult üks aine. Kuid süsteemi tihedus muutub Q-ga, isegi puhta aine jaoks. Ja kui on segu, siis vedeliku ja gaasi koostised muutuvad aurustamise tõttu. Teiste sõnadega, kui rohkem aurustab ja läheb gaasifaasi, siis keemistemperatuur või aururõhk muutub.
+      </p>
+      <p>
+        Kui Q on 0, kutsutakse mullipunktiks. See vastab olukorrale, kus tekib esimene pisikene gaasi mull. Kui Q on 1, kutsutakse kastepunktiks. Kastepunktis tekib esimene väike piisk.
+      </p>
+      <p>
+        Vaatame näitena, kuidas arvutada vesiniku ja n-heksadekaani segu mullipunkti rõhku. Tihti õli töödeldatakse vesinikuga, et parandada õli kvaliteeti. Sellised tasakaalu arvutused võivad näidata, kuidas vesinik käitub vesinikutöötluses.
+      </p>
+      <pre>
+<code class="python"># 0 = vesinik, 1 = n-heksadekaan
+t = 150 + 273.15 # K
+q = 0 # moolosa segust, mis läheb gaasifaasi
+x0 = 0.0021 # vesiniku moolprotsent segus
+x = np.asarray([x0, 1-x0])
+pcsaft_params = {'m': np.asarray([1, 6.6485]),
+                 's': np.asarray([2.9860, 3.9552]),
+                 'e': np.asarray([19.2775, 254.70])}
+pcsaft_params['k_ij'] = np.asarray([[0, 0],
+                                    [0, 0]])
+
+pvap, xl, xv = flashTQ(t, q, x, pcsaft_params)</code>
+      </pre>
+      <p>
+        Ja jooksutades skripti...
+      </p>
+      <pre>
+        <code class="python-repl">Mullipunkti rõhk: 131990.75423080503 Pa</code>
+      </pre>
+
+      <h2>Lahendajaga lahendamine</h2>
+      <p>
+        Aga mis seal taustas toimub? On oluline ka aru saada, kuidas sellised funktsioonid lahendavad, nii et sa oskad ka ette näha võimalikke probleeme. Ja mõnikord olemasolevad funktsioonid ei sobi ja pead ise lahendama, et leida soovitud omadust.
+      </p>
+      <p>
+        Me saame kasutada olemasolevaid lahendajaid. Peame lihtsalt kirja panema veafunktsiooni. Veafunktsioon ütleb lahendajale, kui lähedal teatud väärtus on õigele väärtusele. Tavaliselt veafunktsioon kirjutatakse nii, et õige väärtuse juures veafunktsioon saavutab miinimumi või maksimumi. Lahendajad siis tavaliselt proovivad leida kõige väiksemat (või kõige suuremat) veafunktsiooni väärtust.
+      </p>
+      <p>
+        Faasitasakaalu arvutustes meie veafunktsioon põhineb tasakaalu tingimusel, mida me kasutame. Kuna siin arvutame PC-SAFT olekuvõrrandiga, kasutame tasakaalu valemit fugitiivsuse koefitsiendiga. Saab samuti arvutada aktiivsuse koefitsiendiga, kui kasutad aktiivsuse koefitsiendi mudelit.
+      </p>
+      <p>
+        Arvutame uuesti 2-propüülamiini aururõhku, aga seekord lahendame ise lahendajaga. Kuna antud süsteemis on ainult üks aine moolosa (x) taandub välja ja faasid on tasakaalus, kui fugitiivsuse koefitsiendid on võrdsed. Seega, veafunktsioonis võime lihtsalt võtta ruutviga nende fugitiivsuse koefitsientide vahel.
+      </p>
+      <pre>
+<code class="python">def veafunktsioon(p, t, x, params):
+    den_l = pcsaft_den(t, p, x, params, phase='liq')
+    den_v = pcsaft_den(t, p, x, params, phase='vap')
+    fugcoef_l = pcsaft_fugcoef(t, den_l, x, params)
+    fugcoef_v = pcsaft_fugcoef(t, den_v, x, params)
+    cost = (fugcoef_v - fugcoef_l)**2
+    return cost</code>
+      </pre>
+      <p>
+        Ja nagu mainisin, lahendajad tavaliselt otsivad miinimumi (või maksimumi) siis siin peame võtma näiteks absoluutväärtust või ruutu. Muidu lahendaja võtaks negatiivset väärtust kui vastus, kuigi me teame, et suur negatiivne väärtus samuti näitab, et fugitiivsuse koefitsiendid ei ole võrdsed.
+      </p>
+      <p>
+        Märka ka, et pcsaft funktsioon fugitiivsuse koefitsiendi arvutamiseks nõuab molaarset tihedust. Me peame siis esiteks tihedust arvutama <a href="https://pcsaft.readthedocs.io/en/latest/functions/pcsaft.pcsaft_den.html"><code class="python">pcsaft_den</code></a> funktsiooniga.
+      </p>
+      <p>
+        Kui on segu siis on natuke keerulisem, sest peame leidma lisaks rõhule ka gaasifaasi ja vedelfaasi koostised.
+      </p>
+      <p>
+        Nüüd saame katsetada meie veafunktsiooni. Valime mõnda rõhku ja näeme veafunktsiooni väärtust.
+      </p>
+      <pre>
+<code class="python">p_test = 60000
+cost = veafunktsioon(p_test, t, x, pcsaft_params)
+print('Proovitud rõhk= {} Pa'.format(p_test))
+print('veafunktsiooni väärtus=', cost)</code>
+      </pre>
+      <pre>
+<code class="python-repl">Proovitud rõhk= 60000 Pa
+veafunktsiooni väärtus= [0.08215161]</code>
+      </pre>
+      <p>
+        Mõnikord on hea käsitsi väärtusi proovida, et leida mõistlikut algväärtust lahendajale. Me võiksime tegelikult niiviisi käsitsi isegi lahendust leida, aga see on tüütu. Kasutame siis olemasolevaid optimeerimise funktsioone. Esiteks, proovime tuletise meetodiga. Scipy <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html"><code class="python">minimize</code></a> function rakendab neid tuletise meetodeid. Tuletise meetodid kasutavad veafunktsiooni tuletist, et valida järgmist väärtust, mida proovida.
+      </p>
+      <pre>
+<code class="python">from scipy.optimize import minimize
+
+p_guess = 50000 # Pa
+result = minimize(veafunktsioon, p_guess, args=(t, x, pcsaft_params), method='Nelder-Mead')</code>
+      </pre>
+      <p>
+        Peame minimize funktsioonile andma veafunktsiooni nime ja algväärtust. Meie veafunktsioon vajab ka teisi parameetreid ja saame neid lisada <code class="python">arg</code> parameetriga. Minimize funktsioon annab need parameetrid edasi veafunktsioonile. On ka võimalik ette anda algoritmi, mida tahame, et minimize funktsioon kasutab. Me ei pea seda andma, aga siin anname, sest väikimismeetod ei anna head tulemust. Nüüd saame jooksutada skripti.
+      </p>
+      <pre>
+  <code class="python-repl"> final_simplex: (array([[77952.08998024],
+ [77952.08990574]]), array([4.77336611e-20, 4.79831610e-19]))
+     fun: 4.773366111932245e-20
+ message: 'Optimization terminated successfully.'
+    nfev: 62
+     nit: 31
+  status: 0
+ success: True
+       x: array([77952.08998024])</code>
+      </pre>
+      <p>
+        Lahendaja vastuses on mitu asja. <code class="python">x</code> näitab parameetrite optimaalsed väärtused, ehk aururõhk. Võime näha, et saime sama rõhk, kui varem saime <code class="python">flashTQ</code> funktsiooniga. <code class="python">fun</code> näitab veafunktsiooni väärtust vastuse juures. Kui see on ikkagi suur, siis võibolla lahendaja ei suutnud leida head väärtust.
+      </p>
+      <p>
+        Võime samuti lahendada globaalse meetodiga. Globaalse meetodi eelis on see, et võib vältida kohalikke miinimume, milles tuletise meetodid jäävad kinni. Siin kasutame <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.differential_evolution.html"><code class="python">differential_evolution</code></a> funktsioon Scipy paketist. Selle funktsiooniga anname mitte algväärtust vaid piirid, milles funktsioon otsib optimaalset väärtust.
+      </p>
+      <pre>
+<code class="python">bnds = ((50000, 175000),)
+result = differential_evolution(veafunktsioon, bounds=bnds, args=(t, x, pcsaft_params))</code>
+      </pre>
+
+      <h2>Viited</h2>
+      <ol>
+        <li id="ref1">
+          J. Gross and G. Sadowski, “Application of the Perturbed-Chain SAFT Equation of State to Associating Systems,” Ind. Eng. Chem. Res., vol. 41, no. 22, pp. 5510–5515, Oct. 2002, doi: 10.1021/ie010954d.
+        </li>
+      </ol>
+    </div>
+  </div>
+</body>
+</html>
