@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet"
+        href="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/styles/default.min.css">
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/highlight.min.js"></script>  <script>hljs.highlightAll();</script>
+
+  <link rel="stylesheet" href="/thermo-course/styles/termodynaamika.css">
+
+  <script>
+    $(function(){
+      $("#navigation").load(`/thermo-course/src/navigation.html`);
+    });
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Olekuvõrrandid Pythonis</title>
+</head>
+
+<body>
+  <div id='content'>
+    <div id="navigation"></div>
+    <div id='main-text'>
+      <h1>Olekuvõrrandid Pythonis</h1>
+      <p>
+        Python on võimas tööriist, millega teha arvutusi olekuvõrranditega. On juba olemas paketid, mis rakendavad mõned olekuvõrrandid. Vajadusel saab ise ka kirja panna mõnda olekuvõrrandit või kohanada olemasolevat olekuvõrrandit. Internetis võib ka leida ja kasutada koodi, mida teised on jaganud, isegi kui nad pole avaldanud seda paketina. Vaatame, kuidas saab Pythonis neid arvutusi teha.
+      </p>
+
+      <h2>Helmholtzi mitmeparameetrilised võrrandid</h2>
+      <p>
+        <a href="http://www.coolprop.org/">CoolProp</a> pakett annab võimaluse teha arvutusi Helmholtzi mitmeparameetriliste võrranditega. CoolPropile on lisatud enamus, kui mitte kõik, ained mille jaoks on välja töötatud Helmholtzi mitmeparameetrlise võrrandi (vt nimekirja <a href="http://www.coolprop.org/fluid_properties/PurePseudoPure.html#list-of-fluids">siin</a>).
+      </p>
+      <p>
+        Näitena, saame arvutada etaani tihedust tingimustel 20 &deg;C ja 5 bar.
+      </p>
+      <pre>
+<code class="python">import CoolProp.CoolProp as cp
+
+den = cp.PropsSI("D", "T", 293.15, "P", 5*1e5, "ETHANE")</code>
+      </pre>
+      <p>
+        <a href="http://www.coolprop.org/coolprop/HighLevelAPI.html#propssi-function"><code class='python'>PropsSI</code></a> funktsioonile tuleb esiteks anda sõne, mis näitab olekuparameetrit, mida soovid arvutada. Antud juhul tahtsime arvutada tihedust, siis andsime esimese parameetrina &bdquo;D&ldquo;. Siis anname esimese olekuparameetri, mida on teada (antud juhul temperatuur), ja sellele järgneb olekuparameetri väärtus. Siis anname teise olekuparameetri sõne koos vastava väärtusega. Viimane parameeter on aine nimi.
+      </p>
+      <p>
+        Kõikides Pythoni arvutustes tuleb jälgida ühikuid. Näiteks, <a href="http://www.coolprop.org/coolprop/HighLevelAPI.html#propssi-function"><code class='python'>PropsSI</code></a> eeldab, et temperatuuri ühik on K ja rõhu ühik on Pa. Samuti tihedus antakse ühikus kg/m<sup>3</sup>. Kõik parameetrid koos ühikutega <a href="http://www.coolprop.org/coolprop/HighLevelAPI.html#propssi-function"><code class='python'>PropsSI</code></a> funktsiooni jaoks antakse CoolPropi <a href="http://www.coolprop.org/coolprop/HighLevelAPI.html#table-of-string-inputs-to-propssi-function">veebilehel</a>.
+      </p>
+
+      <h2>PC-SAFT</h2>
+      <p>
+        PC-SAFT olekuvõrrand on ka CoolProp paketis olemas (alates versioonist 6.4). CoolPropis väikimisi olekuvõrrand on Helmholtzi mitmeparameetriline võrrand. Kui soovid kasutada muud olekuvõrrandit, tuleb lisada olekuvõrrandi sõne enne aine nime.
+      </p>
+      <pre><code class="python">den = cp.PropsSI("D", "T", 293.15, "P", 5*1e5, "PCSAFT::ETHANE")</code>
+      </pre>
+      <p>
+        Lisaks, saab kasutada <a href="https://pcsaft.readthedocs.io/en/latest/">pcsaft</a> paketti PC-SAFTi arvutuste jaoks. Selle paketi eelis on, et saab anda PC-SAFT parameetrid funktsioonidele. CoolProp võtab PC-SAFT parameetrid oma andmefailidest ja ei ole lihtne lisada uusi aineid. pcsaft paketiga saab samuti arvutada etaani tihedust järgnevalt:
+      </p>
+      <pre>
+<code class="python">from pcsaft import pcsaft_den
+import numpy as np
+
+t = 293.15 # K
+p = 5*1e5 # Pa
+
+x = np.asarray([1.]) # moolosa
+m = np.asarray([1.6069]) # parameetrid etaani jaoks
+sigma = np.asarray([3.5206])
+eps_k = np.asarray([191.42])
+param_pcsaft = {'m':m, 's':sigma, 'e':eps_k}
+den = pcsaft_den(t, p, x, param_pcsaft, phase='vap')</code>
+      </pre>
+      <p>
+        pcsaft paketis on eraldi funktsioonid erinevate olekuparameetrite arvutamiseks. Ei ole üks üldine funktsioon nagu CoolPropis. Kõik võimalikud funktsioonid saab leida pcsafti <a href="https://pcsaft.readthedocs.io/en/latest/">dokumentatsioonist</a>.
+      </p>
+      <p>
+        PC-SAFT olekuvõrrandis on võimalik kasutada lisa osi/parameetreid selleks, et täpsemini modelleerida aineid. Näiteks, kui on aine, millel on vesiniksidemed, saab lisada &kappa;<sup>A<sub>i</sub>B<sub>j</sub></sup> ja &epsilon;<sup>A<sub>i</sub>B<sub>j</sub></sup>/k parameetrid. Siin on näide 2-propüülamiiniga.
+      </p>
+      <pre>
+<code class="python">t = 298.15 # K
+p = 1*1e5 # Pa
+
+pcsaft_params = {'m': np.asarray([2.5908]),
+                 's': np.asarray([3.4777]),
+                 'e': np.asarray([231.80]),
+                 'vol_a': np.asarray([0.021340]),
+                 'e_assoc': np.asarray([932.2])} # 2-propüülamiini
+den = pcsaft_den(t, p, x, param_pcsaft, phase='liq')</code>
+      </pre>
+      <p>
+        Samuti võib kasutada polaarsete molekulide jaoks polaarset osa PC-SAFTi valemist. Selleks, tuleb lisada aine dipoolmomenti (<code class="python">dipm</code>) ja dipoolide sisulist arvu (<code class="python">dip_num</code>). Dipoolide sisuliseks arvuks tavaliselt pannakse lihtsalt 1, aga mõnes variandis kasutatakse seda reguleeritava parameetrina. Kasutame siin atsetooni näitena.
+      </p>
+      <pre>
+<code class="python">t = 298.15 # K
+p = 1*1e5 # Pa
+
+pcsaft_params = {'m': np.asarray([2.7448]),
+                 's': np.asarray([3.2742]),
+                 'e': np.asarray([232.99]),
+                 'dipm': np.asarray([2.88]),
+                 'dip_num': np.asarray([1])} # atsetoon
+den = pcsaft_den(t, p, x, param_pcsaft, phase='liq')</code>
+      </pre>
+      <p>
+        Tuleb ka mainida, et pcsaft paketis kasutatakse polaarseid valemeid Grossist ja Vrabecist.<sup><a href="#ref1">1</a></sup> Mõnikord kasutatakse hoopis valemeid Jogist jt.<sup><a href="#ref2">2</a></sup> Jogi valemid kasutavad dipoolide arvu asemel teist parameetrit (x<sub>p</sub>). Seega, kui sa näed, et mõni artikkel annab teistsuguseid polaarseid parameetreid võibolla kasutasid teist mudelit polaarse osa jaoks. Sel juhul oleks vaja leida tarkvara, mis rakendab antud mudelit või otsida mujalt parameetreid, kus kasutati just Grossi ja Vrabeci valemeid.
+      </p>
+      <p>
+        Kui võtad PC-SAFTi parameetrid kirjandusest, siis peaks olema kirjas, mis osi/parameetreid kasutatakse. Selle järgi saab teada, mis parameetreid on vaja sõnastikule lisada Pythonis.
+      </p>
+
+      <h2>Kuupvõrrandid</h2>
+      <p>
+        CoolPropis on ka Soave-Redlich-Kwongi ja Peng-Robinsoni <a href="http://www.coolprop.org/coolprop/Cubics.html">kuupvõrrandeid</a>. Võib samuti neid kasutada, kui lihtsalt kirja panna nende lühendit enne aine nime.
+      </p>
+      <pre><code class="python">den = cp.PropsSI("D", "T", 293.15, "P", 5*1e5, "SRK::ETHANE")</code>
+      </pre>
+      <pre><code class="python">den = cp.PropsSI("D", "T", 293.15, "P", 5*1e5, "PR::ETHANE")</code>
+      </pre>
+      <p>
+        Jälle, üks puudus on, et ei ole lihtne lisada uue aine parameetreid CoolPropile. Saab ka suhteliselt lihtsalt kirjutada oma funktsioone Pythonis kuupvõrrandite jaoks. Näiteks, siin on funktsioonid SRK ja PR võrrandite jaoks.
+      </p>
+      <pre>
+<code class="python">R = 8.314462618 # m^3 Pa K^-1 mol^-1
+
+def soave_redlich_kwong(t, v, c):
+    '''
+    Calculate pressure using the SRK equation of state
+
+    Parameters
+    ----------
+    t : float
+        Temperature (K)
+    v : float
+        Molar volume (m^3 mol^-1)
+    c : dict
+        Fluid constants for the SRK equation of state
+
+    Returns
+    -------
+    p : float
+        Pressure (Pa)
+    '''
+    a = 0.42748 * R**2 * c['t_crit']**2 / c['p_crit']
+    b = 0.08664 * R * c['t_crit'] / c['p_crit']
+    alpha = (1 + (0.48 + 1.574 * c['acentric'] - 0.176 * c['acentric']**2) \
+            * (1 - (t / c['t_crit'])**0.5))**2
+    p = R * t / (v - b) - a * alpha / (v * (v + b))
+    return p
+
+def peng_robinson(t, v, c):
+    '''
+    Calculate pressure using the Peng-Robinson equation of state
+
+    Parameters
+    ----------
+    t : float
+        Temperature (K)
+    v : float
+        Molar volume (m^3 mol^-1)
+    c : dict
+        Fluid constants for the Peng-Robinson equation of state
+
+    Returns
+    -------
+    p : float
+        Pressure (Pa)
+    '''
+    a = 0.45724 * R**2 * c['t_crit']**2 / c['p_crit']
+    b = 0.07780 * R * c['t_crit'] / c['p_crit']
+    alpha = (1 + (0.37464 + 1.54226 * c['acentric'] - 0.26992 * c['acentric']**2) \
+            * (1 - (t / c['t_crit'])**0.5))**2
+    p = R * t / (v - b) - a * alpha / (v**2 + 2*b*v - b**2)
+    return p</code>
+      </pre>
+      <p>
+        Vajadusel saaks lisada veel funktsioone teiste parameetrite arvutamiseks, näiteks maht, tihedus või fugitiivsuse koefitsient. Mõnede parameetrite arvutamiseks on vaja kasutada lahendajat.
+      </p>
+
+      <h2>Arvutamine lahendaja abil</h2>
+      <p>
+        Mõnikord on raske või võimatu lahendada olekuvõrrandit soovitud parameetri jaoks. Sel juhul saab kasutada lahendajat, ehk arvuti programm, mis proovib leida optimaalset lahendust. Mõned paketid lahendavad ise taustas, aga on oluline aru saada, kuidas need töötavad. Ja mõnikord olemasolevad funktsioonid ei sobi ja peate ise lahendama, et leida vajalikku omadust.
+      </p>
+      <p>
+        Kui arvutada mahtu või tihedust olekuvõrrandiga, on tavaliselt vaja kasutada lahendajat. Vajadus tuleb sellest, et kindlal temperatuuril võivad olla mitu erinevat mahtu/tihendust vastavalt sellele, kas süsteemis on gaas, vedelik, tahke või mitu faasi koos.
+      </p>
+      <img class="inline-img" src="/thermo-course/media/PV_joonis.png" />
+      <p>
+        Vaatame, kuidas saab arvutada tihedust lahendajaga. Näitena, kasutame SRK kuupvõrrandi funktsiooni, mida defineerisime varem. Kuupvõrrand on kolmanda astme polünoom ja seega, on kolm lahendit.
+      </p>
+      <p>
+        Pythonis on juba olemas paketid optimeerimiseks. Siin kasutame <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html"><code class="python">minimize</code></a> funktsiooni. Seega, me peame ainult kirja panema veafunktsiooni.
+      </p>
+      <p>
+        Veafunktsioon ütleb lahendajale, kui lähedal teatud väärtus on õigele väärtusele. Tavaliselt veafunktsioon kirjutatakse nii, et õige väärtuse juures veafunktsioon saavutab miinimumi või maksimumi. Lahendajad siis tavaliselt proovivad leida kõige väiksemat (või kõige suuremat) veafunktsiooni väärtust. Lahendi juures võrrandi mõlemad pooled on võrdsed. Ehk kui lahutada paremat poolt vasakust poolest, siis lahendi väärtuse juures saame 0. Me saame seda kirja panna Pythoni funktsioonina, mida saame pärast anda lahendajale.
+      </p>
+      <pre>
+<code class="python">def srk_cost(den, p, t, c):
+    v = 1/den
+    p_calc = soave_redlich_kwong(t, v, c)
+    cost = ((p_calc - p) / p * 100)**2
+    return cost</code>
+      </pre>
+      <p>
+        Siin veafunktsioonis, me lahutasimegi arvutatud rõhust tegelikku rõhku. Kuna rõhk võib väga palju varieeruda (nt võib olla 0,1 Pa või 1000000 Pa), muudame viga protsendiks. Ja peame ka muutma negatiivseid vigu positiivseks kuna lahendaja hakkab otsima kõige madalamat väärtust ja muidu leiab tihedust, mis annab kõige suuremat negatiivset viga. Selleks kasutame vea ruutu.
+      </p>
+      <p>
+        Nüüd saame anda oma veafunktsiooni <code class="python">minimize</code> funktsioonile.
+      </p>
+      <pre>
+<code class="python">from scipy.optimize import minimize
+
+t = 293.15 # K
+p = 5 * 1e5 # Pa
+params_cubic = {'t_crit':305.322, 'p_crit':4872200.0, 'acentric':0.099} # etaan
+den_guess = 5 # mol m^-3
+result = minimize(srk_cost, den_guess, args=(p, t, params_cubic))
+den = result.x</code>
+      </pre>
+      <p>
+        <code class="python">args</code> parameetriga, saame anda lisa parameetrid edasi oma veafunktsioonile. Näiteks, meie funktsioon vajab rõhku, temperatuuri ja SRK parameetreid.
+      </p>
+      <p>
+        Lisaks, peame andma lahendajale algväärtust. Kuupvõrrandite jaoks võivad olla kuni kolm reaalset lahendit. Kui on kolm lahendit, kõige madalam väärtus on gaasifaasi tihedus. Kõige suurem on vedelfaasi tihedus. Keskmine lahend ei oma füüsilist tähendust. Teiste olekuvõrrandite jaoks võib olla isegi rohkem kui kolm lahendit. Näiteks PC-SAFTi puhul võib olla viis.<sup><a href="ref3">3</a></sup> Algväärtusega proovime valida tiheduse väärtus, mis on lähedal faasi tihedusele, mida tahame arvutada. Näiteks, gaasifaasi lahendi leidmiseks on mõistlik alustada väikese algväärtusega. Kui tulemus ei ole loogiline, või kui lahendaja ei suuda lahendust leida, võid valida muud algväärtust. Võibolla siis lahendaja suudab leida õiget lahendit.
+      </p>
+      <p>
+        Lahendaja väljastab <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.OptimizeResult.html"><code class="python">OptimizeResult</code></a> objekti, ja selle objekti x parameeter ongi meie vastus.
+      </p>
+
+      <h2>Viited</h2>
+      <ol>
+        <li id="ref1">
+          J. Gross and J. Vrabec, “An equation‐of‐state contribution for polar components: Dipolar molecules,” AIChE J., vol. 52, no. 3, pp. 1194–1204, Feb. 2006, doi: 10.1002/aic.10683.
+        </li>
+        <li id="ref2">
+          P. K. Jog, S. G. Sauer, J. Blaesing, and W. G. Chapman, “Application of Dipolar Chain Theory to the Phase Behavior of Polar Fluids and Mixtures,” Ind. Eng. Chem. Res., vol. 40, no. 21, pp. 4641–4648, Oct. 2001, doi: 10.1021/ie010264+.
+        </li>
+        <li id="ref3">
+          R. Privat, R. Gani, and J.-N. Jaubert, “Are safe results obtained when the PC-SAFT equation of state is applied to ordinary pure chemicals?,” Fluid Phase Equilibria, vol. 295, no. 1, pp. 76–92, Aug. 2010, doi: 10.1016/j.fluid.2010.03.041.
+        </li>
+      </ol>
+
+    </div>
+  </div>
+</body>
+</html>
