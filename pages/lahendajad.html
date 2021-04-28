@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet"
+        href="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/styles/default.min.css">
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/highlight.min.js"></script>  <script>hljs.highlightAll();</script>
+
+  <link rel="stylesheet" href="/thermo-course/styles/termodynaamika.css?v=0.1.1">
+
+  <script>
+    $(function(){
+      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.2`);
+    });
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Lahendajad</title>
+</head>
+
+<body>
+  <div id='content'>
+    <div id="navigation"></div>
+    <div id='main-text'>
+      <h1>Lahendajad</h1>
+      <p>
+        Inseneridena kasutame matemaatilisi valemeid, mis kirjeldavad seosed erinevate parameetrite vahel. Näiteks, termodünaamikas on meil olekuvõrrandid, mis kirjeldavad seost olekuparameetrite vahel. Kui tahame teatud parameetrit arvutada, siis me peame lahendama mudeli valemeid soovitud parameetri jaoks. Mõnikord saame seda analüütiliselt lahendada, ehk me saame valemit ringi tõsta nii, et soovitud parameeter oleks eraldi. Kuid mõnikord on raske või võimatu seda teha.
+      </p>
+      <p>
+        Sellistel juhtudel peame lahendama numbriliselt. Kui lahendame numbriliselt, siis me sisuliselt proovime erinevaid väärtusi kuni leiame väärtust, mis lahendab valemeid. On palju erinevaid optimeerimise algoritme, mida on pakutud selliste ülesannete lahendamiseks. Sisuliselt kõik kasutavad arvuteid kuna oleks tüütu teha neid arvutusi käsitsi.
+      </p>
+      <p>
+        Siin selgitame lühidalt, kuidas lahendajad töötavad. Näitame ka, kuidas kasutada olemasolevaid lahendajaid Pythoni Scipy paketis ja arvutustabeli tarkvaras.
+      </p>
+
+      <h2>Näide ülesanne</h2>
+      <p>
+        Termodünaamikas me mõnikord tahame arvutada aine või segu tihedust. Kuid tavaliselt ei ole võimalik olekuvõrrandeid lahendada analüütiliselt tiheduse jaoks. Kasutame siis seda ülesannet näitena. Oletame, et tahame arvutada etaani tihedust tingimustel 20 &deg;C ja 5 bar. Võiksime seda näiteks teha PC-SAFT olekuvõrrandiga.
+      </p>
+      <pre>
+<code class="python">from pcsaft import pcsaft_den
+import numpy as np
+
+t = 293.15 # K
+p = 5*1e5 # Pa
+
+x = np.asarray([1.]) # moolosa
+m = np.asarray([1.6069]) # parameetrid etaani jaoks
+sigma = np.asarray([3.5206])
+eps_k = np.asarray([191.42])
+params_pcsaft = {'m':m, 's':sigma, 'e':eps_k}</code>
+      </pre>
+      <p>
+        Kuigi <code class="python">pcsaft</code> ja teised paketid ja programmid suudavad tavaliselt ise lahendada selliseid ülesandeid, teeme siin ise selleks, et näha, kuidas lahendajaid kasutada.
+      </p>
+
+      <h2>Veafunktsioon</h2>
+      <p>
+        Lahendaja peab teama, kas mõni väärtus lahendab valemeid ja, juhul kui ei ole lahendus, kui lähedal see võiks olla lahendusele. Veafunktsioon näitab seda. Veafunktsioonis me arvutame väärtust näitamaks, kui lähedal või kaugel antud parameetri väärtused on lahendusele. Tihti kasutatakse selleks tingimust, et lahenduse juures valemi mõlemad pooled peavad olema võrdsed. Näiteks lahutatakse valemi paremat poolt valemi vasakust poolest ja see väärtus näitab, kui kaugel me oleme lahendusest. Tihti võetakse absoluutväärtust või erinevuse ruutu, nii et viga oleks alati positiivne.
+      </p>
+      <p>
+        Lahendaja tavaliselt otsib veafunktsiooni miinimumi või maksimumi. Seega, on võimalik ka kirjeldada veafunktsiooni nii, et lahenduse juures veafunktsioon annab kõige suuremat vastust.
+      </p>
+      <p>
+        Näide ülesandes võime veafunktsioonina kasutada erinevust arvutatud ja tegelikku rõhu vahel. Kui õiget tihedust antakse sisendina olekuvõrrandile, siis arvutatud rõhk võrdub tegeliku rõhuga. Muudame ka erinevust protsendiks kuna rõhu suurusjärk võib oluliselt varieeruda.
+      </p>
+      <pre>
+<code class="python">def veafunktsioon(den, p, t, x, params):
+    p_calc = pcsaft_p(t, den, x, params)
+    cost = ((p_calc - p) / p * 100)**2
+    return cost</code>
+      </pre>
+
+      <h2>Tuletise meetodid</h2>
+      <p>
+        Lahendaja peab kuidagi otsustama iga kord, mis väärtust proovida. Lahendaja võib lihtsalt suvaliselt valida väärtusi, ja mõnikord tehaksegi seda, aga tavaliselt saab kiiremini leida lahendust, kui targalt valida iga järgmist väärtust.
+      </p>
+      <p>
+        Tuletise meetodid kasutavad veafunktsiooni tuletist antud punktil, et valida järgmist väärtust, mida proovida. Nii nagu pall veereb mäest alla, tuletise järgi saab ennustada, mis suunas viga läheb väiksemaks ja liikuda selles suunas. Kui otsitakse hoopis maksimumi, siis on sama põhimõte, aga lihtsalt minnakse teises suunas.
+      </p>
+      <img class="inline-img" src="/thermo-course/media/lahendaja_tuletis.png" />
+      <p>
+        Tuletise meetodid sobivad, kui veafunktsioon on pidev. Ehk ei toimu järsk hüppeid. Samuti need töötavad paremini, kui funktsioon on sile. Kui funktsioon on hoopis laineline või konarlik, siis lahendaja võib jääda kohalikus miinimumis kinni ja mitte leida lahendust. See juhtub kuna mõlemal pool tuletis suunab tagasi kohalikusse auku. Mõnikord on ikkagi võimalik leida lahendust, kui anda lahendajale teist algväärtust. Siis lahendaja alustab teisest kohast ja võibolla ei jää kohalikusse miinimumisse kinni. Kui aga ei ole võimalik sedasi lahendada, siis tuleb kasutada globaalset lahendajat.
+      </p>
+
+      <h2>Globaalsed lahendajad</h2>
+      <p>
+        Globaalsed lahendajad proovivad vältida kohalikke miinimume ja maksimume ja leida kõige paremat lahendust. On palju erinevaid algoritme. Mõned algoritmid kasutavad ikkagi tuletise meetodeid, aga lisavad osa, mis valib erinevaid algväärtusi tuletise meetodi jaoks.
+      </p>
+      <p>
+        On ka evolutsioonilised algoritmid. Need sisuliselt loovad terve kogumi (või populatsiooni) võimalikke väärtusi ja arvutavad iga liikme jaoks viga. Siis punktid kogumis muudatakse, et tasapisi hakkavad liikuma selle liikme juurde, mis on siiamaani saavutanud kõige paremat väärtust. See peaks sarnanema mõnes mõttes evolutsiooniga, milles aja jooksul kõige paremad organismid populatsioonis jäävad ellu ja annavad geenid edasi järgmisele põlvkonnale.
+      </p>
+      <p>
+        On veel palju erinevaid optimeerimise algoritme, aga me siin ei anna ülevaadet kõikidest.
+      </p>
+
+      <h2>Scipy optimize moodul</h2>
+      <p>
+        On palju tarkvara pakette juba olemas optimeerimiseks, mis pakuvad lahendajad. Vaatame siin ühte: Scipy <a href="https://docs.scipy.org/doc/scipy/reference/tutorial/optimize.html"><code class="python">optimize</code></a> moodul.
+      </p>
+      <p>
+        Scipy-s on mitu erinevat lahendajat juba olemas. <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html#scipy.optimize.minimize"><code class="python">minimize</code></a> funktsioon annab võimalust kasutada 14 erinevat tuletise meetodit. Saaksime seda kasutada, et leida etaani tihedust.
+      </p>
+      <pre>
+<code class="python">from scipy.optimize import minimize
+
+den_guess = 5 # mol m^-3
+result = minimize(veafunktsioon, den_guess, args=(p, t, x, params_pcsaft))
+den = result.x</code>
+      </pre>
+      <p>
+        <code class="python">minimize</code> funktsioonile peame andma funktsiooni, mida see hakkab lahendama, ehk siin veafunktsiooni, mida me varem defineerisime. <code class="python">args</code> parameetriga, saame anda lisa parameetrid edasi oma veafunktsioonile. Näiteks, meie funktsioon vajab rõhku, temperatuuri, moolosad ja PC-SAFT parameetreid. Lisaks, peame andma lahendajale algväärtust: siin <code class="python">den_guess</code>.
+      </p>
+      <p>
+        Lahendaja väljastab tulemust <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.OptimizeResult.html"><code class="python">OptimizeResult</code></a> objekti, ja selle objekti x parameeter ongi meie vastus. On ka muud informatsiooni. Näiteks, <code class="python">fun</code> annab veafunktsiooni väärtust vastuse juures. Kui see on ikkagi suur, siis võibolla lahendaja ei suutnud leida head väärtust.
+      </p>
+      <p>
+        Kui sa ei taha vaikimisi algoritmi kasutada, võid anda funktsioonile <code class="python">method</code> parameetri koos soovitud meetodi sõnega.
+      </p>
+      <p>
+        <code class="python">optimize</code> moodulis on ka globaalsed lahendajad. Üks võimas globaalne lahendaja on <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.differential_evolution.html"><code class="python">differential_evolution</code></a> funktsioon.
+      </p>
+      <pre>
+<code class="python">from scipy.optimize import differential_evolution
+
+bnds = ((1e-2, 150),)
+result = differential_evolution(veafunktsioon, bounds=bnds, args=(p, t, x, params_pcsaft))
+den = result.x</code>
+      </pre>
+      <p>
+        <code class="python">differential_evolution</code> meetodiga antakse algväärtuse asemel piirid. Siin valisime piirideks 0,01 ja 150 mol/m<sup>3</sup>. Kui piirid on liiga kitsad, siis lahendus on tihti ühe piiri lähedal. Sellisel juhul võib piiri laiendada ja uuesti jooksutada programmi.
+      </p>
+      <p>
+        Kui su arvutil on mitu tuuma võid kasutada mitu korraga, et optimeerimine oleks kiirem. Anna differential_evolution funktsioonile lisa parameeter <code class="python">workers</code>. Kui tahad kasutada kõik tuumad pane väärtuseks -1.
+      </p>
+
+      <h2>Lahendajad arvutustabeli tarkvaras</h2>
+      <p>
+        Arvutustabeli tarkvaras on ka lahendaja. Kuigi programmeerimise keeles on valikuid palju rohkem, mõnikord on mugavam kasutada arvutustabeli lahendaja.
+      </p>
+      <p>
+        Kui kasutada lahendajat arvutustabelis, on vaja panna algväärtused lahtritesse. Samuti on vaja defineerida ühes lahtris oma veafunktsiooni. Veafunktsiooni arvutamiseks võib kasutada mitu lahtrit ja vahepealsed väärtused kokku liita lõplikuks veaväärtuseks.
+      </p>
+    </div>
+  </div>
+</body>
+</html>
