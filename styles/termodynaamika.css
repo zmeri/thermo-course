@@ -181,7 +181,6 @@ a > code {
     float: right;
     width: calc(75% - 2 * 1.5em);
     max-width: calc(1200px * 0.75 - 2 * 1.5em);
-    border-right: 1px solid #f0f0f0;
   }
 
   #menu-button {
@@ -189,7 +188,9 @@ a > code {
   }
 
   #sidebar {
-    display: inline;
+    display: block;
+    top: 0;
+    left: 0;
     width: calc(25% - 2 * 1em);
     max-width: 18em;
   }
