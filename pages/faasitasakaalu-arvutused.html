@@ -13,7 +13,7 @@
 
   <script>
     $(function(){
-      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.2`);
+      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.3`);
     });
   </script>
 
@@ -108,7 +108,7 @@ pvap, xl, xv = flashTQ(t, q, x, pcsaft_params)</code>
 
       <h2>Lahendajaga lahendamine</h2>
       <p>
-        Aga mis seal taustas toimub? On oluline ka aru saada, kuidas sellised funktsioonid lahendavad, nii et sa oskad ka ette näha võimalikke probleeme. Ja mõnikord olemasolevad funktsioonid ei sobi ja pead ise lahendama, et leida soovitud omadust.
+        Aga mis seal taustas toimub? On oluline ka aru saada, kuidas sellised funktsioonid lahendavad, nii et sa oskad ka ette näha võimalikke probleeme. Ja mõnikord olemasolevad funktsioonid ei sobi ja pead ise <a href="/thermo-course/pages/lahendajad.html">lahendama</a>, et leida soovitud omadust.
       </p>
       <p>
         Me saame kasutada olemasolevaid lahendajaid. Peame lihtsalt kirja panema veafunktsiooni. Veafunktsioon ütleb lahendajale, kui lähedal teatud väärtus on õigele väärtusele. Tavaliselt veafunktsioon kirjutatakse nii, et õige väärtuse juures veafunktsioon saavutab miinimumi või maksimumi. Lahendajad siis tavaliselt proovivad leida kõige väiksemat (või kõige suuremat) veafunktsiooni väärtust.
@@ -160,7 +160,7 @@ p_guess = 50000 # Pa
 result = minimize(veafunktsioon, p_guess, args=(t, x, pcsaft_params), method='Nelder-Mead')</code>
       </pre>
       <p>
-        Peame minimize funktsioonile andma veafunktsiooni nime ja algväärtust. Meie veafunktsioon vajab ka teisi parameetreid ja saame neid lisada <code class="python">arg</code> parameetriga. Minimize funktsioon annab need parameetrid edasi veafunktsioonile. On ka võimalik ette anda algoritmi, mida tahame, et minimize funktsioon kasutab. Me ei pea seda andma, aga siin anname, sest väikimismeetod ei anna head tulemust. Nüüd saame jooksutada skripti.
+        Peame <code class="python">minimize</code> funktsioonile andma veafunktsiooni nime ja algväärtuse. Meie veafunktsioon vajab ka teisi parameetreid ja saame neid lisada <code class="python">arg</code> parameetriga. Minimize funktsioon annab need parameetrid edasi veafunktsioonile. On ka võimalik ette anda algoritmi, mida tahame, et minimize funktsioon kasutab. Me ei pea seda andma, aga siin anname, sest väikimismeetod ei anna head tulemust. Nüüd saame jooksutada skripti.
       </p>
       <pre>
   <code class="python-repl"> final_simplex: (array([[77952.08998024],
@@ -183,6 +183,9 @@ result = minimize(veafunktsioon, p_guess, args=(t, x, pcsaft_params), method='Ne
 <code class="python">bnds = ((50000, 175000),)
 result = differential_evolution(veafunktsioon, bounds=bnds, args=(t, x, pcsaft_params))</code>
       </pre>
+      <p>
+        Rohkem lahendajate kohta võid lugeda <a href="/thermo-course/pages/lahendajad.html">peatükis</a> sellel teemal.
+      </p>
 
       <h2>Viited</h2>
       <ol>

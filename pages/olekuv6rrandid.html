@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      CommonHTML: { linebreaks: { automatic: true } }
+    });
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS_CHTML"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="/thermo-course/styles/termodynaamika.css?v=0.1.2">
+
+  <script>
+    $(function(){
+      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.3`);
+    });
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Olekuvõrrandid</title>
+</head>
+
+<body>
+  <div id='content'>
+    <div id="navigation"></div>
+    <div id='main-text'>
+      <h1>Olekuvõrrandid</h1>
+      <p>
+
+      </p>
+
+      <h2>Mis on olekuvõrrand</h2>
+      <p>
+        <b>Olekuvõrrand</b> on avaldis, mis seob aine olekuparameetreid. Olekuvõrrand on funktsioon kahes olekuparameetrist ja koostisest. See arv tuleb Gibbs-Duhemi reeglist, mis paneb paika mitu parameetrit on vaja selleks, et täielikult kirjeldada olekut. Enamasti kasutatakse olekuparameetritena temperatuur ja maht või tihedus.
+      </p>
+      <p>
+        Üldiselt olekuvõrrandeid pannakse kirja põhikujul, mis arvutab rõhku või Helmholtzi energiat. Siis seda põhivalemit teisendatakse selleks, et arvutada muid olekuparameetreid. Teisendamises kasutatakse põhiseoseid ja tavaliselt on vaja võtta tuletist või integreerida.
+      </p>
+
+      <h2>Olekuvõrrandi liigid</h2>
+      <p>
+        On kolm peamist olekuvõrrandi liiki: kuupvõrrandid, empiirilised seosed ja SAFT võrrandid.
+      </p>
+      <div class="table-div">
+        <table>
+          <tr>
+            <th>
+            </th>
+            <th>
+              Tunnused
+            </th>
+            <th>
+              Eelised
+            </th>
+            <th>
+              Puudused
+            </th>
+          </tr>
+          <tr>
+            <td>
+              Kuupvõrrandid
+            </td>
+            <td>
+              Kolmanda astme polünoom mahu suhtes
+            </td>
+            <td>
+              Lihtsad<br />
+              Hea gaasifaasi jaoks
+            </td>
+            <td>
+              Halvad tulemused vedelfaasi jaoks
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Empiirilised seosed
+            </td>
+            <td>
+              Kuju on empiiriline ja ei põhine teoorial
+            </td>
+            <td>
+              Võivad olla väga täpsed
+            </td>
+            <td>
+              Keerulised<br />
+              Raske arendada
+            </td>
+          </tr>
+          <tr>
+            <td>
+              SAFT
+            </td>
+            <td>
+              Põhineb statistilisel mehaanikal
+            </td>
+            <td>
+              Sobivad ka vedelfaasile<br />
+              Suhteliselt täpsed
+            </td>
+            <td>
+              Keerulised
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <h2>Kuupvõrrandid</h2>
+      <p>
+        Kuupvõrrandid tulevad ideaalgaasi võrrandist. <a href="https://en.wikipedia.org/wiki/Johannes_Diderik_van_der_Waals">Van der Waals</a> pakkus välja esimest kuupvõrrandit aastal 1873. Seda nüüd kutsutakse tema järgi. Van der Waals lisas parameetrid <em>a</em> ja <em>b</em>, mis võtavad arvesse molekulide oma mahtu ja molekulide vahelist tõmbejõudu. Need on kaks põhi erinevust ideaalse ja reaalse gaasi vahel. Kõikides valemites siin <em>V</em> on molaarne maht.
+      </p>
+      <div>
+        <em>Van der Waals (1873)</em>
+        \[ P = \frac{RT}{\left( V - b \right)} - \frac{a}{V^2} \]
+      </div>
+      <p>
+        Edasised arengud on keskendunud valemile teisele osale, mis kirjeldab molekulide vahelisi tõmbejõude. Teadlased leidsid, et <em>a</em> ja <em>b</em> sõltuvad temperatuurist ja molekulist. 1948. aastal Redlich ja Kwong pakkusid uut kuupvõrrandit, mis oli täpsem, kui Van der Waalsi võrrand.<sup><a href="#ref1">1</a></sup> Nagu valemist võib näha, nad võtsid <em>a</em> temperatuursõltuvust arvesse, jagades <em>a</em>-d temperatuuri ruutjuurega. Uurijad olid ka leidnud, et võib arvutada <em>a</em> ja <em>b</em> aine kriitilistest parameetritest (<em>T<sub>c</sub></em> ja <em>P<sub>c</sub></em>), siis Redlich ja Kwong pakkusid ka valemid <em>a</em> ja <em>b</em> arvutamiseks.
+      </p>
+      <div>
+        <em>Redlich-Kwong (1948)</em>
+        \[ P = \frac{RT}{\left( V - b \right)} - \frac{a}{\sqrt{T} V \left( V + b \right)} \]
+      </div>
+      <div>
+        \[ a = 0.4278 \frac{R^2 T_c^{2.5}}{P_c} \]
+      </div>
+      <div>
+        \[ b = 0.0867 \frac{R T_c}{P_c} \]
+      </div>
+      <p>
+        Hiljem Soave muutis Redlich-Kwong olekuvõrrandit, lisades kolmanda parameetri: atsentriline tegur (&omega;).<sup><a href="#ref2">2</a></sup> Atsentriline tegur peaks näitama, kui sfääriline molekul on. Kolmanda parameetriga Soave-Redlich-Kwong olekuvõrrand oli täpsem. Siin <em>T<sub>r</sub></em> on taandatud temperatuur, ehk temperatuur jagatud kriitilise temperatuuriga.
+      </p>
+      <div>
+        <em>Soave-Redlich-Kwong (1972)</em>
+        \[ P = \frac{RT}{\left( V - b \right)} - \frac{a \alpha}{V \left( V + b \right)} \]
+      </div>
+      <div>
+        \[ a = 0.42747 \frac{R^2 T_c^2}{P_c} \]
+      </div>
+      <div>
+        \[ b = 0.08664 \frac{R T_c}{P_c} \]
+      </div>
+      <div>
+        \[ \alpha = \left( 1 + \left( 0.48508 + 1.55171 \omega - 0.15613 \omega^2 \right) \left( 1 - T_r^{0.5} \right) \right)^2 \]
+      </div>
+      <p>
+        Paar aastat hiljem Peng ja Robinson pakkusid oma varianti.<sup><a href="#ref3">3</a></sup>
+      </p>
+      <div>
+        <em>Peng-Robinson (1976)</em>
+        \[ P = \frac{RT}{\left( V - b \right)} - \frac{a \alpha}{V \left( V + b \right) + b \left( V - b \right)} \]
+      </div>
+      <div>
+        \[ a = 0.45724 \frac{R^2 T_c^2}{P_c} \]
+      </div>
+      <div>
+        \[ b = 0.07780 \frac{R T_c}{P_c} \]
+      </div>
+      <div>
+        \[ \alpha = \left( 1 + \left( 0.37464 + 1.54226 \omega - 0.26992 \omega^2 \right) \left( 1 - T_r^{0.5} \right) \right)^2 \]
+      </div>
+      <p>
+        Tavaliselt kuupvõrrandid ei arvuta vedelfaasi tihedust/mahtu väga täpselt. Proovides selle probleemi lahendada, pakuti "Volume translated Peng-Robinson" olekuvõrrandit (või VTPR).<sup><a href="#ref4">4</a></sup> Olekuvõrrandile lisati kriitilise kokkusurutavusteguri (<em>Z<sub>c</sub></em>) neljanda parameetrina. Kui on tiheduse katseandmed, siis saab <em>c</em>-d arvutada nendest, aga muidu saab kasutada üldistatud Racketti võrrandit, nagu siin näidatakse.<sup><a href="#ref5">5</a></sup> Kuigi see suutis täpsemini arvutada vedelfaasi tihedust/mahtu, see ei lahendanud probleemi täielikult.<sup><a href="#ref5">5</a>,<a href="#ref6">6</a></sup>
+      </p>
+      <div>
+        <em>Volume translated Peng-Robinson (1982)</em>
+        \[ P = \frac{RT}{\left( V + c - b \right)} - \frac{a \alpha}{\left( V + c \right) \left( V + c + b \right) + b \left( V + c - b \right)} \]
+      </div>
+      <div>
+        \[ a = 0.45724 \frac{R^2 T_c^2}{P_c} \]
+      </div>
+      <div>
+        \[ b = 0.0778 \frac{R T_c}{P_c} \]
+      </div>
+      <div>
+        \[ c = -0.252 \frac{R T_c}{P_c} (1.5448 Z_c - 0.4024) \]
+      </div>
+      <div>
+        \[ \alpha = \left( 1 + \left( 0.37464 + 1.54226 \omega - 0.26992 \omega^2 \right) \left( 1 - T_r^{0.5} \right) \right)^2 \]
+      </div>
+      <p>
+        Peale SAFT võrrandite tulekut, pakuti ka kuupvõrrandi varianti, mis kasutab osa SAFT võrrandist. Täpsemalt, lisati Soave-Redlich-Kwong võrrandile SAFTi avaldise, mis võtab arvesse vesiniksidemeid. Seda valemit kutsutakse "Cubic Plus Association" olekuvõrrandiks.<sup><a href="#ref7">7</a></sup> <em>a</em> ja <em>b</em> on samad kui SRK võrrandis.
+      </p>
+      <div>
+        <em>Cubic Plus Association (1996)</em>
+        \[ P = \frac{RT}{\left( V - b \right)} - \frac{a \alpha}{V \left( V + b \right)} + \frac{RT}{V} \rho \sum_A \left[ \frac{1}{X^A} - \frac{1}{2} \right] \frac{\partial X^A}{\partial \rho} \]
+      </div>
+      <p>
+        Aastate jooksul uurijad on pakkunud palju muid kuupvõrrandi variante. Siin näitasime ainult põhilised.
+      </p>
+
+      <h2>Empiirilised seosed</h2>
+      <p>
+        Mõned uurijad on alustanud mitte teooriast vaid katseandmetest. Võrrandid kasutanud avaldisi, mis suudavad hästi jälgida andmetest tulenevat kuju, aga millel ei ole eriti teoreetilist tausta. Kuupvõrrandid ja SAFT võrrandid kasutavad ka empiiriliselt leitud osi, kuid nende kuju ikkagi põhineb vähemalt osaliselt teoorial. Ehk, need on poolempiirilised. Seevastu, empiiriliste olekuvõrrandite kuju ei tule teooriast ja on tavaliselt lihtsalt paindlik matemaatiline avaldis.
+      </p>
+      <p>
+        Mõnikord hiljem leitakse, et mõnedel empiirilistel olekuvõrranditel on ikkagi seos teooriaga, aga see ei tule teadlikust valikust ja on pigem juhus. Näiteks, viriaal võrrandil on tegelikult seos molekulide füüsilise käitumisega ja on võimalik seda tuletada statistilisest mehaanikast.<sup><a href="#ref8">8</a></sup> Kuid alguses <a href="https://en.wikipedia.org/wiki/Heike_Kamerlingh_Onnes">Kamerlingh Onnes</a> pakkus seda kui lihtsalt empiiriline seos.<sup><a href="#ref9">9</a></sup>
+      </p>
+      <p>
+        Viriaal võrrand oligi tõenäoliselt esimene empiiriline olekuvõrrand. See on lihtsalt astme seeria. Lisades seeriale osi on võimalik saavutada kõrgemat täpsust, aga siis on vaja rohkem andmeid, et leida kõik koefitsiente. Tavaliselt kasutatakse ainult paar esimest osa. Teist ja kolmandat viriaal koefitsiente (<em>B</em> ja <em>C</em>) on juba leitud paljude ainete jaoks. Esimene viriaal koefitsient on alati 1.
+      </p>
+      <div>
+        <em>Viriaal võrrand (1902)</em>
+        \[ P = \frac{RT}{V} \left( 1 + \frac{B}{V} + \frac{C}{V^2} + \frac{D}{V^3} + \ldots \right) \]
+      </div>
+      <p>
+        Üldiselt empiirilised võrrandid kasutavad sellist lähenemist, ehk liidatakse kokku hunniku erinevaid matemaatilisi avaldisi. Tänu sellele, et on palju koefitsiente, mida leitakse katseandmetest, siis empiirilised võrrandid on tavaliselt kõige täpsemad olekuvõrrandid. Üks esimesi võrrandeid oli Beattie-Bridgeman võrrand.<sup><a href="#ref10">10</a></sup> Hiljem Benedict, Webb ja Rubin täiendasid seda võrrandit nii, et võiks kasutada, kui tihedus on suurem kui kriitiline tihedus.<sup><a href="#ref11">11</a></sup>
+      </p>
+      <div>
+        <em>Benedict-Webb-Rubin (1940)</em>
+        \[ P = \frac{RT}{V} + \frac{1}{V^2} \left( RT \left( B_0 + \frac{b}{V} \right) - \left( A_0 + \frac{a}{V} - \frac{a \alpha}{V^4} \right) - \frac{1}{T^2} \left( C_0 - \frac{c}{V} \left( 1 + \frac{\gamma}{V^2} \right) \exp \left( \frac{-\gamma}{V^2} \right) \right) \right) \]
+      </div>
+      <p>
+        Mitu uurijat on avaldanud uusi võrrandeid, mis põhinevad Benedict-Webb-Rubin võrrandil.<sup><a href="#ref12">12</a>-<a href="#ref14">14</a></sup> Näiteks, Lee ja Kesler muutsid Benedict-Webb-Rubin võrrandit, pakkudes oma varianti.<sup><a href="#ref14">14</a></sup> Nende võrrandis <em>V<sub>r</sub></em> on taandatud maht.
+      </p>
+      <div>
+        <em>Lee-Kesler (1975)</em>
+        \[ P = \frac{RT}{V} \left( 1 + \frac{B}{V_r} + \frac{C}{V_r^2} + \frac{D}{V_r^5} + \frac{c_4}{T_r^3 V_r^2}  \left( \beta + \frac{\gamma}{V_r^2} \right) \exp \left( \frac{-\gamma}{V_r^2} \right) \right) \]
+      </div>
+      <p>
+        Kuna empiirilistel olekuvõrranditel on tavaliselt palju koefitsiente, mida sobitatakse andmetega, siis need on tavaliselt täpsemad, kui teised olekuvõrrandid. Sellepärast, neid tihti kasutatakse referentsolekuvõrrandite jaoks.<sup><a href="#ref13">13</a>,<a href="#ref15">15</a>,<a href="#ref16">16</a></sup> Kõige täpsemad võrrandid, mida on siiamaani välja arendatud, on Helmholtzi mitmeparameetrilised olekuvõrrandid.<sup><a href="#ref16">16</a>,<a href="#ref17">17</a></sup>
+      </p>
+      <p>
+        Helmholtzi mitmeparameetrilistes võrrandites on tavaliselt hunnik erinevaid algebraalisi osi ja neil on rohkem kui 15 koefitsienti. Võrrandi kuju võib varieeruda, ja kui tahetakse ülitäpset referentsolekuvõrrandit, siis tavaliselt optimeeritakse võrrandi osi spetsiaalselt selle aine jaoks.<sup><a href="#ref16">16</a>,<a href="#ref17">17</a></sup> Siin näitame ühte, mis on natuke lihtsam ja on tehnilisteks rakendusteks (mitte referentsolekuvõrranditeks).<sup><a href="#ref17">17</a></sup>
+      </p>
+      <div>
+        <em>Mitmeparameetriline võrrand tehnilisteks rakendusteks (2003)</em>
+        \[ a^{res} = \sum_{i=1}^8 \sum_{j=-8}^{12} n_{i,j} \delta^i \tau^{j/8} + \sum_{i=1}^5 \sum_{j=-8}^{24} n_{i,j} \delta^i \tau^{j/8} \exp \left( -\delta \right) + \sum_{i=1}^5 \sum_{j=16}^{56} n_{i,j} \delta^i \tau^{j/8} \exp \left( -\delta^2 \right) + \sum_{i=2}^4 \sum_{j=24}^{38} n_{i,j} \delta^i \tau^{j/2} \exp \left( -\delta^3 \right) \]
+      </div>
+      <p>
+        Võrrandis &delta; on taandatud tihedus ja &tau; on taandatud temperatuur. Neid võrrandeid tehti Helmholtzi energia põhjal kuna on lihtsam arvutada teisi olekuparameetreid Helmholtzi energiast. Kõik teised olekuparameetrid saab leida, kui võtta õiget Helmholtzi energia tuletist.<sup><a href="#ref16">16</a>,<a href="#ref17">17</a></sup>
+      </p>
+      <p>
+        Kuigi Helmholtzi mitmeparameetrilised olekuvõrrandid võivad olla väga täpsed, on tavaliselt vaja palju andmeid kõikide nende parameetrite leidmiseks.
+      </p>
+      <p>
+        Mõned teadlased on ka teinud olekuvõrrandeid närvivõrkudega.<sup><a href="#ref26">26</a>-<a href="#ref31">31</a></sup> Närvivõrk on samuti empiiriline mudel paljude parameetritega, mis suudab hästi jäljendada kuju, mis tuleb andmetest.
+      </p>
+
+      <h2>SAFT võrrandid</h2>
+      <p>
+        SAFT võrrandid (ingl <em>Statistical Associating Fluid Theory</em>) põhinevad statistilisel mehaanikal. Kujutatakse ette, et molekulid on sfäärid või koosnevad sfääridest. Võrrandis on osad erinevate molekulide vaheliste mõjude jaoks. Näiteks, esimeses SAFT võrrandis Chapman jt<sup><a href="#ref18">18</a></sup> kasutasid kolme osa: <em>a<sup>seg</sup></em> sfääridevahelisteks vastasmõjudeks, <em>a<sup>chain</sup></em> kovalentseteks sidemeteks sfääride vahel ja <em>a<sup>assoc</sup></em> tõmbejõudude jaoks kindlate funktsionaalsete rühmade vahel (nt vesiniksidemed).
+      </p>
+      <div>
+        <em>SAFT (1989)</em>
+        \[ a^{res} = a^{seg} + a^{chain} + a^{assoc} \]
+      </div>
+      <p>
+        Iga osa sees on mitu valemit antud vastasmõju arvutamiseks. Näitena võid vaadata PC-SAFT valemeid <a href="https://github.com/zmeri/PC-SAFT/blob/9fe478b7b9c6f3cdc99449a592644ea9da6e114c/pcsaft_electrolyte.cpp#L958">selles koodis</a> või vaadata algartikleid.
+      </p>
+      <p>
+        SAFT võrrandeid tehti Helmholtzi energia põhjal, nii nagu Helmholtzi mitmeparameetrilised olekuvõrrandid, kuna Helmholtzi energiast saab arvutada kõik muid olekuparameetreid ainult tuletistega (ei pea integreerima).<sup><a href="#ref19">19</a></sup> Sisendparameetritena kasutatakse temperatuuri ja molaarset tihedust.
+      </p>
+      <p>
+        Uurijad on pakkunud erinevaid SAFT variante. Üks tuntumaid on PC-SAFT, mis põhineb ahela molekuli kujul. PC tähendabki <em>perturbed chain</em> ja selle referentsahela käitumist kirjeldatakse kõva ahela osaga (ingl <em>hard chain</em>, <em>a<sup>hc</sup></em>). PC-SAFTile lisati ka dispersiooni osa (<em>a<sup>disp</sup></em>). Tänu nendele muudatustele, PC-SAFT on üldiselt täpsem, kui algne SAFT võrrand.<sup><a href="#ref19">19</a></sup>
+      </p>
+      <div>
+        <em>PC-SAFT (2001)</em>
+        \[ a^{res} = a^{hc} + a^{disp} \]
+      </div>
+      <p>
+        PC-SAFT võrrandile on lisatud teisi osi muude vastasmõjude kirjeldamiseks. Näiteks, on võimalik lisada osa, mis kirjeldab spetsiifilisi vastasjõudusid (nt vesiniksidemeid).<sup><a href="#ref20">20</a></sup>
+      </p>
+      <div>
+        <em>PC-SAFT + Association (2002)</em>
+        \[ a^{res} = a^{hc} + a^{disp} + a^{assoc} \]
+      </div>
+      <p>
+        On pakutud ka PC-SAFT varianti polaarsete molekulide jaoks (PCP-SAFT), mis võtab arvesse tõmbejõudusid dipoolide vahel.<sup><a href="#ref21">21</a>-<a href="#ref23">23</a></sup>
+      </p>
+      <div>
+        <em>PCP-SAFT (2006)</em>
+        \[ a^{res} = a^{hc} + a^{disp} + a^{polar} \]
+      </div>
+      <p>
+        PC-SAFT laiendati samuti ioonsetele lahustele elektrolüüdi PC-SAFTiga.<sup><a href="#ref24">24</a>,<a href="#ref25">25</a></sup>
+      </p>
+      <div>
+        <em>Electrolyte PC-SAFT (2008)</em>
+        \[ a^{res} = a^{hc} + a^{disp} + a^{assoc} + a^{ion} \]
+      </div>
+      <p>
+        Kuigi SAFT võrrandid on keerulised, need üldiselt nõuavad ainult kolm kuni viis parameetrit ühe aine jaoks. Näiteks, PC-SAFT olekuvõrrandi jaoks on vaja teada aine <em>m</em>, <em>&sigma;</em> ja <em>&epsilon;/k</em>. <em>m</em> peaks näitama sfääride arvu molekulis, <em>&sigma;</em> on sfääri läbimõõt ja <em>&epsilon;/k</em> on potentsiaali augu sügavus jagatud <a href="https://www.nist.gov/si-redefinition/kelvin/kelvin-boltzmann-constant">Boltzmanni konstandiga</a>.<sup><a href="#ref19">19</a></sup> Teised osad võivad nõuda lisa parameetreid. <em>a<sup>assoc</sup></em> osa jaoks, näiteks, on vaja parameetrid <em>&kappa;<sup>A<sub>i</sub>B<sub>j</sub></sup></em> ja <em>&epsilon;<sup>A<sub>i</sub>B<sub>j</sub></sup>/k</em>.<sup><a href="#ref20">20</a></sup>
+      </p>
+
+      <h2>Kuidas kasutada</h2>
+      <p>
+        Mõned olekuvõrrandid, nagu kuupvõrrandid ja viriaal võrrand, on piisavalt lihtsad, et saab ise käsitsi teha arvutusi nendega. Kuid keerulisemate olekuvõrrandite jaoks on vaja tarkvara, mis rakendab neid olekuvõrrandeid. Isegi lihtsamate olekuvõrranditega on tihti mugavam kasutada tarkvara, mis automaatselt teeb vajalikke arvutusi.
+      </p>
+      <p>
+        On mõned tarkvara paketid, mille abil on võimalik teha arvutusi olekuvõrranditega. Protsessi simulaatoritega on võimalik ka olekuvõrrandeid kasutada, kuid tihti need on tasulised. Järgmine tabel näitab mõned tööriistad, mida on võimalik kasutada. Loe ka <a href="/thermo-course/pages/olekuv6rrandid-pythonis.html">peatükki</a>, mis näitab, kuidas neid Pythoni pakette kasutada.
+      </p>
+      <div class="table-div">
+        <table>
+          <tr>
+            <th>
+              Tööriist
+            </th>
+            <th>
+              Kirjeldus
+            </th>
+            <th>
+              Tasuta
+            </th>
+            <th>
+              Võrrandid
+            </th>
+          </tr>
+          <tr>
+            <td>
+              <a href="http://www.coolprop.org/">CoolProp</a>
+            </td>
+            <td>
+              Pakett termodünaamiliste omaduste jaoks
+            </td>
+            <td>
+              Jah
+            </td>
+            <td>
+              Helmholtzi võrrandid, kuupvõrrandid, PC-SAFT
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="https://pcsaft.readthedocs.io/en/latest/">pcsaft</a>
+            </td>
+            <td>
+              Pythoni pakett PC-SAFT olekuvõrrandi jaoks
+            </td>
+            <td>
+              Jah
+            </td>
+            <td>
+              PC-SAFT
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="https://github.com/CalebBell/thermo">thermo</a>
+            </td>
+            <td>
+              Pakett termodünaamiliste ja teiste omaduste jaoks
+            </td>
+            <td>
+              Jah
+            </td>
+            <td>
+              Kuupvõrrandid, Helmholtzi võrrandid
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Protsessi simulaatorid
+            </td>
+            <td>
+              Tarkvara keemiliste protsesside simuleerimiseks
+            </td>
+            <td>
+              Enamasti mitte
+            </td>
+            <td>
+              Kuupvõrrandid, Helmholtzi võrrandid, PC-SAFT, jt
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="https://dwsim.inforside.com.br/new/">DWSIM</a>
+            </td>
+            <td>
+              Avatud protsessi simulaator
+            </td>
+            <td>
+              Jah
+            </td>
+            <td>
+              Kuupvõrrandid, PC-SAFT, Helmholtzi võrrandid, jt
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="https://www.nist.gov/srd/refprop">Refprop</a>
+            </td>
+            <td>
+              Tarkvara termodünaamiliste ja teiste omaduste jaoks
+            </td>
+            <td>
+              Ei
+            </td>
+            <td>
+              Helmholtzi võrrandid, jt
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="https://webbook.nist.gov/chemistry/fluid/">NISTi veebileht</a>
+            </td>
+            <td>
+              Veebileht Helmholzi võrranditega paari kümnele ainele
+            </td>
+            <td>
+              Jah
+            </td>
+            <td>
+              Helmholtzi võrrandid
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <h2>Viited</h2>
+      <ol>
+        <li id="ref1">
+          Otto. Redlich and J. N. S. Kwong, “On the Thermodynamics of Solutions. V. An Equation of State. Fugacities of Gaseous Solutions.,” Chem. Rev., vol. 44, no. 1, pp. 233–244, Feb. 1949, doi: 10.1021/cr60137a013.
+        </li>
+        <li id="ref2">
+          G. Soave, “Equilibrium constants from a modified Redlich-Kwong equation of state,” Chemical Engineering Science, vol. 27, no. 6, pp. 1197–1203, Jun. 1972, doi: 10.1016/0009-2509(72)80096-4.
+        </li>
+        <li id="ref3">
+          D.-Y. Peng and D. B. Robinson, “A New Two-Constant Equation of State,” Ind. Eng. Chem. Fund., vol. 15, no. 1, pp. 59–64, Feb. 1976, doi: 10.1021/i160057a011.
+        </li>
+        <li id="ref4">
+          A. Péneloux, E. Rauzy, and R. Fréze, “A consistent correction for Redlich-Kwong-Soave volumes,” Fluid Phase Equilibria, vol. 8, no. 1, pp. 7–23, Jan. 1982, doi: 10.1016/0378-3812(82)80002-2.
+        </li>
+        <li id="ref5">
+          J. Gmehling, “Present status and potential of group contribution methods for process development,” The Journal of Chemical Thermodynamics, vol. 41, no. 6, pp. 731–747, Jun. 2009, doi: 10.1016/j.jct.2008.12.007.
+        </li>
+        <li id="ref6">
+          M. Kleiber, Process Engineering: Addressing the Gap between Study and Chemical Industry. Walter de Gruyter GmbH & Co KG, 2016.
+        </li>
+        <li id="ref7">
+          G. M. Kontogeorgis, E. C. Voutsas, I. V. Yakoumis, and D. P. Tassios, “An Equation of State for Associating Fluids,” Ind. Eng. Chem. Res., vol. 35, no. 11, pp. 4310–4318, Jan. 1996, doi: 10.1021/ie9600203.
+        </li>
+        <li id="ref8">
+          J.-L. Bretonnet, Statistical Mechanics for the Liquid State. Cambridge Scholars Publishing, 2020.
+        </li>
+        <li id="ref9">
+          H. Kamerlingh Onnes, “Expression of the equation of state of gases and liquids by means of series,” Koninklijke Nederlandse Akademie van Wetenschappen Proceedings Series B Physical Sciences, vol. 4, pp. 125–147, 1902.
+        </li>
+        <li id="ref10">
+          J. A. Beattie and O. C. Bridgeman, “A New Equation of State for Fluids,” Proc. Am. Acad. Arts Sci., vol. 63, pp. 229–308, 1928.
+        </li>
+        <li id="ref11">
+          M. Benedict, G. B. Webb, and L. C. Rubin, “An Empirical Equation for Thermodynamic Properties of Light Hydrocarbons and Their Mixtures I. Methane, Ethane, Propane and n‐Butane,” J. Chem. Phys., vol. 8, no. 4, pp. 334–345, Apr. 1940, doi: 10.1063/1.1750658.
+        </li>
+        <li id="ref12">
+          K. E. Starling, Fluid Thermodynamic Properties for Light Petroleum Systems. Gulf Publishing Company, 1973.
+        </li>
+        <li id="ref13">
+          R. T. Jacobsen and R. B. Stewart, “Thermodynamic Properties of Nitrogen Including Liquid and Vapor Phases from 63K to 2000K with Pressures to 10,000 Bar,” J. Phys. Chem. Ref. Data, vol. 2, no. 4, pp. 757–922, Oct. 1973, doi: 10.1063/1.3253132.
+        </li>
+        <li id="ref14">
+          B. I. Lee and M. G. Kesler, “A generalized thermodynamic correlation based on three-parameter corresponding states,” AIChE J., vol. 21, no. 3, pp. 510–527, May 1975, doi: 10.1002/aic.690210313.
+        </li>
+        <li id="ref15">
+          W. Wagner and A. Pruß, “The IAPWS Formulation 1995 for the Thermodynamic Properties of Ordinary Water Substance for General and Scientific Use,” J. Phys. Chem. Ref. Data, vol. 31, no. 2, pp. 387–535, Jun. 2002, doi: 10.1063/1.1461829.
+        </li>
+        <li id="ref16">
+          R. Span, E. W. Lemmon, R. T. Jacobsen, W. Wagner, and A. Yokozeki, “A Reference Equation of State for the Thermodynamic Properties of Nitrogen for Temperatures from 63.151 to 1000 K and Pressures to 2200 MPa,” J. Phys. Chem. Ref. Data, vol. 29, no. 6, pp. 1361–1433, Nov. 2000, doi: 10.1063/1.1349047.
+        </li>
+        <li id="ref17">
+          R. Span and W. Wagner, “Equations of State for Technical Applications. I. Simultaneously Optimized Functional Forms for Nonpolar and Polar Fluids,” International Journal of Thermophysics, vol. 24, no. 1, pp. 1–39, Jan. 2003, doi: 10.1023/A:1022390430888.
+        </li>
+        <li id="ref18">
+          W. G. Chapman, K. E. Gubbins, G. Jackson, and M. Radosz, “SAFT: Equation-of-state solution model for associating fluids,” Fluid Phase Equilibria, vol. 52, pp. 31–38, Dec. 1989, doi: 10.1016/0378-3812(89)80308-5.
+        </li>
+        <li id="ref19">
+          J. Gross and G. Sadowski, “Perturbed-Chain SAFT:  An Equation of State Based on a Perturbation Theory for Chain Molecules,” Ind. Eng. Chem. Res., vol. 40, no. 4, pp. 1244–1260, Feb. 2001, doi: 10.1021/ie0003887.
+        </li>
+        <li id="ref20">
+          J. Gross and G. Sadowski, “Application of the Perturbed-Chain SAFT Equation of State to Associating Systems,” Ind. Eng. Chem. Res., vol. 41, no. 22, pp. 5510–5515, Oct. 2002, doi: 10.1021/ie010954d.
+        </li>
+        <li id="ref21">
+          J. Gross and J. Vrabec, “An equation‐of‐state contribution for polar components: Dipolar molecules,” AIChE Journal, vol. 52, no. 3, pp. 1194–1204, Feb. 2006, doi: 10.1002/aic.10683.
+        </li>
+        <li id="ref22">
+          M. Kleiner and G. Sadowski, “Modeling of Polar Systems Using PCP-SAFT:  An Approach to Account for Induced-Association Interactions,” J. Phys. Chem. C, vol. 111, no. 43, pp. 15544–15553, Nov. 2007, doi: 10.1021/jp072640v.
+        </li>
+        <li id="ref23">
+          A. J. de Villiers, C. E. Schwarz, and A. J. Burger, “Improving vapour–liquid-equilibria predictions for mixtures with non-associating polar components using sPC-SAFT extended with two dipolar terms,” Fluid Phase Equilibria, vol. 305, no. 2, pp. 174–184, Jun. 2011, doi: 10.1016/j.fluid.2011.03.025.
+        </li>
+        <li id="ref24">
+          C. Held, L. F. Cameretti, and G. Sadowski, “Modeling aqueous electrolyte solutions: Part 1. Fully dissociated electrolytes,” Fluid Phase Equilibria, vol. 270, no. 1, pp. 87–96, Aug. 2008, doi: 10.1016/j.fluid.2008.06.010.
+        </li>
+        <li id="ref25">
+          C. Held, T. Reschke, S. Mohammad, A. Luza, and G. Sadowski, “ePC-SAFT revised,” Chemical Engineering Research and Design, vol. 92, no. 12, pp. 2884–2897, Dec. 2014, doi: 10.1016/j.cherd.2014.05.017.
+        </li>
+        <li id="ref26">
+          A. Chouai, S. Laugier, and D. Richon, “Modeling of thermodynamic properties using neural networks: Application to refrigerants,” Fluid Phase Equilibria, vol. 199, no. 1, pp. 53–62, Jun. 2002, doi: 10.1016/S0378-3812(01)00801-9.
+        </li>
+        <li id="ref27">
+          F. Yousefi and H. Karimi, “Application of equation of state and artificial neural network to prediction of volumetric properties of polymer melts,” Journal of Industrial and Engineering Chemistry, vol. 19, no. 2, pp. 498–507, Mar. 2013, doi: 10.1016/j.jiec.2012.09.001.
+        </li>
+        <li id="ref28">
+          T. Hatami, M. Rahimi, H. Daraei, E. Heidaryan, and A. A. Alsairafi, “PRSV equation of state parameter modeling through artificial neural network and adaptive network-based fuzzy inference system,” Korean J. Chem. Eng., vol. 29, no. 5, pp. 657–667, May 2012, doi: 10.1007/s11814-011-0235-x.
+        </li>
+        <li id="ref29">
+          G. Scalabrin, L. Piazza, and D. Richon, “An equation of state for R227ea from density data through a new extended corresponding states-neural network technique,” Fluid Phase Equilibria, vol. 199, no. 1, pp. 33–51, Jun. 2002, doi: 10.1016/S0378-3812(02)00005-5.
+        </li>
+        <li id="ref30">
+          A. A. Rohani, G. Pazuki, H. A. Najafabadi, S. Seyfi, and M. Vossoughi, “Comparison between the artificial neural network system and SAFT equation in obtaining vapor pressure and liquid density of pure alcohols,” Expert Systems with Applications, vol. 38, no. 3, pp. 1738–1747, Mar. 2011, doi: 10.1016/j.eswa.2010.07.099.
+        </li>
+        <li id="ref31">
+          E. Sanjari and E. N. Lay, “Estimation of natural gas compressibility factors using artificial neural network approach,” Journal of Natural Gas Science and Engineering, vol. 9, pp. 220–226, Nov. 2012, doi: 10.1016/j.jngse.2012.07.002.
+        </li>
+      </ol>
+
+    </div>
+  </div>
+</body>
+</html>
