@@ -13,7 +13,7 @@
 
   <script>
     $(function(){
-      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.3`);
+      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.4`);
     });
   </script>
 
@@ -31,12 +31,12 @@
         Vesi on üks olulisemaid aineid. See on vajalik eluks ja tööstuses. Kuna on nii tähtis, tihti vajame arvutustes vee omadusi. Vaatame, kuidas kasutada IAPWS95 olekuvõrrandit, et leida vee omadusi.
       </p>
 
-      <h2>IAPWS95 olekuvõrrand</h2>
+      <h2 id="iapws95">IAPWS95 olekuvõrrand</h2>
       <p>
         Kui tahame teada aine omadusi väga täpselt ja üle laia temperatuuri ja rõhu piirkonna, siis kõige parem viis on kasutada keerulist olekuvõrrandit. International Association for the Properties of Water and Steam töötas välja sellist ülitäpset olekuvõrrandit vee jaoks 1995. aastal. See on kõige usaldusväärsem allikas vee omaduste jaoks.
       </p>
 
-      <h2>Tarkvara IAPWS95 kasutamiseks</h2>
+      <h2 id="tarkvara">Tarkvara IAPWS95 kasutamiseks</h2>
       <p>
         Selleks, et teha arvutusi selliste keeruliste mudelitega, on vaja arvutid. Varem, kui arvutid ei olnud laialt levinud, arvutati mudeliga vee omadusi paljudel tingimustel ja need andmed pandi kokku tabelitena. Siis oli võimalik leida nendest veeauru tabelitest omaduse väärtusi ilma arvutit. Kuid olgem ausad, paberist tabelist otsimine on tüütu ja kuna tänapäeval on arvutid igal pool saame kergesti otse kasutada IAPWS95 olekuvõrrandit.
       </p>
@@ -44,7 +44,7 @@
         On mitu programmi, mis rakendavad IAPWS95 olekuvõrrandit. Vaatame kahte tasuta tarkvara lahendust.
       </p>
 
-      <h2>CoolProp</h2>
+      <h2 id="coolprop">CoolProp</h2>
       <p>
         Pythonis on pakett, mis lubab meil teha arvutusi IAPWS95 olekuvõrrandiga: CoolProp. Pythonis impordi CoolProp moodulit. Selleks, et omadusi arvutada kasutame PropsSI funktsiooni. CoolPropi dokumentatsioon on internetis olemas ja sealt saab lugeda täpsemalt, mis parameetreid on olemas, ja kuidas need PropsSI funktsioonile anda.
       </p>
@@ -70,7 +70,7 @@ print('Vee entalpia tingimustel {} K ja {} bar: {} J/mol'.format(t, p, h))</code
         Kui jooksutame skripti, siis see väljastab vee molaarse entalpia antud tingimustel.
       </p>
 
-      <h2>NISTi veebileht</h2>
+      <h2 id="nist-veebileht">NISTi veebileht</h2>
       <p>
         National Institute for Standards and Technology on Ameerika Ühendriikide agentuur, mis tegeleb teaduse ja tehnikaga. Neil on <a href="https://webbook.nist.gov/chemistry/fluid/">veebileht</a>, mille kaudu on võimalik kasutada keeruliseid Helmholtzi mitmeparameetrilisi olekuvõrrandeid. See veebileht kasutab IAPWS95 olekuvõrrandit vee jaoks. On olemas olekuvõrrandid ka mitmete teiste ainete jaoks.
       </p>

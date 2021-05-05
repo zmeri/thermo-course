@@ -19,7 +19,7 @@
 
   <script>
     $(function(){
-      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.3`);
+      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.4`);
     });
   </script>
 
@@ -37,7 +37,7 @@
         Faasimuutused mõjutavad protsesse. Neid kasutatakse separatsiooni protsessides, et puhastada kemikaale ja muid toote. On oluline siis arvutada tingimusi, kus kaks faasi tekivad.
       </p>
 
-      <h2>Faasitasakaalu tingimused</h2>
+      <h2 id="tasakaalu-tingimused">Faasitasakaalu tingimused</h2>
       <p>
         Faasitasakaal esineb siis, kui mõlema faasi keemilised potentsiaalid on võrdsed kõikide ainete jaoks. Kuna keemiline potentsiaal ei käitu ilusti matemaatiliselt, saab samuti leida faasitasakaalu fugitiivsustega.
       </p>
@@ -48,7 +48,7 @@
         \[ f_{i,faas\ 1} = f_{i,faas\ 2} \]
       </div>
 
-      <h2>Ideaalne tasakaal</h2>
+      <h2 id="ideaalne-tasakaal">Ideaalne tasakaal</h2>
       <p>
         Kuidas me saame fugitiivsust arvutada? Alustame kõige lihtsama olukorraga, ehk kui on ideaalgaas tasakaalus ideaalse seguga. Ideaalgaasi jaoks fugitiivsus on lihtsalt aine osarõhk.
       </p>
@@ -74,7 +74,7 @@
         Seda valemit kutsutakse <b>Raoulti seaduseks</b>.
       </p>
 
-      <h2>Reaalsed segud</h2>
+      <h2 id="reaalsed-segud">Reaalsed segud</h2>
       <p>
         Loomulikult, reaalses elus molekulide vahelised tõmbejõud on olulised ja Raoulti seadus tihti ei vasta reaalsele olukorrale. Vaata näiteks, kuidas 3-metüülpentaani ja 2-metüül-2-propanooli segu erineb Raoulti seadusest.
       </p>
@@ -103,7 +103,7 @@
         Mõnikord kasutatakse ka lõpmatu lahjenduse olekut. Seda kasutatakse näiteks soolalahuste jaoks kuna puhas sool on hoopis tahke. Aine oma osarõhu asemel kasutatakse hoopis lahusti puhta aine fugitiivsust referentsina.
       </p>
 
-      <h2>Reaalse segu tasakaal</h2>
+      <h2 id="reaalse-segu-tasakaal">Reaalse segu tasakaal</h2>
       <p>
         Kuna fugitiivsuse koefitsient näitab kõrvalekallet ideaalsest olukorrast, saame seda lisada Raoulti seadusele, et modelleerida faasitasakaalu reaalsete ainete jaoks. Seda meetodit kutsutakse mõnikord &phi;-&phi; meetodiks.
       </p>
@@ -120,7 +120,7 @@
         Fugitiivsuse koefitsienti saab arvutada olekuvõrrandiga.
       </p>
 
-      <h2>Aktiivsuse koefitsient</h2>
+      <h2 id="aktiivsuse-koefitsient">Aktiivsuse koefitsient</h2>
       <p>
         Minevikus polnud head olekuvõrrandit vedelfaasi jaoks. Sellepärast, töötati välja meetodit, mis kasutab hoopis aktiivsuse koefitsienti vedelfaasi fugitiivsuse arvutamiseks.
       </p>
@@ -143,7 +143,7 @@
         Aktiivsus koefitsienti saab arvutada erinevate mudelitega.
       </p>
 
-      <h2>Tasakaal aktiivsuse koefitsiendiga</h2>
+      <h2 id="tasakaal-aktiivsus">Tasakaal aktiivsuse koefitsiendiga</h2>
       <p>
         Me saame nüüd asendada vedelfaasi fugitiivsuse koefitsiendi aktiivsuse koefitsiendiga. Seda meetodit kutsutakse mõnikord &gamma;-&phi; meetodiks.
       </p>
@@ -175,7 +175,7 @@
         Ja kui eeldame, et vedelfaas on ideaalne segu (ehk segunemine ei mõjuta fugitiivsust), siis võime aktiivsuse koefitsiendi kõrvale jätta ja jõuame tagasi Raoulti seaduseni.
       </p>
 
-      <h2>Muud tasakaalud</h2>
+      <h2 id="muud-tasakaalud">Muud tasakaalud</h2>
       <p>
         Siiamaani oleme keskendanud auru-vedel tasakaalule, aga esinevad tasakaalud ka teiste faaside vahel.
       </p>

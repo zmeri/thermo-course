@@ -13,7 +13,7 @@
 
   <script>
     $(function(){
-      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.3`);
+      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.4`);
     });
   </script>
 
@@ -31,7 +31,7 @@
         Vesi on üks põhilisi aineid meie maailmas ja seda kasutatakse sageli soojusmasinates töövedelikuna. Paljud elektrijaamad kasutavad aurujõuseadmeid, et muundada soojust mehaaniliseks tööks, mida omakorda kasutatakse elektritootmiseks.
       </p>
 
-      <h2>Kuidas erineb Carnot ringprotsessist</h2>
+      <h2 id="erinevus-carnot">Kuidas erineb Carnot ringprotsessist</h2>
       <p>
         Reaalses elus ei ole võimalik ega praktiline kasutada Carnot ringprotsessi. Järgmised on mõned põhierinevused aurujõuseadmete ringprotsesside ja Carnot ringprotsessi vahel:
       </p>
@@ -48,7 +48,7 @@
       </ul>
       <img class="inline-img" src="/thermo-course/media/auruj%C3%B5useade%20-%20carnot.png" />
 
-      <h2>Põhiline protsess</h2>
+      <h2 id="p6hinine-protsess">Põhiline protsess</h2>
       <p>
         Üldiselt aurujõuseadme ringprotsess koosneb järgnevatest sammudest:<sup><a href="#ref1">1</a></sup>
       </p>
@@ -81,7 +81,7 @@
         On mitu viisi, kuidas seda põhilist ringprotsessi muudatatakse. Muudatusi tehakse selleks, et tõsta protsessi tõhusust, kuigi selle eest protsess muutub keerulisemaks.
       </p>
 
-      <h2>Vaheülekuumendamine</h2>
+      <h2 id="vaheylekuumendamine">Vaheülekuumendamine</h2>
       <p>
         Selleks, et tõsta kasutegurit, tihti kuumutatakse auru taas peale esimest turbiini. Selleks on paigaldatud vaheülekuumendit. Siis saab auru viia läbi teise madala rõhu turbiini enne, kui läheb kondensaatorisse. Elektrijaamas mõlemad turbiinid on tihti samal võllil.<sup><a href="#ref1">1</a></sup>
       </p>
@@ -97,7 +97,7 @@
         Kasutegurit võib veel tõsta, kui lisada veel vaheülekuumendamise samme, ehk kui taas kuumutatakse teine või kolmas kord. Kuid iga järgneva ülekuumendamise samm muudab protsessi kallimaks ja kasuteguri tõus muutub järjest väiksemaks.
       </p>
 
-      <h2>Eelsoojendamine</h2>
+      <h2 id="eelsoojendamine">Eelsoojendamine</h2>
       <p>
         Teine viis tõsta kasutegurit on kasutada osa auru, mis väljub esimesest turbiinist, selleks et soojendada toitevett. Toitevee kuumutamine nõuab päris palju energiat. Kui esiteks osaliselt soojendame toitevett madalama kvaliteedi auruga, siis me ei pea kasutama nii palju energiat katlast vee soojendamiseks.
       </p>
@@ -113,7 +113,7 @@
         </li>
       </ul>
 
-      <h2>Ülekriitiline protsess</h2>
+      <h2 id="ylekriitiline">Ülekriitiline protsess</h2>
       <p>
         Nagu me Carnot ringprotsessist õppisime, soojusmasina kasutegur sõltub palju temperatuuride vahest. Kui tõstame auru temperatuuri, siis on võimalik suurendada kasutegurit.
       </p>
@@ -135,7 +135,7 @@
         Üritatakse välja töötada aurujõuseadmeid, mis töötavad ülekriitilises olekus järjest kõrgemal temperatuuril ja rõhul. Sihitakse temperatuuri, mis on 700-760 &deg;C ja rõhku, mis on kuni 350 bar. Selle kõrge temperatuuriga on võimalik saavutada kasutegurit, mis on kõrgem kui 50%. Kuid need protsessid on ka keerulised. Näiteks, sellistel tingimustel teras enam ei pea vastu ja on vaja kasutada spetsiaalseid nikli sulameid.<sup><a href="#ref1">2</a></sup>
       </p>
 
-      <h2>Arvutused Pythonis</h2>
+      <h2 id="arvutused-pythonis">Arvutused Pythonis</h2>
       <p>
         Nüüd vaatame, kuidas saame teha termodünaamilisi arvutusi aurujõuseadmete jaoks. Kasutame näitena ülekriitilist ringprotsessi. Oletame, et ringprotsess läbib järgmised punktid:
       </p>

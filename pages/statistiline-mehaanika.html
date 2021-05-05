@@ -16,7 +16,7 @@
 
   <script>
     $(function(){
-      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.3`);
+      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.4`);
     });
   </script>
 
@@ -34,7 +34,7 @@
         Kuidas asi, mida me näeme oma silmaga, on seotud aatomite käitumisega, millest asi koosneb? Statistilise mehaanikaga saame luua seost makro- ja mikroskaalade vahel. Statistiline mehaanika rakendab statistilisi meetodeid koos mõne baasteooriaga selleks, et selgitada nähtusi suuremas skaalas.<a href="#ref1"><sup>1</sup></a> Näiteks, võime võtta teooria, mis selgitab aatomite käitumist (nt kvantmehaanika) ja kasutada statistikat selleks, et tuletada termodünaamika põhimõtteid. Ehk statistiline mehaanika aitab meil luua seost termodünaamika ja molekulide käitumise vahel.
       </p>
 
-      <h2>Mis toimub mikroskaalas?</h2>
+      <h2 id="mikroskaalas">Mis toimub mikroskaalas?</h2>
       <div class="quote-emphasis">
         &bdquo;Ma arvan, et ma võin julgelt öelda, et mitte keegi ei mõista kvantmehaanikat.&ldquo;<br />
         <span class="quote-source">
@@ -52,7 +52,7 @@
       </p>
       <img class="inline-img" src="/thermo-course/media/mikroolek1.jpg" />
 
-      <h2>Ansamblid</h2>
+      <h2 id="ansamblid">Ansamblid</h2>
       <p>
         On tavaliselt mitu erinevat mikroolekut, mis vastavad ühele makroolekule. Näiteks, kui meil on gaasiballoon molekulid liikuvad ja mikroolek muutub, isegi kui rõhk ja temperatuur balloonis ei muutu.
       </p>
@@ -61,7 +61,7 @@
         Süsteemi kõikide võimalike mikroolekute kogumit kutsutakse <b>ansambliks</b>. Makrooleku tingimused, mida me valime, määravad ansamblit. Mõnedele ansamblitele on antud nime. <em>Mikrokanoonilises ansamblis</em> moolide arv ja energia kogus jääb samaks, ehk süsteem on isoleeritud. <em>Kanoonilise ansamblis</em> moolide arv ja temperatuur püsivad samaks, aga võib toimuda soojuse ülekanne süsteemi ja keskkonna vahel. Eeldatakse, et keskkond on piisavalt suur, et soojusülekanne ei mõjuta keskkonna temperatuuri. Kanooniline ansambel vastab suletud süsteemile. <em>Suurkanooniline ansamblis</em> nii energia kui ka moolide arv võib muutuda, ehk süsteemi temperatuur, keemiline potentsiaal ja maht jäävad konstantseks. On ka teised ansamblid. Sobivat ansamblit valitakse vastavalt antud süsteemile.
       </p>
 
-      <h2>Olekute arv</h2>
+      <h2 id="olekute-arv">Olekute arv</h2>
       <p>
         Kui ansamblit on paika pandud, siis saab hinnata võimalike mikroolekute arvu süsteemis (&Omega;). Väikeses süsteemis saaksime lihtsalt kokku lugeda need võimalikud mikroolekud. Kuid tavalises süsteemis on väga palju võimalikke mikroolekuid ja saame ligikaudselt kirjeldada mikroolekute arvu pideva funktsiooniga.
       </p>
@@ -75,7 +75,7 @@
         Ehk, me üldiselt näeme, et mikroolekute arv kasvab eksponentsiaalselt koos energiaga. Siin valemis <em>k<sub>B</sub></em> on Boltzmanni konstant ja <em>T</em> on temperatuur. Ja selles valemis saame kasutada erinevat energia valemit vastavalt sellele, mis on antud süsteemi jaoks kõige mugavam. Näiteks, kui tahame võtta arvesse mahumuutusi, siis saame E muutujas juurde liita PV väärtust (ehk energia parameetrina kasutaksime entalpiat). Samuti võiksime arvesse võtta osakeste lahkumist või sisenemist: \(E - &mu;N\).
       </p>
 
-      <h2>Oleku tõenäosus</h2>
+      <h2 id="oleku-t6en2osus">Oleku tõenäosus</h2>
       <p>
         Kui tahame teada ühe mikrooleku tõenäosus, on lihtsalt võimalike mikroolekute arv pöördväärtus.
       </p>
@@ -104,7 +104,7 @@
         Võime ka arvutada muid tõenäosusi, näiteks tõenäosus, et süsteemil oleks teatud olekuparameetri väärtused (ehk teatud makroolek). Seda saab arvutada liites kokku kõikide mikroolekute tõenäosused, millel on samad makroskoobilised parameetrid kui valitud makroolek.
       </p>
 
-      <h2>Näide - gaasi molekulide kiirus</h2>
+      <h2 id="n2ide">Näide - gaasi molekulide kiirus</h2>
       <p>
         Statistiline mehaanika selgitab, kuidas termodünaamilisi nähtusi on seotud osakeste liikumisega mikroskoobilisel tasandil. Kuid saame ka statistilise mehaanika abiga arvutada, kuidas molekulid teatud süsteemis käituvad. Näiteks, võime arvutada, kui kiiresti molekulid liikuvad gaasis.<a href="#ref2"><sup>2</sup></a>
       </p>

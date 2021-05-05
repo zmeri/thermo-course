@@ -13,7 +13,7 @@
 
   <script>
     $(function(){
-      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.3`);
+      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.4`);
     });
   </script>
 
@@ -34,7 +34,7 @@
         Siin vaatame täpsemalt, kuidas arvutada aine või segu termofüüsilisi omadusi. Allpool on minu strateegiad erinevate olukordade jaoks. Need on eelistus järjekorras, ehk alustan esimesega ja kui ei ole võimalik seda strateegiat kasutada lähen järgmise juurde. Need on lihtsalt minu mõtted ja võib ka teisiti ülesandele läheneda.
       </p>
 
-      <h2>Mitmeparameetrilise Helmholtzi võrrand on olemas</h2>
+      <h2 id="mitmeparameetriline">Mitmeparameetrilise Helmholtzi võrrand on olemas</h2>
       <p>
         Kuna need on üldiselt kõige täpsemad olekuvõrrandid, kui antud ainele on selline võrrand juba olemas <a href="http://www.coolprop.org/index.html">CoolPropis</a>, siis kohe kasutan seda. Saan vastuse tavaliselt kõige parema täpsusega, aga väga kiiresti kuna mul on juba olemas tarkvara (CoolProp), mis lubab mul rakendada neid olekuvõrrandeid.
       </p>
@@ -57,7 +57,7 @@ den = cp.PropsSI('Dmolar', 'T', t, 'P', p, 'METHANE[0.4]&PROPANE[0.6]')</code>
         Kahjuks selliseid olekuvõrrandeid on ainult välja arendatud umbes sajale ainele. <a href="http://www.coolprop.org/fluid_properties/PurePseudoPure.html#list-of-fluids">CoolPropi lehelt</a> saab näha, mis ainetele on Helmholtzi olekuvõrrandi tehtud.
       </p>
 
-      <h2>PC-SAFT parameetrid on olemas</h2>
+      <h2 id="pcsaft">PC-SAFT parameetrid on olemas</h2>
       <p>
          Ma eelistan tavaliselt kasutada head olekuvõrrandit, kui on olemas, kuna olekuvõrrand suudab anda palju informatsiooni ühe mudeliga. PC-SAFT parameetrid on olemas rohkem ainete jaoks kuna ei ole nii raske leida vajalikke parameetreid. Seega, kui mitmeparameetrilist Helmholtzi olekuvõrrandit pole, siis on võimalik, et vähemalt PC-SAFT parameetrid on olemas. PC-SAFT üldiselt annab väärtused hea täpsusega nii gaasi- kui ka vedelfaasi jaoks. Kui PC-SAFT tarkvara on juba olemas (nt <a href="https://pypi.org/project/pcsaft/">pcsaft</a> pakett), siis võid kiiresti arvutusi teha. CoolPropis on ka nüüd olemas PC-SAFT olekuvõrrand, kuid pole veel kerge lisada parameetrid uue aine jaoks.
       </p>
@@ -99,17 +99,17 @@ den_pcsaft = pcsaft_den(t, p, x, param_pcsaft, phase='vap')</code>
         Üks nõrk koht PC-SAFT olekuvõrrandiga on see, et entroopia ja energia parameetrite jaoks (entalpia, Gibbs energia, soojusmahtuvus, jne) PC-SAFT annab ainult jääkomadust. Ehk, see ainult näitab, kui palju antud omadus erineb ideaalgaasi väärtusest. Kuid nende parameetrite ideaalgaasi väärtused sõltuvad molekuli struktuurist (ehk ei saa lihtsalt ideaalgaasi valemiga arvutada), ja seega on vaja eraldi korrelatsiooni aine ideaalgaasi soojusmahtuvuse jaoks.<sup><a href="#ref1">1</a></sup> Üsna tihti neid korrelatsioone pole kuskilt kättesaadav. Kui on vaja entroopiat või energia parameetreid arvutada, ma tavaliselt kasutan teist meetodit.
       </p>
 
-      <h2>Kui on tarkvara teiste mudelitega</h2>
+      <h2 id="muu-tarkvara">Kui on tarkvara teiste mudelitega</h2>
       <p>
         Kui pole juba olemas mitmeparameetrilist Helmholtzi võrrandit ega PC-SAFT parameetreid aine jaoks, siis võib kasutada mudeleid muus tarkvaras, kui sul on olemas. Näiteks, protsessisimulaatoritel on hunniku mudeleid, mida saab kasutada. Samuti kui on olemas litsents <a href="https://www.aiche.org/dippr">DIPPR 801</a> või mõne sarnase tarkvara lahenduse jaoks, siis nendes on ka korrelatsioonid ja mudelid, mida võib kasutada. Kuid üldiselt need tarkvarad on päris kallid ja tihti tööandja ei osta neid litsentse. Aga kui on juba olemas, miks mitte kasutada.
       </p>
 
-      <h2>Kui täpsust ei ole nii oluline</h2>
+      <h2 id="t2psus-ebaoluline">Kui täpsust ei ole nii oluline</h2>
       <p>
         Kui on vaja ainult esialgset väärtust või kui parameetri täpsust ei mõjuta arvutuse tulemust väga palju, siis otsin ligikaudset väärtust. Mõnikord võib kasutada rusikareeglit. Näiteks, ma tean, et paljude orgaaniliste vedelikute jaoks soojusmahtuvus on umbes 2 J g<sup>-1</sup> K<sup>-1</sup>. Võib ka leida sarnast ainet, mille omadused on teada, ja kasutada selle aine omadusi. Kui pole juba minu tarkvaras mudel olemas ja täpsus pole kriitiline, siis kasutan lihtsalt hinnangulist väärtust ja liigun edasi oma tööga.
       </p>
 
-      <h2>Mudeli parameetreid pole, aga täpsus on oluline</h2>
+      <h2 id="t2psus-oluline">Mudeli parameetreid pole, aga täpsus on oluline</h2>
       <p>
         Kuid mõnikord täpsus on oluline ja mudelit pole juba olemas antud ainele või segule. Siis on kahjuks vaja investeerida seda aega, et ise mudelit välja arendada. Kui on vähemalt katseandmed olemas, siis tavaliselt pole nii hull. Siis saab optimeerimise teel leida mõne mudeli parameetrid (nt PC-SAFT parameetrid). Seda näitan ka selles õppeaines. Kui pole aga katseandmeid ka, siis oleks vaja esiteks neid mõõtma. Kui töötad kuskil, siis võibolla on ka võimalik lihtsalt osta need mõõtmised teenusena.
       </p>

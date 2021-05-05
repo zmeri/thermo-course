@@ -13,7 +13,7 @@
 
   <script>
     $(function(){
-      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.3`);
+      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.4`);
     });
   </script>
 
@@ -31,7 +31,7 @@
         Termodünaamiliste mudelite jaoks on vaja teada mudeli parameetrid. Mõnikord parameetrid on juba olemas tarkvaras või saab neid leida teaduskirjandusest, aga kui ei ole, siis on vaja ise arvutada mudeli parameetreid optimeerimise teel. Optimeerimiseks on vaja andmed aine või segu termofüüsilistest omadustest. Vaatame põhilisi kohti, kust neid andmeid leida. Vaatame ka, kuidas ise leida mudeli parameetrid andmetest optimeerimise teel.
       </p>
 
-      <h2>Peamised allikad</h2>
+      <h2 id="andme-allikad">Peamised allikad</h2>
       <p>
         Aja jooksul on mõõdetud miljoneid andmeid, aga ei ole ühtlane jaotus. Mõned ained on tähtsad või laialt levinud ja neid uuritakse põhjalikumalt. Enamus ainete jaoks võib leida ainult üksikuid andmepunkte, kui on üldse andmed mõõdetud.
       </p>
@@ -142,7 +142,7 @@
         </table>
       </div>
 
-      <h2>Andmed ja parameetrid teadusajakirjadest</h2>
+      <h2 id="andmed-kirjandusest">Andmed ja parameetrid teadusajakirjadest</h2>
       <p>
         Suur osa andmetest olid kunagi avaldatud teaduskirjanduses. Seega, tihti on võimalik leida kirjandusest vajalikud andmed.
       </p>
@@ -153,7 +153,7 @@
         Tavalise otsingumootoriga saab ka päris hästi leida andmeid. Google Scholar näitab ka, kas artikli PDF on kuskil internetis kättesaadav, mis on kasulik, kui ajakiri ei ole avaldanud avatud juurdepääsuga. Kahjuks, isegi kui viide on käes, on mõnikord raske pääseda artiklile ligi. Kui ei ole kuskil avalikult avaldatud, siis võib ka kirjutada otse autoritele. Teaduskirjastustest erinevalt, autoritel on tavaliselt heameel, et keegi tahab lugeda nende artiklit. Selleks nad ju alguses avaldasid seda ja nad ei saa kasu juurdepääsu piiramisest, nagu teaduskirjastused. On võimalik ka paluda tuttava käest, kellel on juurdepääs antud artiklile, või isegi saab paluda abi Twitteris (<a href="https://twitter.com/hashtag/icanhazpdf">#icanhazpdf</a>).
       </p>
 
-      <h2>Mudeli parameetrite optimeerimine</h2>
+      <h2 id="parameetrite-optimeerimine">Mudeli parameetrite optimeerimine</h2>
       <p>
         Kui on andmed aine termofüüsiliste omaduste kohta, siis saab ise leida mudeli parameetreid optimeerimise teel. Vaatame, kuidas saab seda teha. Näitena, leiame PC-SAFT mudeli interaktisooni parameetrit heksaani ja benseeni segu jaoks. Andmed tulevad kuuest artiklist.<sup><a href="#ref1">1</a>-<a href="#ref6">6</a></sup>
       </p>
