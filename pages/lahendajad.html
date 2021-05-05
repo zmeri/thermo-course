@@ -13,7 +13,7 @@
 
   <script>
     $(function(){
-      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.3`);
+      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.4`);
     });
   </script>
 
@@ -37,7 +37,7 @@
         Siin selgitame lühidalt, kuidas lahendajad töötavad. Näitame ka, kuidas kasutada olemasolevaid lahendajaid Pythoni Scipy paketis ja arvutustabeli tarkvaras.
       </p>
 
-      <h2>Näide ülesanne</h2>
+      <h2 id="n2ide">Näide ülesanne</h2>
       <p>
         Termodünaamikas me mõnikord tahame arvutada aine või segu tihedust. Kuid tavaliselt ei ole võimalik olekuvõrrandeid lahendada analüütiliselt tiheduse jaoks. Kasutame siis seda ülesannet näitena. Oletame, et tahame arvutada etaani tihedust tingimustel 20 &deg;C ja 5 bar. Võiksime seda näiteks teha PC-SAFT olekuvõrrandiga.
       </p>
@@ -58,7 +58,7 @@ params_pcsaft = {'m':m, 's':sigma, 'e':eps_k}</code>
         Kuigi <code class="python">pcsaft</code> ja teised paketid ja programmid suudavad tavaliselt ise lahendada selliseid ülesandeid, teeme siin ise selleks, et näha, kuidas lahendajaid kasutada.
       </p>
 
-      <h2>Veafunktsioon</h2>
+      <h2 id="veafunktsioon">Veafunktsioon</h2>
       <p>
         Lahendaja peab teama, kas mõni väärtus lahendab valemeid ja, juhul kui ei ole lahendus, kui lähedal see võiks olla lahendusele. Veafunktsioon näitab seda. Veafunktsioonis me arvutame väärtust näitamaks, kui lähedal või kaugel antud parameetri väärtused on lahendusele. Tihti kasutatakse selleks tingimust, et lahenduse juures valemi mõlemad pooled peavad olema võrdsed. Näiteks lahutatakse valemi paremat poolt valemi vasakust poolest ja see väärtus näitab, kui kaugel me oleme lahendusest. Tihti võetakse absoluutväärtust või erinevuse ruutu, nii et viga oleks alati positiivne.
       </p>
@@ -75,7 +75,7 @@ params_pcsaft = {'m':m, 's':sigma, 'e':eps_k}</code>
     return cost</code>
       </pre>
 
-      <h2>Tuletise meetodid</h2>
+      <h2 id="tuletise-meetodid">Tuletise meetodid</h2>
       <p>
         Lahendaja peab kuidagi otsustama iga kord, mis väärtust proovida. Lahendaja võib lihtsalt suvaliselt valida väärtusi, ja mõnikord tehaksegi seda, aga tavaliselt saab kiiremini leida lahendust, kui targalt valida iga järgmist väärtust.
       </p>
@@ -87,7 +87,7 @@ params_pcsaft = {'m':m, 's':sigma, 'e':eps_k}</code>
         Tuletise meetodid sobivad, kui veafunktsioon on pidev. Ehk ei toimu järsk hüppeid. Samuti need töötavad paremini, kui funktsioon on sile. Kui funktsioon on hoopis laineline või konarlik, siis lahendaja võib jääda kohalikus miinimumis kinni ja mitte leida lahendust. See juhtub kuna mõlemal pool tuletis suunab tagasi kohalikusse auku. Mõnikord on ikkagi võimalik leida lahendust, kui anda lahendajale teist algväärtust. Siis lahendaja alustab teisest kohast ja võibolla ei jää kohalikusse miinimumisse kinni. Kui aga ei ole võimalik sedasi lahendada, siis tuleb kasutada globaalset lahendajat.
       </p>
 
-      <h2>Globaalsed lahendajad</h2>
+      <h2 id="globaalsed-lahendajad">Globaalsed lahendajad</h2>
       <p>
         Globaalsed lahendajad proovivad vältida kohalikke miinimume ja maksimume ja leida kõige paremat lahendust. On palju erinevaid algoritme. Mõned algoritmid kasutavad ikkagi tuletise meetodeid, aga lisavad osa, mis valib erinevaid algväärtusi tuletise meetodi jaoks.
       </p>
@@ -98,7 +98,7 @@ params_pcsaft = {'m':m, 's':sigma, 'e':eps_k}</code>
         On veel palju erinevaid optimeerimise algoritme, aga me siin ei anna ülevaadet kõikidest.
       </p>
 
-      <h2>Scipy optimize moodul</h2>
+      <h2 id="scipy-optimize">Scipy optimize moodul</h2>
       <p>
         On palju tarkvara pakette juba olemas optimeerimiseks, mis pakuvad lahendajad. Vaatame siin ühte: Scipy <a href="https://docs.scipy.org/doc/scipy/reference/tutorial/optimize.html"><code class="python">optimize</code></a> moodul.
       </p>
@@ -138,7 +138,7 @@ den = result.x</code>
         Kui su arvutil on mitu tuuma võid kasutada mitu korraga, et optimeerimine oleks kiirem. Anna differential_evolution funktsioonile lisa parameeter <code class="python">workers</code>. Kui tahad kasutada kõik tuumad pane väärtuseks -1.
       </p>
 
-      <h2>Lahendajad arvutustabeli tarkvaras</h2>
+      <h2 id="lahendaja-arvutustabelis">Lahendajad arvutustabeli tarkvaras</h2>
       <p>
         Arvutustabeli tarkvaras on ka lahendaja. Kuigi programmeerimise keeles on valikuid palju rohkem, mõnikord on mugavam kasutada arvutustabeli lahendaja.
       </p>

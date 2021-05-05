@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      CommonHTML: { linebreaks: { automatic: true } }
+    });
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS_CHTML"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="/thermo-course/styles/termodynaamika.css?v=0.1.2">
+
+  <script>
+    $(function(){
+      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.4`);
+    });
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Aktiivsuse koefitsiendi mudelid</title>
+</head>
+
+<body>
+  <div id='content'>
+    <div id="navigation"></div>
+    <div id='main-text'>
+      <h1>Aktiivsuse koefitsiendi mudelid</h1>
+      <p>
+        Faasitasakaalu <a href="/thermo-course/pages/faasitasakaal.html">arvutustes</a>, on tavaliselt vaja arvutada vedelfaasi <a href="/thermo-course/pages/keemiline-potentsiaal.html#fugitiivsus">fugitiivsust</a>. Minevikus ei olnud eriti olekuvõrrandeid, mis suudaksid hästi kirjeldada vedelfaasi. Sellepärast, töötati välja hoopis aktiivsuse koefitsiendi mudelid. Aktiivsuse koefitsientide kaudu on võimalik ka arvutada vedelfaasi fugitiivsust.
+      </p>
+
+      <h2 id="liigomadus">Liigomadus</h2>
+      <p>
+        Aktiivsuse koefitsient põhineb Gibbsi energia liial. <b>Liigomadus</b> (ingl <a href="https://en.wikipedia.org/wiki/Excess_property"><em>excess property</em></a>) näitab erinevust segu tegeliku väärtuse ja ideaalse segu väärtuse vahel.
+      </p>
+      <div>
+        \[ \theta^E = \theta - \theta^{is} \]
+      </div>
+      <p>
+        <b>Ideaalses segus</b> omaduse väärtus on lihtsalt puhaste ainete väärtuste kaalutud keskmine. Ehk, segu omaduse väärtust saab arvutada otse puhaste ainete väärtustest, kui korrutada moolosaga ja kokku liita.
+      </p>
+      <div>
+        \[ \theta^{is} = \sum_i x_i \theta_i \]
+      </div>
+      <p>
+        Päris segudes moleulide vahelised vastasmõjud muutuvad, kui koostis muutub. See tähendab, et segu omadus tihti erineb ideaalse segu väärtusest. Liigomadus kirjeldab seda erinevust ja näitab lisa mõju, mis tuleb segunemisest.
+      </p>
+      <p>
+        Kui ained segus on sarnased, siis nende vahelised vastasmõjud on tõenäoliselt sarnased ja segu on ideaalsem. Kui aga molekulid on teistsugused, siis tõenäoliselt esinevad uued vastasmõjud segunemisel ja liigomaduse väärtus on suur.
+      </p>
+
+      <h2 id="aktiivsuse-koefitsient">Aktiivsuse koefitsient</h2>
+      <p>
+        <b>Aktiivsuse koefitsient</b> (&gamma;) näitab, kuidas Gibbs energia liig muutub, kui ühe aine kontsentratsioon muutub. Teiste sõnadega, aktiivsuse koefitsient on osatuletis.
+      </p>
+      <div>
+        \[ \ln \gamma_i = \left( \frac{\partial \left( n \frac{g^E}{RT} \right)}{ \partial n_i } \right)_{T,P,n_{j \left( j \neq i \right)}} \]
+      </div>
+      <p>
+        Kui korrutada aktiivsuse koefitsiendi logaritmi aine moolosaga ja liita kokku kõikide segu komponentide jaoks, siis saab arvutada Gibbs energia liiga.
+      </p>
+      <div>
+        \[ \frac{g^E}{RT} = \sum_i x_i \ln \gamma_i \]
+      </div>
+      <p>
+        Kui on ideaalne segu, siis iga komponendi aktiivsuse koefitsient on 1, mis omakorda tähendab, et Gibbs energia liig on 0. Kui aine moolosa läheneb ühele, siis selle aine aktiivsuse koefitsient läheneb ka ühele. Peaks nii käituma, sest kui moolosa läheneb ühele segu on peaaegu puhas aine ja segu omaduse väärtus on peaaegu sama, kui puhta aine väärtus.
+      </p>
+
+      <h2 id="wilson">Wilson</h2>
+      <p>
+        1958. aastal Wilson avaldas aktiivsuse koefitsiendi mudelit, mis põhineb kohaliku koostise ideel.<sup><a href="#ref1">1</a>,<a href="#ref2">2</a></sup> Selle idee järgi aine käitumine segus sõltub mitte üldkoostisest, vaid kohalikust koostisest, mis esineb selle molekuli ümber. See oli murranguline idee ja tema mudelit hakati laialt kasutama.<sup><a href="#ref3">3</a></sup>
+      </p>
+      <p>
+        Mudelis A on empiirilised parameetrid. Kahe aine segu puhul, on vaja ainult kaks parameetrit: A<sub>1,2</sub> ja A<sub>2,1</sub>. A sama aine molekulide vahel (nt A<sub>1,1</sub> ja A<sub>2,2</sub>) on null.
+      </p>
+      <div>
+        \[ \gamma_i = -\ln \left( 1 - \sum_j x_j A_{ji} \right) + 1 - \sum_j \left( \frac{x_j \left( 1 - A_{ij} \right)}{1 - \sum_k x_k A_{kj}} \right) \]
+      </div>
+      <p>
+        Wilsoni mudeli üks eelis on see, et seda saab ka lihtsasti kasutada, isegi kui on rohkem kui kaks komponenti segus.<sup><a href="#ref4">4</a></sup> Teiste mudelitega binaarsetest parameetritest tavaliselt ei piisa ja on vaja lisada veel parameetreid, kui on rohkem kui kaks komponenti segus. Üks oluline puudus on aga see, et mudel ei sobi, kui tekib kaks vedelfaasi (ehk vedel-vedel tasakaalu jaoks see ei sobi).
+      </p>
+
+      <h2 id="nrtl">NRTL</h2>
+      <p>
+        Kuna Wilsoni mudelit ei saa kasutada, kui on kaks vedelfaasi, Renon ja Prausnitz töötasid välja uue aktiivsuse koefitsiendi mudeli: NRTL mudel.<sup><a href="#ref4">4</a>,<a href="#ref5">5</a></sup> NRTL tähendab "non-random, two liquid". NRTLi valemid on paindlikud, nii et mudel suudab hästi jälgida andmeid.
+      </p>
+      <p>
+        Mudelis on &tau; ja &alpha; parameetrid. &tau; on empiirilised parameetrid. &alpha; on mittejuhuslikkuse parameeter. Tavaliselt &alpha; on 0,2 või 0,3 ja veesegude puhul 0,48.
+      </p>
+      <div>
+        \[ \ln \gamma_i = \frac{\sum_j x_j \tau_{ji} G_{ji}}{\sum_k x_k G_{ki}} + \sum_j \left( \frac{G_{ij} x_j}{\sum_k G_{kj} x_k} \left( \tau_{ij} - \frac{\sum_m x_m \tau_{mj} G_{mj}}{\sum_k G_{kj} x_k} \right) \right) \]
+      </div>
+      <div>
+        \[ G_{ij} = \exp \left( -\alpha_{ij} \tau_{ij} \right) \]
+      </div>
+      <p>
+        Mõnikord antakse &tau; asemel <em>b</em>, mis peaks olema temperatuurist mitte sõltuv parameeter. Seos &tau; ja <em>b</em> vahel on selline
+      </p>
+      <div>
+        \[ \tau = \frac{b}{RT} \]
+      </div>
+      <p>
+        NRTL mudelit on aastate jooksul muudetud ja täiendatud, nagi tihti juhtub teaduses. Näiteks, on pakutud NRTL varianti, mis sobib ka elektrolüütidele.<sup><a href="#ref13">13</a></sup>
+      </p>
+
+      <h2 id="uniquac">UNIQUAC</h2>
+      <p>
+        UNIQUAC põhineb statistilisel mehaanikal ja kasutab parameetreid, mis on seotud molekulide suuruse ja kujuga. UNIQUAC tähendab "universal quasi-chemical". Nii nagu NRTL mudel, UNIQUAC sobib ka süsteemidele, milles esineb kaks vedelfaasi.<sup><a href="#ref6">6</a></sup>
+      </p>
+      <p>
+        UNIQUACi valemis on kaks osa: liitosa (ingl <em>combinatorial</em>) ja jääkosa (ingl <em>residual</em>). Liitosa on seotud molekulide kuju ja suurusega. Jääkosa kirjeldab molekulide vahelisi vastasmõjusid.
+      </p>
+      <p>
+        UNIQUAC mudelis &tau; on empiirilised parameetrid. Nii nagu NRTL valemis, mõnikord antakse hoopis (<em>u<sub>ji</sub></em> - <em>u<sub>ij</sub></em>) kui empiiriline parameeter kuna see ei peaks nii palju sõltuma temperatuurist kui &tau;. Mudelis on ka puhaste ainete parameetrid. <em>r</em> on seotud molekuli Van der Waalsi mahuga ja <em>q</em> on seotud molekuli pindalaga.
+      </p>
+      <div>
+        \[ \ln \gamma_i = \ln \gamma_i^C + \ln \gamma_i^R \]
+      </div>
+      <div>
+        \[ \ln \gamma_i^C = \ln \frac{\Phi_i}{x_i} + \frac{z}{2} q_i \ln \frac{\theta_i}{\Phi_i} + l_i - \frac{\Phi_i}{x_i} \sum_j x_j l_j \]
+      </div>
+      <div>
+        \[ \ln \gamma_i^R = q_i \left( 1 - \ln \left( \sum_j \theta_j \tau_{ji} \right) - \sum_j \left( \frac{\theta_j \tau_{ij}}{\sum_k \theta_k \tau_{kj}} \right) \right) \]
+      </div>
+      <div>
+        \[ \theta_i = \frac{q_i x_i}{\sum_j q_j x_j} \]
+      </div>
+      <div>
+        \[ \Phi_i = \frac{r_i x_i}{\sum_j r_j x_j} \]
+      </div>
+      <div>
+        \[ l_i = \frac{z}{2} \left( r_i - q_i \right) - \left( r_i - 1 \right) \]
+      </div>
+      <div>
+        \[ z = 10 \]
+      </div>
+      <div>
+        \[ \tau_{ji} = \exp \left( \frac{-\left( u_{ji} - u_{ij} \right)}{RT} \right) \]
+      </div>
+
+      <h2 id="unifac">UNIFAC</h2>
+      <p>
+        Parameetrid NRTLi, UNIQUACi ja sarnaste mudelite jaoks saab leida andmetest. Kui aga andmeid pole olemas ja ei ole võimalik neid mõõta, siis oleks vaja ennustada mudeli parameetreid. UNIFAC on meetod, mille abil saab ennustada UNIQUACi parameetreid.<sup><a href="#ref7">7</a></sup>
+      </p>
+      <p>
+        UNIFAC tähendab "UNIQUAC Functional-group Activity Coefficients". Selle meetodi järgi jagatakse molekuli rühmadeks. Igal rühmal on omad parameetrid ja kõikide rühmade osad saab kokku liita selleks, et arvutada molekuli UNIQUACi parameetrid.
+      </p>
+      <p>
+        Kuigi UNIFAC on võimas, üks puudus on see, et tuleb eraldi leida parameetreid kõikide võimalikke funktsionaalsete rühmade vahel. Kui interaktsiooni parameetrid on olemas segu rühmade jaoks, siis on lihtne kasutada UNIFACi. Kuid nende parameetrite välja arendamine nõuab palju aega ja katseandmeid. Mõnede rühmade paaride jaoks pole veel leitud parameetreid.<sup><a href="#ref15">15</a></sup>
+      </p>
+      <p>
+        Aastate jooksul uurijad on pakkunud mitu erinevat UNIFACi mudelit.<sup><a href="#ref14">14</a></sup>
+      </p>
+
+      <h2 id="cosmo">COSMO</h2>
+      <p>
+        Tänapäeva arvutitega on võimalik teha qvantmehaanika arvutusi molekulide jaoks. See tähendab, et saab täpsemalt kirjeldada molekuli kuju ja elektroonilist struktuuri. COSMO põhineb qvantmehaanikal ja tähendab "Conductor-like Screening Model".<sup><a href="#ref12">12</a></sup> COSMO kasutab molekulide parameetrid, mis tulevad qvantmehaanika arvutusest, koos Monte Carlo simulatsiooniga arvutamaks segu omadusi.
+      </p>
+      <p>
+        Nii nagu UNIFAC, COSMO suudab ennustada molekulide omadusi ja ei ole vaja katseandmeid, mis on suur eelis. Kuid UNIFACist erinevalt, COSMO saab kasutada rohkem molekulide liikide jaoks kuna pole vaja leida parameetreid rühmade paaride jaoks.<sup><a href="#ref15">15</a></sup> Kuigi COSMOga saab kiiresti hinnata paljude erinevate segude omadusi, COSMO täpsus mõnikord ei ole olnud piisavalt hea reaalsete probleemide jaoks. Mõnikord leitakse, et täpsus on sama hea kui UNIFAC,<sup><a href="#ref9">9</a></sup> kuid teised on leidnud, et täpsus ei ole veel piisavalt hea tööstuse jaoks.<sup><a href="#ref15">15</a></sup>
+      </p>
+      <p>
+        On pakutud ka uuemat mudelit (F-SAC), mis võtab osad UNIFACist ja COSMOst. F-SAC mudel kasutab molekuli rühmasid, nii nagu UNIFAC, lootusega saavutada paremat täpsust. Kuid rühmade vaheliste parameetrite arvutamiseks F-SAC kasutab COSMO.<sup><a href="#ref15">15</a></sup>
+      </p>
+
+      <h2>Viited</h2>
+      <ol>
+        <li id="ref1">
+          G. M. Wilson, “Vapor-liquid equilibria from measurements of pressure temperature and over-all composition the system water-2-Butoxyethanol,” PhD Thesis, Massachusetts Institute of Technology, 1958.
+        </li>
+        <li id="ref2">
+          G. M. Wilson, “Vapor-Liquid Equilibrium. XI. A New Expression for the Excess Free Energy of Mixing,” J. Am. Chem. Soc., vol. 86, no. 2, pp. 127–130, Jan. 1964, doi: 10.1021/ja01056a002.
+        </li>
+        <li id="ref3">
+          S. K. Ghosh and S. J. Chopra, “Activity coefficients from the Wilson equation,” Ind. Eng. Chem. Process Des. Dev., vol. 14, no. 3, pp. 304–308, 1975.
+        </li>
+        <li id="ref4">
+          H. Renon and J. M. Prausnitz, “Estimation of Parameters for the NRTL Equation for Excess Gibbs Energies of Strongly Nonideal Liquid Mixtures,” Ind. Eng. Chem. Process Des. Dev., vol. 8, no. 3, pp. 413–419, Jul. 1969, doi: 10.1021/i260031a019.
+        </li>
+        <li id="ref5">
+          H. Renon and J. M. Prausnitz, “Local compositions in thermodynamic excess functions for liquid mixtures,” AIChE J., vol. 14, no. 1, pp. 135–144, 1968, doi: 10.1002/aic.690140124.
+        </li>
+        <li id="ref6">
+          D. S. Abrams and J. M. Prausnitz, “Statistical thermodynamics of liquid mixtures: A new expression for the excess Gibbs energy of partly or completely miscible systems,” AIChE J., vol. 21, no. 1, pp. 116–128, 1975, doi: 10.1002/aic.690210115.
+        </li>
+        <li id="ref7">
+          A. Fredenslund, R. L. Jones, and J. M. Prausnitz, “Group-contribution estimation of activity coefficients in nonideal liquid mixtures,” AIChE J., vol. 21, no. 6, pp. 1086–1099, 1975, doi: 10.1002/aic.690210607.
+        </li>
+        <li id="ref8">
+          J. P. O’Connell and J. M. Haile, Thermodynamics: Fundamentals for Applications. Cambridge University Press, 2005.
+        </li>
+        <li id="ref9">
+          C. Luiz da Silveira and N. P. G. Salau, “From Wilson to F-SAC: A comparative analysis of correlative and predictive activity coefficient models to determine VLE and IDAC of binary systems,” Fluid Phase Equilibria, vol. 464, pp. 1–11, May 2018, doi:10.1016/j.fluid.2018.02.010.
+        </li>
+        <li id="ref10">
+          G. M. Kontogeorgis and G. K. Folas, Thermodynamic Models for Industrial Applications: From Classical and Advanced Mixing Rules to Association Theories. John Wiley & Sons, 2009.
+        </li>
+        <li id="ref11">
+          K. D. Dahm and D. P. Visco, Fundamentals of Chemical Engineering Thermodynamics. Cengage Learning, 2014.
+        </li>
+        <li id="ref12">
+          A. Klamt, “Conductor-like Screening Model for Real Solvents: A New Approach to the Quantitative Calculation of Solvation Phenomena,” J. Phys. Chem., vol. 99, no. 7, pp. 2224–2235, Feb. 1995, doi: 10.1021/j100007a062.
+        </li>
+        <li id="ref13">
+          Chen Chau‐Chyun and Song Yuhua, “Generalized electrolyte‐NRTL model for mixed‐solvent electrolyte systems,” AIChE J., vol. 50, no. 8, pp. 1928–1941, Jul. 2004, doi: 10.1002/aic.10151.
+        </li>
+        <li id="ref14">
+          E. Muzenda, “From UNIQUAC to modified UNIFAC Dortmund: a discussion,” in 3rd International Conference on Medical Sciences and Chemical Engineering (ICMSCE), December, 2013, pp. 25–26.
+        </li>
+        <li id="ref15">
+          R. de P. Soares and R. P. Gerber, “Functional-Segment Activity Coefficient Model. 1. Model Formulation,” Ind. Eng. Chem. Res., vol. 52, no. 32, pp. 11159–11171, Aug. 2013, doi: 10.1021/ie400170a.
+        </li>
+      </ol>
+
+    </div>
+  </div>
+</body>
+</html>

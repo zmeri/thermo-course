@@ -13,7 +13,7 @@
 
   <script>
     $(function(){
-      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.3`);
+      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.4`);
     });
   </script>
 
@@ -31,7 +31,7 @@
         Python on võimas tööriist, millega teha arvutusi olekuvõrranditega. On juba olemas paketid, mis rakendavad mõned olekuvõrrandid. Vajadusel saab ise ka kirja panna mõnda olekuvõrrandit või kohanada olemasolevat olekuvõrrandit. Internetis võib ka leida ja kasutada koodi, mida teised on jaganud, isegi kui nad pole avaldanud seda paketina. Vaatame, kuidas saab Pythonis neid arvutusi teha.
       </p>
 
-      <h2>Helmholtzi mitmeparameetrilised võrrandid</h2>
+      <h2 id="mitmeparameetrilised">Helmholtzi mitmeparameetrilised võrrandid</h2>
       <p>
         <a href="http://www.coolprop.org/">CoolProp</a> pakett annab võimaluse teha arvutusi Helmholtzi mitmeparameetriliste võrranditega. CoolPropile on lisatud enamus, kui mitte kõik, ained mille jaoks on välja töötatud Helmholtzi mitmeparameetrlise võrrandi (vt nimekirja <a href="http://www.coolprop.org/fluid_properties/PurePseudoPure.html#list-of-fluids">siin</a>).
       </p>
@@ -50,7 +50,7 @@ den = cp.PropsSI("D", "T", 293.15, "P", 5*1e5, "ETHANE")</code>
         Kõikides Pythoni arvutustes tuleb jälgida ühikuid. Näiteks, <a href="http://www.coolprop.org/coolprop/HighLevelAPI.html#propssi-function"><code class='python'>PropsSI</code></a> eeldab, et temperatuuri ühik on K ja rõhu ühik on Pa. Samuti tihedus antakse ühikus kg/m<sup>3</sup>. Kõik parameetrid koos ühikutega <a href="http://www.coolprop.org/coolprop/HighLevelAPI.html#propssi-function"><code class='python'>PropsSI</code></a> funktsiooni jaoks antakse CoolPropi <a href="http://www.coolprop.org/coolprop/HighLevelAPI.html#table-of-string-inputs-to-propssi-function">veebilehel</a>.
       </p>
 
-      <h2>PC-SAFT</h2>
+      <h2 id="pcsaft">PC-SAFT</h2>
       <p>
         PC-SAFT olekuvõrrand on ka CoolProp paketis olemas (alates versioonist 6.4). CoolPropis väikimisi olekuvõrrand on Helmholtzi mitmeparameetriline võrrand. Kui soovid kasutada muud olekuvõrrandit, tuleb lisada olekuvõrrandi sõne enne aine nime.
       </p>
@@ -111,7 +111,7 @@ den = pcsaft_den(t, p, x, param_pcsaft, phase='liq')</code>
         Kui võtad PC-SAFTi parameetrid kirjandusest, siis peaks olema kirjas, mis osi/parameetreid kasutatakse. Selle järgi saab teada, mis parameetreid on vaja sõnastikule lisada Pythonis.
       </p>
 
-      <h2>Kuupvõrrandid</h2>
+      <h2 id="kuupv6rrandid">Kuupvõrrandid</h2>
       <p>
         CoolPropis on ka Soave-Redlich-Kwongi ja Peng-Robinsoni <a href="http://www.coolprop.org/coolprop/Cubics.html">kuupvõrrandeid</a>. Võib samuti neid kasutada, kui lihtsalt kirja panna nende lühendit enne aine nime.
       </p>
@@ -179,7 +179,7 @@ def peng_robinson(t, v, c):
         Vajadusel saaks lisada veel funktsioone teiste parameetrite arvutamiseks, näiteks maht, tihedus või fugitiivsuse koefitsient. Mõnede parameetrite arvutamiseks on vaja kasutada lahendajat.
       </p>
 
-      <h2>Arvutamine lahendaja abil</h2>
+      <h2 id="lahendajaga">Arvutamine lahendaja abil</h2>
       <p>
         Mõnikord on raske või võimatu lahendada olekuvõrrandit soovitud parameetri jaoks. Sel juhul saab kasutada <a href="/thermo-course/pages/lahendajad.html">lahendajat</a>, ehk arvuti programm, mis proovib leida optimaalset lahendust. Mõned paketid lahendavad ise taustas, aga on oluline aru saada, kuidas need töötavad. Ja mõnikord olemasolevad funktsioonid ei sobi ja peate ise lahendama, et leida vajalikku omadust.
       </p>

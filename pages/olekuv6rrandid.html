@@ -16,7 +16,7 @@
 
   <script>
     $(function(){
-      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.3`);
+      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.4`);
     });
   </script>
 
@@ -34,7 +34,7 @@
 
       </p>
 
-      <h2>Mis on olekuvõrrand</h2>
+      <h2 id="mis-olekuv6rrand">Mis on olekuvõrrand</h2>
       <p>
         <b>Olekuvõrrand</b> on avaldis, mis seob aine olekuparameetreid. Olekuvõrrand on funktsioon kahes olekuparameetrist ja koostisest. See arv tuleb Gibbs-Duhemi reeglist, mis paneb paika mitu parameetrit on vaja selleks, et täielikult kirjeldada olekut. Enamasti kasutatakse olekuparameetritena temperatuur ja maht või tihedus.
       </p>
@@ -42,7 +42,7 @@
         Üldiselt olekuvõrrandeid pannakse kirja põhikujul, mis arvutab rõhku või Helmholtzi energiat. Siis seda põhivalemit teisendatakse selleks, et arvutada muid olekuparameetreid. Teisendamises kasutatakse põhiseoseid ja tavaliselt on vaja võtta tuletist või integreerida.
       </p>
 
-      <h2>Olekuvõrrandi liigid</h2>
+      <h2 id="liigid">Olekuvõrrandi liigid</h2>
       <p>
         On kolm peamist olekuvõrrandi liiki: kuupvõrrandid, empiirilised seosed ja SAFT võrrandid.
       </p>
@@ -109,7 +109,7 @@
         </table>
       </div>
 
-      <h2>Kuupvõrrandid</h2>
+      <h2 id="kuupv6rrandid">Kuupvõrrandid</h2>
       <p>
         Kuupvõrrandid tulevad ideaalgaasi võrrandist. <a href="https://en.wikipedia.org/wiki/Johannes_Diderik_van_der_Waals">Van der Waals</a> pakkus välja esimest kuupvõrrandit aastal 1873. Seda nüüd kutsutakse tema järgi. Van der Waals lisas parameetrid <em>a</em> ja <em>b</em>, mis võtavad arvesse molekulide oma mahtu ja molekulide vahelist tõmbejõudu. Need on kaks põhi erinevust ideaalse ja reaalse gaasi vahel. Kõikides valemites siin <em>V</em> on molaarne maht.
       </p>
@@ -192,7 +192,7 @@
         Aastate jooksul uurijad on pakkunud palju muid kuupvõrrandi variante. Siin näitasime ainult põhilised.
       </p>
 
-      <h2>Empiirilised seosed</h2>
+      <h2 id="empiirilised">Empiirilised seosed</h2>
       <p>
         Mõned uurijad on alustanud mitte teooriast vaid katseandmetest. Võrrandid kasutanud avaldisi, mis suudavad hästi jälgida andmetest tulenevat kuju, aga millel ei ole eriti teoreetilist tausta. Kuupvõrrandid ja SAFT võrrandid kasutavad ka empiiriliselt leitud osi, kuid nende kuju ikkagi põhineb vähemalt osaliselt teoorial. Ehk, need on poolempiirilised. Seevastu, empiiriliste olekuvõrrandite kuju ei tule teooriast ja on tavaliselt lihtsalt paindlik matemaatiline avaldis.
       </p>
@@ -240,7 +240,7 @@
         Mõned teadlased on ka teinud olekuvõrrandeid närvivõrkudega.<sup><a href="#ref26">26</a>-<a href="#ref31">31</a></sup> Närvivõrk on samuti empiiriline mudel paljude parameetritega, mis suudab hästi jäljendada kuju, mis tuleb andmetest.
       </p>
 
-      <h2>SAFT võrrandid</h2>
+      <h2 id="saft">SAFT võrrandid</h2>
       <p>
         SAFT võrrandid (ingl <em>Statistical Associating Fluid Theory</em>) põhinevad statistilisel mehaanikal. Kujutatakse ette, et molekulid on sfäärid või koosnevad sfääridest. Võrrandis on osad erinevate molekulide vaheliste mõjude jaoks. Näiteks, esimeses SAFT võrrandis Chapman jt<sup><a href="#ref18">18</a></sup> kasutasid kolme osa: <em>a<sup>seg</sup></em> sfääridevahelisteks vastasmõjudeks, <em>a<sup>chain</sup></em> kovalentseteks sidemeteks sfääride vahel ja <em>a<sup>assoc</sup></em> tõmbejõudude jaoks kindlate funktsionaalsete rühmade vahel (nt vesiniksidemed).
       </p>
@@ -286,7 +286,7 @@
         Kuigi SAFT võrrandid on keerulised, need üldiselt nõuavad ainult kolm kuni viis parameetrit ühe aine jaoks. Näiteks, PC-SAFT olekuvõrrandi jaoks on vaja teada aine <em>m</em>, <em>&sigma;</em> ja <em>&epsilon;/k</em>. <em>m</em> peaks näitama sfääride arvu molekulis, <em>&sigma;</em> on sfääri läbimõõt ja <em>&epsilon;/k</em> on potentsiaali augu sügavus jagatud <a href="https://www.nist.gov/si-redefinition/kelvin/kelvin-boltzmann-constant">Boltzmanni konstandiga</a>.<sup><a href="#ref19">19</a></sup> Teised osad võivad nõuda lisa parameetreid. <em>a<sup>assoc</sup></em> osa jaoks, näiteks, on vaja parameetrid <em>&kappa;<sup>A<sub>i</sub>B<sub>j</sub></sup></em> ja <em>&epsilon;<sup>A<sub>i</sub>B<sub>j</sub></sup>/k</em>.<sup><a href="#ref20">20</a></sup>
       </p>
 
-      <h2>Kuidas kasutada</h2>
+      <h2 id="kasutamine">Kuidas kasutada</h2>
       <p>
         Mõned olekuvõrrandid, nagu kuupvõrrandid ja viriaal võrrand, on piisavalt lihtsad, et saab ise käsitsi teha arvutusi nendega. Kuid keerulisemate olekuvõrrandite jaoks on vaja tarkvara, mis rakendab neid olekuvõrrandeid. Isegi lihtsamate olekuvõrranditega on tihti mugavam kasutada tarkvara, mis automaatselt teeb vajalikke arvutusi.
       </p>
