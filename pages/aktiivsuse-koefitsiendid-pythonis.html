@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      CommonHTML: { linebreaks: { automatic: true } }
+    });
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS_CHTML"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet"
+        href="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/styles/default.min.css">
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/highlight.min.js"></script>  <script>hljs.highlightAll();</script>
+
+  <link rel="stylesheet" href="/thermo-course/styles/termodynaamika.css?v=0.1.2">
+
+  <script>
+    $(function(){
+      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.5`);
+    });
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Aktiivsuse koefitsiendid Pythonis</title>
+</head>
+
+<body>
+  <div id='content'>
+    <div id="navigation"></div>
+    <div id='main-text'>
+      <h1>Aktiivsuse koefitsiendi mudelid Pythonis</h1>
+      <p>
+        On mõned Pythoni paketid (nt <a href="https://thermo.readthedocs.io/index.html">thermo</a>), millega peaks olema võimalik teha arvutusi aktiivsuse koefitsiendi mudelitega. Lisaks, protsessi simulaatoritega tulevad kaasa aktiivsuse koefitsiendi mudelid. Siin aga vaatame, kuidas saaks ise <a href="/thermo-course/pages/aktiivsuse-koefitsiendid.html#uniquac">UNIQUAC</a> mudelit kirja panna Pythonis.
+      </p>
+
+      <h2 id="summad-indeksid">Summad ja indeksid</h2>
+      <p>
+        Aktiivsuse koefitsiendi mudelites on vaja korrutada ja kokku liita väärtusi maatriksitest. Üks võimalus seda teha on for-tsükliga. Näiteks, UNIQUAC valemites on vaja arvutada &Phi;.
+      </p>
+      <div>
+        \[ \Phi_i = \frac{r_i x_i}{\sum_j r_j x_j} \]
+      </div>
+      <p>
+        Seda saab arvutada for-tsüklitega järgmiselt:
+      </p>
+      <pre>
+<code class="python">import numpy as np
+
+summa = 0
+for j in range(ncomp):
+    summa += r[j] * x[j]
+
+phi = np.zeros_like(x)
+for i in range(ncomp):
+    phi[i] = x[i] / summa</code></pre>
+      <p>
+        Kuid saab lihtsamini teha Numpy-ga kuna Numpy saab teha palju maatriksi tehteid. Näiteks, kui korrutame kahte Numpy massiivi, siis Numpy korrutab iga elementi vastava elemendiga teises massiivis. Samuti, Numpy-s on <a href="https://numpy.org/doc/stable/reference/generated/numpy.sum.html"><code class="python">sum</code></a> funktsioon, mis liidab kokku kõik elemendid maatriksis. Seega, Numpy massiividega on võimalik ka arvutada &Phi; järgmiselt:
+      </p>
+      <pre><code class="python">phi = r * x / np.sum(r * x)</code></pre>
+      <p>
+        Numpy võib ka transponeerida ja korrutada maatrikse. Transponeerimist tehakse <a href="https://numpy.org/doc/stable/reference/generated/numpy.transpose.html"><code>transpose</code></a> funktsiooniga ja maatriksi korrutamist <a href="https://numpy.org/doc/stable/reference/generated/numpy.dot.html"><code>dot</code></a> funktsiooniga. Näiteks, UNIQUAC funktsioonis on vaja korrutada &theta; ja &tau;.
+      </p>
+      <div>
+        \[ \theta_j \tau_{ji} \]
+      </div>
+      <p>
+        Pythonis seda tehakse Numpy massiividega järgmiselt:
+      </p>
+      <pre><code class="python">np.dot(theta, tau)</code></pre>
+      <p>
+        UNIQUACis on ka sarnane avaldis, milles ainult &tau; indeksite järjekorda on vahetatud.
+      </p>
+      <div>
+        \[ \theta_j \tau_{ij} \]
+      </div>
+      <p>
+        Ehk, &tau; on transponeeritud. Seda saab arvutada Pythonis selliselt:
+      </p>
+      <pre><code class="python">theta.reshape(-1,1) * tau.transpose()</code></pre>
+      <p>
+        Siin kasutasime <a href="https://numpy.org/doc/stable/reference/generated/numpy.reshape.html">reshape</a> funkstiooni, et muuta maatriksit kahe-dimensionaalseks. Ehk, ütleme Numpy-ile kindlalt, et massiivis on 2 rida ja 1 veerg. Muidu Numpy siin kipub korrutama elemente vales järjekorras.
+      </p>
+
+      <h2 id="uniquac-pythonis">UNIQUAC Pythonis</h2>
+      <p>
+        Aktiivsuse koefitsiendi mudeleid võib arvutada for-tsüklitega või Numpy maatriksi tehetega. Kuna Numpy maatriksi funktsioonidega kood on lühem, kasutame Numpy maatriksi tehteid. Lisaks, for-tsüklid on Pythonis suhteliselt aeglased ja kasutades Numpy funktsioone meie kood on kiirem.
+      </p>
+      <pre>
+<code class="python">def uniquac(tau, r, q, x):
+    z = 10
+    l = z/2 * (r - q) - (r - 1)
+    theta = q * x / np.sum(q * x)
+    phi = r * x / np.sum(r * x)
+
+    gamma_c = np.log(phi / x) + z/2*q*np.log(theta / phi) + l - phi/x*np.sum(x*l)
+    gamma_r = q * (1 - np.log(np.dot(theta, tau)) - np.sum((theta.reshape(-1,1) *
+              tau.transpose()) / np.dot(theta, tau).reshape(-1,1), axis=0))
+
+    gamma = gamma_c + gamma_r
+    return np.exp(gamma)</code></pre>
+
+      <h2 id="uniquac-n2ide">Näide</h2>
+      <p>
+        Teeme nüüd läbi ühe näide arvutuse meie UNIQUAC funktsiooniga. Arvutame vee ja äädikhappe aktiivsuse koefitsiendid temperatuuril 25 &deg;C, kui vee moolprotsent on 80% ja äädikhappe moolprotsent on 20%.
+      </p>
+      <p>
+        Esiteks, tuleb leida vee ja äädikhappe UNIQUAC parameetrid. Saame need leida Andersoni ja Prausnitzi artiklist.<sup><a href="#ref1">1</a></sup> Kuid otsida parameetreid kirjandusest, siis tee kindlaks, et kasutatakse saama aktiivsuse koefitsiendi mudelit kuna mõnikord uurijad on kasutanud muudetud varianti. Sa võid ka oma Pythoni koodi muuta selliseks, nagu artiklis kasutati.
+      </p>
+      <p>
+        Paneme need parameetrid kirja Pythoni failis.
+      </p>
+      <pre>
+<code class="python"># 0 = vesi, 1 = äädikhappe
+t = 298.15 # K
+x = np.asarray([0.8, 0.2])
+r = np.asarray([0.92, 1.90])
+q = np.asarray([1.40, 1.80])
+a12 = -299.90
+a21 = 530.94</code></pre>
+      <p>
+        Artiklis oli antud &tau; asemel hoopis <em>a</em>, mis peaks sõltuma vähem temperatuurist, kui &tau;. Seega, peame &tau; arvutama antud temperatuuril.
+      </p>
+      <pre>
+<code class="python">tau = np.asarray([[1, np.exp(-a12/t)],
+                  [np.exp(-a21/t), 1]])</code></pre>
+      <p>
+        Nüüd saame kasutada meie UNIQUAC funktsiooni selleks, et arvutada aktiivsuse koefitsiente.
+      </p>
+      <pre><code class="python">gamma = uniquac(tau, r, q, x)</code></pre>
+      <pre>
+<code class="python-repl">Vee aktiivsuse koefitsient: 1.0319103283354194
+Äädikhappe aktiivsuse koefitsient: 1.2397716375015644</code></pre>
+      <p>
+        Terve näide faili saad leida <a href="https://github.com/zmeri/thermo-course/blob/master/examples/n2ide_aktiivsuse_koefitsiendi_mudel.py">GitHubist</a>.
+      </p>
+
+      <h2>Viited</h2>
+      <ol>
+        <li id="ref1">
+          T. F. Anderson and J. M. Prausnitz, “Application of the UNIQUAC Equation to Calculation of Multicomponent Phase Equilibria. 1. Vapor-Liquid Equilibria,” Ind. Eng. Chem. Proc. Des. Dev., vol. 17, no. 4, pp. 552–561, Oct. 1978, doi: 10.1021/i260068a028.
+        </li>
+      </ol>
+
+    </div>
+  </div>
+</body>
+</html>
