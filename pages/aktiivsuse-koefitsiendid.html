@@ -90,7 +90,7 @@
         Kuna Wilsoni mudelit ei saa kasutada, kui on kaks vedelfaasi, Renon ja Prausnitz töötasid välja uue aktiivsuse koefitsiendi mudeli: NRTL mudel.<sup><a href="#ref4">4</a>,<a href="#ref5">5</a></sup> NRTL tähendab "non-random, two liquid". NRTLi valemid on paindlikud, nii et mudel suudab hästi jälgida andmeid.
       </p>
       <p>
-        Mudelis on &tau; ja &alpha; parameetrid. &tau; on empiirilised parameetrid. &alpha; on mittejuhuslikkuse parameeter. Tavaliselt &alpha; on 0,2 või 0,3 ja veesegude puhul 0,48.
+        Mudelis on &tau; ja &alpha; parameetrid. &tau; on empiirilised parameetrid. Sama aine molekulide vahel &tau; on null. &alpha; on mittejuhuslikkuse parameeter. Tavaliselt &alpha; on 0,2 või 0,3 ja veesegude puhul 0,48.
       </p>
       <div>
         \[ \ln \gamma_i = \frac{\sum_j x_j \tau_{ji} G_{ji}}{\sum_k x_k G_{ki}} + \sum_j \left( \frac{G_{ij} x_j}{\sum_k G_{kj} x_k} \left( \tau_{ij} - \frac{\sum_m x_m \tau_{mj} G_{mj}}{\sum_k G_{kj} x_k} \right) \right) \]
@@ -116,7 +116,7 @@
         UNIQUACi valemis on kaks osa: liitosa (ingl <em>combinatorial</em>) ja jääkosa (ingl <em>residual</em>). Liitosa on seotud molekulide kuju ja suurusega. Jääkosa kirjeldab molekulide vahelisi vastasmõjusid.
       </p>
       <p>
-        UNIQUAC mudelis &tau; on empiirilised parameetrid. Nii nagu NRTL valemis, mõnikord antakse hoopis (<em>u<sub>ji</sub></em> - <em>u<sub>ij</sub></em>) kui empiiriline parameeter kuna see ei peaks nii palju sõltuma temperatuurist kui &tau;. Mudelis on ka puhaste ainete parameetrid. <em>r</em> on seotud molekuli Van der Waalsi mahuga ja <em>q</em> on seotud molekuli pindalaga.
+        UNIQUAC mudelis &tau; on empiirilised parameetrid. Nii nagu NRTL valemis, mõnikord antakse hoopis (<em>u<sub>ji</sub></em> - <em>u<sub>ij</sub></em>) kui empiiriline parameeter kuna see ei peaks nii palju sõltuma temperatuurist kui &tau;. Sama aine molekulide vahel &tau; on 1 (NB! see on erinev NRTL ja Wilsoni mudelitest). Mudelis on ka puhaste ainete parameetrid. <em>r</em> on seotud molekuli Van der Waalsi mahuga ja <em>q</em> on seotud molekuli pindalaga.
       </p>
       <div>
         \[ \ln \gamma_i = \ln \gamma_i^C + \ln \gamma_i^R \]
