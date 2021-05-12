@@ -13,7 +13,7 @@
 
   <script>
     $(function(){
-      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.5`);
+      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.6`);
     });
   </script>
 
@@ -52,8 +52,7 @@ x = np.asarray([1.]) # moolosa
 m = np.asarray([1.6069]) # parameetrid etaani jaoks
 sigma = np.asarray([3.5206])
 eps_k = np.asarray([191.42])
-params_pcsaft = {'m':m, 's':sigma, 'e':eps_k}</code>
-      </pre>
+params_pcsaft = {'m':m, 's':sigma, 'e':eps_k}</code></pre>
       <p>
         Kuigi <code class="python">pcsaft</code> ja teised paketid ja programmid suudavad tavaliselt ise lahendada selliseid ülesandeid, teeme siin ise selleks, et näha, kuidas lahendajaid kasutada.
       </p>
@@ -72,8 +71,7 @@ params_pcsaft = {'m':m, 's':sigma, 'e':eps_k}</code>
 <code class="python">def veafunktsioon(den, p, t, x, params):
     p_calc = pcsaft_p(t, den, x, params)
     cost = ((p_calc - p) / p * 100)**2
-    return cost</code>
-      </pre>
+    return cost</code></pre>
 
       <h2 id="tuletise-meetodid">Tuletise meetodid</h2>
       <p>
@@ -110,8 +108,7 @@ params_pcsaft = {'m':m, 's':sigma, 'e':eps_k}</code>
 
 den_guess = 5 # mol m^-3
 result = minimize(veafunktsioon, den_guess, args=(p, t, x, params_pcsaft))
-den = result.x</code>
-      </pre>
+den = result.x</code></pre>
       <p>
         <code class="python">minimize</code> funktsioonile peame andma funktsiooni, mida see hakkab lahendama, ehk siin veafunktsiooni, mida me varem defineerisime. <code class="python">args</code> parameetriga, saame anda lisa parameetrid edasi oma veafunktsioonile. Näiteks, meie funktsioon vajab rõhku, temperatuuri, moolosad ja PC-SAFT parameetreid. Lisaks, peame andma lahendajale algväärtust: siin <code class="python">den_guess</code>.
       </p>
@@ -129,8 +126,7 @@ den = result.x</code>
 
 bnds = ((1e-2, 150),)
 result = differential_evolution(veafunktsioon, bounds=bnds, args=(p, t, x, params_pcsaft))
-den = result.x</code>
-      </pre>
+den = result.x</code></pre>
       <p>
         <code class="python">differential_evolution</code> meetodiga antakse algväärtuse asemel piirid. Siin valisime piirideks 0,01 ja 150 mol/m<sup>3</sup>. Kui piirid on liiga kitsad, siis lahendus on tihti ühe piiri lähedal. Sellisel juhul võib piiri laiendada ja uuesti jooksutada programmi.
       </p>
