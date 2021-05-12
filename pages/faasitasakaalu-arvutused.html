@@ -13,7 +13,7 @@
 
   <script>
     $(function(){
-      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.5`);
+      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.6`);
     });
   </script>
 
@@ -31,7 +31,7 @@
         Tavaliselt teame kas temperatuuri või rõhku, aga mitte mõlemaid. Siis peame teist parameetrit arvutama. Kuid fugitiivsuse avaldised sõltuvad ka temperatuurist ja rõhust, ja üldiselt on raske või võimatu leida neid analüütiliselt. Sellepärast, me peame leidma temperatuuri või rõhku numbriliselt.
       </p>
 
-      <h2>Lahendamine paketi funktsioonidega</h2>
+      <h2 id="lahendamine-paketiga">Lahendamine paketi funktsioonidega</h2>
       <p>
         Mõned tööriistad lahendavad ise taustas ja me ei pea ise muretsema sellest. Näiteks, pcsaft paketis on <a href="https://pcsaft.readthedocs.io/en/latest/functions/pcsaft.flashTQ.html"><code class="python">flashTQ</code></a> ja <a href="https://pcsaft.readthedocs.io/en/latest/functions/pcsaft.flashPQ.html"><code class="python">flashPQ</code></a> funktsioonid, mida saame kasutada auru-vedel tasakaalu arvutuste jaoks.
       </p>
@@ -51,27 +51,23 @@ pcsaft_params = {'m': np.asarray([2.5908]),
                  'vol_a': np.asarray([0.021340]),
                  'e_assoc': np.asarray([932.2])}
 
-pvap, xl, xv = flashTQ(t, q, x, pcsaft_params)</code>
-      </pre>
+pvap, xl, xv = flashTQ(t, q, x, pcsaft_params)</code></pre>
       <p>
         <code class="python">flashTQ</code> funktsioonile anname parameetrina Q. Q näitab moolosa süsteemist, mis on gaasifaasist, ja varsti selgitame seda põhjalikumalt. Funktsioon väljastab kolm parameetrit. <code class="python">pvap</code> on aururõhk. <code class="python">xl</code> ja <code class="python">xv</code> on vastavalt vedel- ja gaasifaasi koostised, aga kuna antud ülesandes on ainult üks aine moolosa mõlemas faasis on lihtsalt 1.
       </p>
       <p>
         Kui jooksutame skripti ja prindime <code class="python">pvap</code>, näeme 2-propüülamiini aururõhku.
       </p>
-      <pre>
-        <code class="python-repl">2-propüülamiini aururõhk: 77952.10072375127 Pa</code>
-      </pre>
+      <pre><code class="python-repl">2-propüülamiini aururõhk: 77952.10072375127 Pa</code></pre>
       <p>
         CoolProp paketiga on ka võimalik teha faasitasakaalu arvutusi. On vaja lihtsalt anda <code class="python">PropsSI</code> funktsioonile parameeter <a href="http://www.coolprop.org/coolprop/HighLevelAPI.html#table-of-string-inputs-to-propssi-function">Q</a>, nii nagu antakse pcsaft funktsioonidele. Näiteks, võime arvutada vee aururõhku.
       </p>
       <pre>
 <code class="python">import CoolProp.CoolProp as cp
 
-pvap = cp.PropsSI("P", "T", 298, "Q", 0, "WATER")</code>
-      </pre>
+pvap = cp.PropsSI("P", "T", 298, "Q", 0, "WATER")</code></pre>
 
-      <h2>Moolosa gaasifaasis</h2>
+      <h2 id="moolosa-gaasifaasis">Moolosa gaasifaasis</h2>
       <p>
         Mis on see parameeter Q, mida oleme kasutanud siin auru-vedel tasakaalu arvutustes? Kui süsteemis on auru- ja vedelfaasid, siis auru kogus võib varieeruda. Näiteks, võibolla süsteemis on ainult üks väike mull. Süsteemis võib samuti olla pool vedelik ja pool aur või peaaegu kogu süsteem võib olla gaasifaasis ja on ainult üks vedeliku piisk. Q näitab moolosa ainest/segust, mis on gaasifaasis.
       </p>
@@ -97,16 +93,13 @@ pcsaft_params = {'m': np.asarray([1, 6.6485]),
 pcsaft_params['k_ij'] = np.asarray([[0, 0],
                                     [0, 0]])
 
-pvap, xl, xv = flashTQ(t, q, x, pcsaft_params)</code>
-      </pre>
+pvap, xl, xv = flashTQ(t, q, x, pcsaft_params)</code></pre>
       <p>
         Ja jooksutades skripti...
       </p>
-      <pre>
-        <code class="python-repl">Mullipunkti rõhk: 131990.75423080503 Pa</code>
-      </pre>
+      <pre><code class="python-repl">Mullipunkti rõhk: 131990.75423080503 Pa</code></pre>
 
-      <h2>Lahendajaga lahendamine</h2>
+      <h2 id="lahendajaga-lahendamine">Lahendajaga lahendamine</h2>
       <p>
         Aga mis seal taustas toimub? On oluline ka aru saada, kuidas sellised funktsioonid lahendavad, nii et sa oskad ka ette näha võimalikke probleeme. Ja mõnikord olemasolevad funktsioonid ei sobi ja pead ise <a href="/thermo-course/pages/lahendajad.html">lahendama</a>, et leida soovitud omadust.
       </p>
@@ -126,8 +119,7 @@ pvap, xl, xv = flashTQ(t, q, x, pcsaft_params)</code>
     fugcoef_l = pcsaft_fugcoef(t, den_l, x, params)
     fugcoef_v = pcsaft_fugcoef(t, den_v, x, params)
     cost = (fugcoef_v - fugcoef_l)**2
-    return cost</code>
-      </pre>
+    return cost</code></pre>
       <p>
         Ja nagu mainisin, lahendajad tavaliselt otsivad miinimumi (või maksimumi) siis siin peame võtma näiteks absoluutväärtust või ruutu. Muidu lahendaja võtaks negatiivset väärtust kui vastus, kuigi me teame, et suur negatiivne väärtus samuti näitab, et fugitiivsuse koefitsiendid ei ole võrdsed.
       </p>
@@ -144,21 +136,18 @@ pvap, xl, xv = flashTQ(t, q, x, pcsaft_params)</code>
 <code class="python">p_test = 60000
 cost = veafunktsioon(p_test, t, x, pcsaft_params)
 print('Proovitud rõhk= {} Pa'.format(p_test))
-print('veafunktsiooni väärtus=', cost)</code>
-      </pre>
+print('veafunktsiooni väärtus=', cost)</code></pre>
       <pre>
 <code class="python-repl">Proovitud rõhk= 60000 Pa
-veafunktsiooni väärtus= [0.08215161]</code>
-      </pre>
+veafunktsiooni väärtus= [0.08215161]</code></pre>
       <p>
-        Mõnikord on hea käsitsi väärtusi proovida, et leida mõistlikut algväärtust lahendajale. Me võiksime tegelikult niiviisi käsitsi isegi lahendust leida, aga see on tüütu. Kasutame siis olemasolevaid optimeerimise funktsioone. Esiteks, proovime tuletise meetodiga. Scipy <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html"><code class="python">minimize</code></a> function rakendab neid tuletise meetodeid. Tuletise meetodid kasutavad veafunktsiooni tuletist, et valida järgmist väärtust, mida proovida.
+        Mõnikord on hea käsitsi väärtusi proovida, et leida mõistlikut algväärtust lahendajale. Kui tundub, et on mitu erinevat väärtust, mille juures veafunktsioon annab 0, võibolla sa oled valinud olekut, mis on kolmikpunktist allpool või kriitilisest punktist üleval (loe täpsemalt <a href="/thermo-course/pages/kkk.html#miks-veafunktsioon-null">siin</a>). Me võiksime tegelikult niiviisi käsitsi isegi lahendust leida, aga see on tüütu. Kasutame siis olemasolevaid optimeerimise funktsioone. Esiteks, proovime tuletise meetodiga. Scipy <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html"><code class="python">minimize</code></a> function rakendab neid tuletise meetodeid. Tuletise meetodid kasutavad veafunktsiooni tuletist, et valida järgmist väärtust, mida proovida.
       </p>
       <pre>
 <code class="python">from scipy.optimize import minimize
 
 p_guess = 50000 # Pa
-result = minimize(veafunktsioon, p_guess, args=(t, x, pcsaft_params), method='Nelder-Mead')</code>
-      </pre>
+result = minimize(veafunktsioon, p_guess, args=(t, x, pcsaft_params), method='Nelder-Mead')</code></pre>
       <p>
         Peame <code class="python">minimize</code> funktsioonile andma veafunktsiooni nime ja algväärtuse. Meie veafunktsioon vajab ka teisi parameetreid ja saame neid lisada <code class="python">arg</code> parameetriga. Minimize funktsioon annab need parameetrid edasi veafunktsioonile. On ka võimalik ette anda algoritmi, mida tahame, et minimize funktsioon kasutab. Me ei pea seda andma, aga siin anname, sest väikimismeetod ei anna head tulemust. Nüüd saame jooksutada skripti.
       </p>
@@ -171,8 +160,7 @@ result = minimize(veafunktsioon, p_guess, args=(t, x, pcsaft_params), method='Ne
      nit: 31
   status: 0
  success: True
-       x: array([77952.08998024])</code>
-      </pre>
+       x: array([77952.08998024])</code></pre>
       <p>
         Lahendaja vastuses on mitu asja. <code class="python">x</code> näitab parameetrite optimaalsed väärtused, ehk aururõhk. Võime näha, et saime sama rõhk, kui varem saime <code class="python">flashTQ</code> funktsiooniga. <code class="python">fun</code> näitab veafunktsiooni väärtust vastuse juures. Kui see on ikkagi suur, siis võibolla lahendaja ei suutnud leida head väärtust.
       </p>
@@ -181,8 +169,7 @@ result = minimize(veafunktsioon, p_guess, args=(t, x, pcsaft_params), method='Ne
       </p>
       <pre>
 <code class="python">bnds = ((50000, 175000),)
-result = differential_evolution(veafunktsioon, bounds=bnds, args=(t, x, pcsaft_params))</code>
-      </pre>
+result = differential_evolution(veafunktsioon, bounds=bnds, args=(t, x, pcsaft_params))</code></pre>
       <p>
         Rohkem lahendajate kohta võid lugeda <a href="/thermo-course/pages/lahendajad.html">peatükis</a> sellel teemal.
       </p>

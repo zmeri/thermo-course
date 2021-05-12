@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet"
+        href="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/styles/default.min.css">
+  <script src="https://unpkg.com/@highlightjs/cdn-assets@10.6.0/highlight.min.js"></script>  <script>hljs.highlightAll();</script>
+
+  <link rel="stylesheet" href="/thermo-course/styles/termodynaamika.css?v=0.1.2">
+
+  <script>
+    $(function(){
+      $("#navigation").load(`/thermo-course/src/navigation.html?v=0.1.6`);
+    });
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Korduma kippuvad küsimused</title>
+</head>
+
+<body>
+  <div id='content'>
+    <div id="navigation"></div>
+    <div id='main-text'>
+      <h1>Korduma kippuvad küsimused</h1>
+      <h2 id="miks-veafunktsioon-null">Miks veafunktsiooni väärtus on 0 madalal ja kõrgel temperatuuril?</h2>
+      <p>
+        Võibolla sa pead ise leidma faasitasakaalu olekut lahendajaga, nagu <a href="/thermo-course/pages/faasitasakaalu-arvutused.html#lahendajaga-lahendamine">siin</a> näites. Seda lahendades sa võibolla märkad, et <a href="/thermo-course/pages/faasitasakaalu-arvutused.html#veafunktsioon">veafunktsiooni</a> väärtus on 0 mitte ainult faasitasakaalu juures vaid ka madalal või kõrgel temperatuuril.
+      </p>
+      <p>
+        Näiteks, puhta aine auru-vedel tasakaalu arvutamiseks võib kasutada järgnevat lihtsat veafunktsiooni.
+      </p>
+      <pre>
+<code class="python">def veafunktsioon(t, p, x, params):
+    den_l = pcsaft_den(t, p, x, params, phase='liq')
+    den_v = pcsaft_den(t, p, x, params, phase='vap')
+    fugcoef_l = pcsaft_fugcoef(t, den_l, x, params)
+    fugcoef_v = pcsaft_fugcoef(t, den_v, x, params)
+    cost = (fugcoef_v - fugcoef_l)**2
+    return cost</code></pre>
+      <p>
+        Kui proovida leida CO<sub>2</sub>-e keemistemperatuuri 30 bar juures selle veafunktsiooniga, siis näiteks 100 K ja 700 K juures veafunktsiooni väärtus on ka 0. Ei saa olla, et on mitu keemistemperatuuri puhta aine jaoks kindlal rõhul. Milles probleem?
+      </p>
+      <p>
+        Auru-vedel tasakaal võib juhtuda ainult kolmikpunkti ja kriitilise punkti vahel. 100 K on CO<sub>2</sub>-e kolmikpunktist madalam ja 700 K on kriitilisest punktist kõrgem. <code class="python">pcsaft_den</code> funktsioon ei tea sellest ja annab <code class="python">den_l</code> ja <code class="python">den_v</code> jaoks sama väärtus (kuna on ainult üks faas), mille tõttu fugitiivsuse koefitsiendid on samad. Auru-vedel tasakaalus faaside fugitiivsused peavad küll samad olema, aga tihedused peavad olema erinevad.
+      </p>
+      <p>
+        Probleemi lahendamiseks, <b>vali mõnda algväärtust kolmikpunkti ja kriitilise punkti vahel</b>. Või saab muuta veafunktsiooni, nii et see annab suurt väärtust ka siis, kui <code class="python">den_l</code> ja <code class="python">den_v</code> on sama.
+      </p>
+    </div>
+  </div>
+</body>
+</html>
