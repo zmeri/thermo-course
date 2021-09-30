@@ -116,19 +116,24 @@ a > code {
   z-index: 1;
 }
 
+#sidebar ul {
+  list-style-type: none;
+}
+
+#sidebar li {
+  margin: 1px 0;
+}
+
 #main-text {
   padding: 1.5em;
 }
 
-#navi {
-  padding: 5px 15px;
-  list-style-type: none;
+.navi {
+  padding: 0 1em;
 }
 
-#navi-level2 {
-  padding: 0px 15px 5px 40px;
+.navi-level2 {
   text-indent: -10px;
-  list-style-type: none;
 }
 
 #home {
@@ -147,7 +152,6 @@ a > code {
 }
 
 .nav-link {
-  padding: 5px 0px;
   color: #f0f0f0;
 }
 
@@ -169,6 +173,79 @@ a > code {
 .quote-source {
   font-size: medium;
   color: black;
+}
+
+.collapsible-button {
+  padding: 0.3em 1em;
+  border: none;
+  outline: none;
+  font: inherit;
+  color: #342b60;
+  background: none;
+  margin-bottom: 1em;
+}
+
+.collapsible-button:hover {
+  background-color: #f0d9e6;
+}
+
+.collapsible-text {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.4s 0s, opacity 0.4s 0s;
+  padding-left: 1em;
+  border-left: 5px solid #f0d9e6;
+}
+
+.collapsible-text-long {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.4s 0s, opacity 0.4s 0s;
+  padding-left: 1em;
+  border-left: 5px solid #f0d9e6;
+}
+
+.close-label {
+  display: none;
+}
+
+.show-label {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.collapsible.expanded > .collapsible-text {
+  height: auto;
+  opacity: 1;
+  max-height: 30em;
+  transition: max-height 0.9s 0s, opacity 0.7s 0.2s;
+}
+
+.collapsible.expanded > .collapsible-text-long {
+  height: auto;
+  opacity: 1;
+  max-height: 200em;
+  transition: max-height 0.9s 0s, opacity 0.7s 0.2s;
+}
+
+.collapsible.expanded > .collapsible-button > .close-label {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.collapsible.expanded > .collapsible-button > .show-label {
+  display: none;
+}
+
+.carrot {
+  height: 0.45em;
+  margin-left: 0.7em;
 }
 
 @media only screen and (min-width: 1000px) {
@@ -193,9 +270,5 @@ a > code {
     left: 0;
     width: calc(25% - 2 * 1em);
     max-width: 18em;
-  }
-
-  .nav-link {
-    color: #f0f0f0;
   }
 }
