@@ -9,15 +9,20 @@
 
   var globalResizeTimer = null;
 
-  $(window).resize(function() {
-    if(globalResizeTimer != null) window.clearTimeout(globalResizeTimer);
-    globalResizeTimer = window.setTimeout(function() {
-      if (window.outerWidth > 1000) {
-        document.getElementById('sidebar').style.display = 'inline';
-      } else {
-        document.getElementById('sidebar').style.display = 'none';
-      }
-    }, 200);
+  $(document).ready(function () {
+    var initwidth = $(window).width();
+
+    $(window).resize(function() {
+      if(globalResizeTimer != null) window.clearTimeout(globalResizeTimer);
+      globalResizeTimer = window.setTimeout(function() {
+        if (window.outerWidth > 1000) {
+          document.getElementById('sidebar').style.display = 'inline';
+        } else if (initwidth > 1000 && window.outerWidth < 1000) {
+          document.getElementById('sidebar').style.display = 'none';
+        }
+        initwidth = $(window).width();
+      }, 200);
+    });
   });
 </script>
 
